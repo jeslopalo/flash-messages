@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>es.sandbox.ui.messages</groupId>
+		<artifactId>flash-messages-parent</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+		<relativePath></relativePath>
+	</parent>
+
+	<artifactId>flash-messages-core</artifactId>
+	<packaging>jar</packaging>
+	
+	<name>flash-messages-core</name>
+	<description>A simple way to send &#038; show flash messages from controllers to the view</description>
+	<url>https://github.com/jeslopalo/flash-messages</url>
+
+	<licenses>
+		<license>
+			<name>The MIT License</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+			<distribution>repo</distribution>
+			<comments>It would be awesome to know that you're using it!</comments>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>jeslopalo</id>
+			<name>Jesús López</name>
+			<email>jeslopalo at sandbox dot es</email>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/jeslopalo/flash-messages/issues</url>
+	</issueManagement>
+
+	<scm>
+		<connection>scm:git:git@github.com:jeslopalo/flash-messages.git</connection>
+		<developerConnection>scm:git:git@github.com:jeslopalo/flash-messages.git</developerConnection>
+		<url>git@github.com:jeslopalo/flash-messages.git</url>
+	</scm>
+
+	<dependencies>
+		<!-- Apache commons lang -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<!-- JodaTime API -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+
+		<!-- Fest reflect -->
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-reflect</artifactId>
+		</dependency>
+
+		<!-- Equals Verifier -->
+		<dependency>
+			<groupId>nl.jqno.equalsverifier</groupId>
+			<artifactId>equalsverifier</artifactId>
+		</dependency>
+	</dependencies>
+</project>

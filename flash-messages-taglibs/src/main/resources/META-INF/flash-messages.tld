@@ -1,0 +1,48 @@
+<taglib 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="2.1"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+			
+	<description>A set of Taglibs to print messages in views</description>
+	<display-name>Flash Messages</display-name>
+	<tlib-version>0.1</tlib-version>
+	<short-name>flash</short-name>
+	
+	<uri>http://sandbox.es/tags/flash-messages</uri>
+
+	<tag-file>
+		<name>messages</name>
+		<path>/META-INF/tags/flash/messages.tag</path>
+	</tag-file>
+	
+	<tag-file>
+		<name>level</name>
+		<path>/META-INF/tags/flash/level.tag</path>
+	</tag-file>
+	
+	<function>
+		<name>levels</name>
+		<function-class>es.sandbox.ui.messages.tags.MessagesTaglibSupport</function-class>
+		<function-signature>
+			es.sandbox.ui.messages.Level[] levels(javax.servlet.http.HttpServletRequest)
+		</function-signature>
+	</function>
+		
+	<function>
+		<name>levelMessages</name>
+		<function-class>es.sandbox.ui.messages.tags.MessagesTaglibSupport</function-class>
+		<function-signature>
+			java.util.Collection levelMessages(es.sandbox.ui.messages.Level, javax.servlet.http.HttpServletRequest)
+		</function-signature>
+	</function>
+	
+	<function>
+		<name>levelCssClass</name>
+		<function-class>es.sandbox.ui.messages.tags.MessagesTaglibSupport</function-class>
+		<function-signature>
+			java.lang.String levelCssClass(es.sandbox.ui.messages.Level, javax.servlet.http.HttpServletRequest)
+		</function-signature>
+	</function>	
+</taglib>
+
