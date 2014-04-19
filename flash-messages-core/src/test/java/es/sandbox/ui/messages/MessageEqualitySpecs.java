@@ -35,11 +35,6 @@ public class MessageEqualitySpecs {
 
 
 		@Test
-		public void should_be_deterministic() {
-			assertThat(this.sut.hashCode()).isEqualTo(1413823314);
-		}
-
-		@Test
 		public void invoked_on_the_same_object_more_than_once_should_return_the_same_integer() {
 			final int expectedHashCode= this.sut.hashCode();
 
