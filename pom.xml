@@ -16,6 +16,14 @@
 		<module>flash-messages-core</module>
 		<module>flash-messages-taglibs</module>
 		<module>flash-messages-spring</module>
-		<module>flash-messages-showcase</module>
 	</modules>
+
+	<profiles>
+		<profile>
+			<id>include-showcase</id>
+			<modules>
+				<module>flash-messages-showcase</module>
+			</modules>
+		</profile>
+	</profiles>
 </project>
