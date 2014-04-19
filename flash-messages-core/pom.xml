@@ -13,8 +13,9 @@
 	<packaging>jar</packaging>
 	
 	<name>flash-messages-core</name>
-	<description>A simple way to send &#038; show flash messages from controllers to the view</description>
+	<description>A simple way to send &#038; show flash messages</description>
 	<url>https://github.com/jeslopalo/flash-messages</url>
+	<inceptionYear>2013</inceptionYear>
 
 	<licenses>
 		<license>
@@ -25,6 +26,11 @@
 		</license>
 	</licenses>
 
+	<organization>
+		<name>Jesús López Alonso [@jeslopalo]</name>
+		<url>\\sandbox.es</url>
+	</organization>
+	
 	<developers>
 		<developer>
 			<id>jeslopalo</id>

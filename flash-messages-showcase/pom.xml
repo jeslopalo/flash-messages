@@ -15,6 +15,7 @@
 	<name>flash-messages-showcase</name>
 	<description>Web application showcase for flash messages</description>
 	<url>https://github.com/jeslopalo/flash-messages</url>
+	<inceptionYear>2013</inceptionYear>
 
 	<licenses>
 		<license>
@@ -25,6 +26,11 @@
 		</license>
 	</licenses>
 
+	<organization>
+		<name>Jesús López Alonso [@jeslopalo]</name>
+		<url>\\sandbox.es</url>
+	</organization>
+	
 	<developers>
 		<developer>
 			<id>jeslopalo</id>

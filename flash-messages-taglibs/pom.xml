@@ -15,6 +15,7 @@
 	<name>flash-messages-taglibs</name>
 	<description>A set of Taglibs to print messages in views</description>
 	<url>https://github.com/jeslopalo/flash-messages</url>
+	<inceptionYear>2013</inceptionYear>
 
 	<licenses>
 		<license>
@@ -24,6 +25,11 @@
 			<comments>It would be awesome to know that you're using it!</comments>
 		</license>
 	</licenses>
+
+	<organization>
+		<name>Jesús López Alonso [@jeslopalo]</name>
+		<url>\\sandbox.es</url>
+	</organization>
 
 	<developers>
 		<developer>
@@ -49,32 +55,24 @@
 	</scm>
 
 	<dependencies>
-		<!-- 
-			Flash messages core 
-		-->
+		<!-- Flash messages core -->
 		<dependency>
 			<groupId>es.sandbox.ui.messages</groupId>
 			<artifactId>flash-messages-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
-		<!-- 
-			Servlet api 
-		-->
+		<!-- Servlet api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
-		<!-- 
-			jsp api
-		-->
+		<!-- jsp api -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 		</dependency>
-		<!-- 
-			jstl 
-		-->
+		<!-- jstl -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>

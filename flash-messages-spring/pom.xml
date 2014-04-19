@@ -15,6 +15,7 @@
 	<name>flash-messages-spring</name>
 	<description>Flash messages integration for spring mvc framework</description>
 	<url>https://github.com/jeslopalo/flash-messages</url>
+	<inceptionYear>2013</inceptionYear>
 
 	<licenses>
 		<license>
@@ -24,7 +25,12 @@
 			<comments>It would be awesome to know that you're using it!</comments>
 		</license>
 	</licenses>
-
+	
+	<organization>
+		<name>Jesús López Alonso [@jeslopalo]</name>
+		<url>\\sandbox.es</url>
+	</organization>
+	
 	<developers>
 		<developer>
 			<id>jeslopalo</id>
