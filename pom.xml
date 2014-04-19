@@ -12,7 +12,6 @@
 	<url>https://github.com/jeslopalo/flash-messages</url>
 	<inceptionYear>2013</inceptionYear>
 
-
 	<licenses>
 		<license>
 			<name>The MIT License</name>
@@ -39,6 +38,10 @@
 		</developer>
 	</developers>
 
+	<properties>
+		<maven.deploy.skip>true</maven.deploy.skip>
+	</properties>
+	
 	<modules>
 		<module>flash-messages-parent</module>
 		<module>flash-messages-core</module>
