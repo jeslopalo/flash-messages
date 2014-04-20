@@ -40,8 +40,11 @@
 
 	<properties>
 		<maven.deploy.skip>true</maven.deploy.skip>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+		<java.version>1.6</java.version>
 	</properties>
-	
+
 	<modules>
 		<module>flash-messages-parent</module>
 		<module>flash-messages-core</module>
@@ -57,4 +60,34 @@
 			</modules>
 		</profile>
 	</profiles>
+
+	<build>
+		<plugins>
+			<!-- Cobertura -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<format>xml</format>
+					<maxmem>256m</maxmem>
+					<!-- aggregated reports for multi-module projects -->
+					<aggregate>true</aggregate>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<configuration>
+					<serviceName>travis-ci</serviceName>
+					<!-- If used as a standalone maven build or with any continuous integration 
+						server other than Travis CI -->
+					<!-- <repoToken>yourcoverallsprojectrepositorytoken</repoToken> -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

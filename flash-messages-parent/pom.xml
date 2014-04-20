@@ -20,12 +20,12 @@
 			<comments>It would be awesome to know that you're using it!</comments>
 		</license>
 	</licenses>
-	
+
 	<organization>
 		<name>Jesús López Alonso [@jeslopalo]</name>
 		<url>\\sandbox.es</url>
 	</organization>
-	
+
 	<developers>
 		<developer>
 			<id>jeslopalo</id>
@@ -48,7 +48,7 @@
 		<developerConnection>scm:git:git@github.com:jeslopalo/flash-messages.git</developerConnection>
 		<url>git@github.com:jeslopalo/flash-messages.git</url>
 	</scm>
-	
+
 	<prerequisites>
 		<maven>3.0.0</maven>
 	</prerequisites>
@@ -293,46 +293,33 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
+			<!-- Cobertura -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<format>xml</format>
+					<maxmem>256m</maxmem>
+					<!-- aggregated reports for multi-module projects -->
+					<aggregate>true</aggregate>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<configuration>
+					<serviceName>travis-ci</serviceName>
+					<!-- If used as a standalone maven build or with any continuous integration 
+						server other than Travis CI -->
+					<!-- <repoToken>yourcoverallsprojectrepositorytoken</repoToken> -->
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>coveralls</id>
-			<activation>
-				<property>
-					<name>coveralls</name>
-					<value>true</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<!-- Cobertura -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>cobertura-maven-plugin</artifactId>
-						<version>2.5.2</version>
-						<configuration>
-							<format>xml</format>
-							<maxmem>256m</maxmem>
-						</configuration>
-					</plugin>
-
-					<plugin>
-						<groupId>org.eluder.coveralls</groupId>
-						<artifactId>coveralls-maven-plugin</artifactId>
-						<version>1.2.0</version>
-						<configuration>
-							<serviceName>travis-ci</serviceName>
-							<!-- If used as a standalone maven build or with any continuous integration 
-								server other than Travis CI -->
-							<!-- <repoToken>yourcoverallsprojectrepositorytoken</repoToken> -->
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 
 	<reporting>
 		<plugins>
