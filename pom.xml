@@ -81,6 +81,7 @@
 				<artifactId>coveralls-maven-plugin</artifactId>
 				<version>2.2.0</version>
 				<configuration>
+					<skip>true</skip>
 					<serviceName>travis-ci</serviceName>
 					<!-- If used as a standalone maven build or with any continuous integration 
 						server other than Travis CI -->
