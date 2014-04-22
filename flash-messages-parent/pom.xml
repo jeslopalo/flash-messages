@@ -56,7 +56,7 @@
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
 		<artifactId>oss-parent</artifactId>
-		<version>7</version>
+		<version>9</version>
 		<relativePath></relativePath>
 	</parent>
 
@@ -231,6 +231,11 @@
 				</executions>
 
 				<configuration>
+					<links>
+						<link>http://download.oracle.com/javase/6/docs/api/</link>
+					</links>
+					<detectLinks>true</detectLinks>
+
 					<!-- bootclasspath required by Sun's JVM -->
 					<bootclasspath>${sun.boot.class.path}</bootclasspath>
 					<!-- General Javadoc settings -->
@@ -256,6 +261,13 @@
 						-inferrel
 					</additionalparam>
 					<useStandardDocletOptions>true</useStandardDocletOptions>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
 			<plugin>

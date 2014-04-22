@@ -15,66 +15,66 @@ import es.sandbox.ui.messages.context.MessagesContext;
 
 public class MessagesTaglibSupport {
 
-	private static final Logger LOGGER= LoggerFactory.getLogger(MessagesTaglibSupport.class);
+   private static final Logger LOGGER= LoggerFactory.getLogger(MessagesTaglibSupport.class);
 
 
-	/**
-	 * Private constructor to prevent instances
-	 * 
-	 * @throws UnsupportedOperationException
-	 */
-	private MessagesTaglibSupport() throws UnsupportedOperationException {
-		throw new UnsupportedOperationException();
-	}
+   /**
+    * Private constructor to prevent instances
+    * 
+    * @throws UnsupportedOperationException
+    */
+   private MessagesTaglibSupport() throws UnsupportedOperationException {
+      throw new UnsupportedOperationException();
+   }
 
-	/**
-	 * @param level
-	 * @param request
-	 * @return
-	 */
-	public static Collection<Message> levelMessages(Level level, HttpServletRequest request) {
-		return levelMessagesFromContext(level, context(request), request);
-	}
+   /**
+    * @param level
+    * @param request
+    * @return
+    */
+   public static Collection<Message> levelMessages(Level level, HttpServletRequest request) {
+      return levelMessagesFromContext(level, context(request), request);
+   }
 
-	private static Collection<Message> levelMessagesFromContext(Level level, MessagesContext context, HttpServletRequest request) {
-		if ((context != null) && (level != null)) {
-			return context.levelMessages(level, request);
-		}
+   private static Collection<Message> levelMessagesFromContext(Level level, MessagesContext context, HttpServletRequest request) {
+      if ((context != null) && (level != null)) {
+         return context.levelMessages(level, request);
+      }
 
-		LOGGER.warn("Level messages can't be accessed!");
-		return new ArrayList<Message>();
-	}
+      LOGGER.warn("Level messages can't be accessed!");
+      return new ArrayList<Message>();
+   }
 
-	private static MessagesContext context(HttpServletRequest request) {
-		return request == null? null : (MessagesContext) request.getAttribute(MessagesContext.MESSAGES_CONTEXT_PARAMETER);
-	}
+   private static MessagesContext context(HttpServletRequest request) {
+      return request == null? null : (MessagesContext) request.getAttribute(MessagesContext.MESSAGES_CONTEXT_PARAMETER);
+   }
 
-	/**
-	 * @param request
-	 * @return
-	 */
-	public static Level[] levels(HttpServletRequest request) {
+   /**
+    * @param request
+    * @return
+    */
+   public static Level[] levels(HttpServletRequest request) {
 
-		final MessagesContext context= context(request);
-		if (context == null) {
-			LOGGER.warn("MessageContext can't be accessed!");
-			return new Level[] {};
-		}
-		return context.levels();
-	}
+      final MessagesContext context= context(request);
+      if (context == null) {
+         LOGGER.warn("MessageContext can't be accessed!");
+         return new Level[] {};
+      }
+      return context.levels();
+   }
 
-	/**
-	 * @param level
-	 * @param request
-	 * @return
-	 */
-	public static String levelCssClass(Level level, HttpServletRequest request) {
+   /**
+    * @param level
+    * @param request
+    * @return
+    */
+   public static String levelCssClass(Level level, HttpServletRequest request) {
 
-		final MessagesContext context= context(request);
-		if (context == null) {
-			LOGGER.warn("MessageContext can't be accessed!");
-			return "";
-		}
-		return context.getLevelCssClass(level);
-	}
+      final MessagesContext context= context(request);
+      if (context == null) {
+         LOGGER.warn("MessageContext can't be accessed!");
+         return "";
+      }
+      return context.getLevelCssClass(level);
+   }
 }

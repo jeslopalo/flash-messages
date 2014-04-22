@@ -14,66 +14,27 @@
 
 	<name>flash-messages-taglibs</name>
 	<description>A set of Taglibs to print messages in views</description>
-	<url>https://github.com/jeslopalo/flash-messages</url>
-	<inceptionYear>2013</inceptionYear>
-
-	<licenses>
-		<license>
-			<name>The MIT License</name>
-			<url>http://www.opensource.org/licenses/mit-license.php</url>
-			<distribution>repo</distribution>
-			<comments>It would be awesome to know that you're using it!</comments>
-		</license>
-	</licenses>
-
-	<organization>
-		<name>Jesús López Alonso [@jeslopalo]</name>
-		<url>\\sandbox.es</url>
-	</organization>
-
-	<developers>
-		<developer>
-			<id>jeslopalo</id>
-			<name>Jesús López</name>
-			<email>jeslopalo at sandbox dot es</email>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-		</developer>
-	</developers>
-
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/jeslopalo/flash-messages/issues</url>
-	</issueManagement>
-
-	<scm>
-		<connection>scm:git:git@github.com:jeslopalo/flash-messages.git</connection>
-		<developerConnection>scm:git:git@github.com:jeslopalo/flash-messages.git</developerConnection>
-		<url>git@github.com:jeslopalo/flash-messages.git</url>
-	</scm>
 
 	<dependencies>
-		<!-- Flash messages core -->
 		<dependency>
+			<!-- Flash messages core -->
 			<groupId>es.sandbox.ui.messages</groupId>
 			<artifactId>flash-messages-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
-		<!-- Servlet api -->
 		<dependency>
+			<!-- Servlet api -->
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
-		<!-- jsp api -->
 		<dependency>
+			<!-- jsp api -->
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 		</dependency>
-		<!-- jstl -->
 		<dependency>
+			<!-- jstl -->
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>

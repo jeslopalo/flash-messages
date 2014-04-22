@@ -8,27 +8,27 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 public final class HttpServletRequestUtils { // NO_UCD (test only)
 
-	/**
-	 * Private constructor to prevent instances
-	 * 
-	 * @throws UnsupportedOperationException
-	 */
-	private HttpServletRequestUtils() throws UnsupportedOperationException {
-		throw new UnsupportedOperationException();
-	}
+   /**
+    * Private constructor to prevent instances
+    * 
+    * @throws UnsupportedOperationException
+    */
+   private HttpServletRequestUtils() throws UnsupportedOperationException {
+      throw new UnsupportedOperationException();
+   }
 
-	/**
-	 * @return
-	 * @throws NotHttpServletRequestBoundToThreadException
-	 */
-	public static final HttpServletRequest currentHttpServletRequest() // NO_UCD (use default)
-			throws NotHttpServletRequestBoundToThreadException {
+   /**
+    * @return
+    * @throws NotHttpServletRequestBoundToThreadException
+    */
+   public static final HttpServletRequest currentHttpServletRequest() // NO_UCD (use default)
+         throws NotHttpServletRequestBoundToThreadException {
 
-		final ServletRequestAttributes attributes= (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-		if (attributes == null) {
-			throw new NotHttpServletRequestBoundToThreadException();
-		}
+      final ServletRequestAttributes attributes= (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+      if (attributes == null) {
+         throw new NotHttpServletRequestBoundToThreadException();
+      }
 
-		return attributes.getRequest();
-	}
+      return attributes.getRequest();
+   }
 }

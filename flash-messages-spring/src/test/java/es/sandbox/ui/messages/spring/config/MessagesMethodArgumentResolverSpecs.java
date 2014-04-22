@@ -21,8 +21,6 @@ import es.sandbox.spring.fixture.MockedSpringHttpServletRequest;
 import es.sandbox.ui.messages.Messages;
 import es.sandbox.ui.messages.context.MessagesContext;
 import es.sandbox.ui.messages.context.MessagesContextBuilder;
-import es.sandbox.ui.messages.spring.config.MessageSourceMessageResolverAdapterStrategy;
-import es.sandbox.ui.messages.spring.config.MessagesMethodArgumentResolver;
 import es.sandbox.ui.messages.spring.scope.flash.MessagesStoreFlashScopeAccessorFactory;
 import es.sandbox.ui.messages.store.MessagesStore;
 import es.sandbox.ui.messages.store.MessagesStoreNotFoundException;
@@ -31,123 +29,123 @@ import es.sandbox.ui.messages.store.MessagesStoreNotFoundException;
 @RunWith(Enclosed.class)
 public class MessagesMethodArgumentResolverSpecs {
 
-	public static class CreationSpecs {
+   public static class CreationSpecs {
 
-		@Test(expected= NullPointerException.class)
-		public void it_should_raise_an_exception_with_null_context() {
-			new MessagesMethodArgumentResolver(null);
-		}
+      @Test(expected= NullPointerException.class)
+      public void it_should_raise_an_exception_with_null_context() {
+         new MessagesMethodArgumentResolver(null);
+      }
 
-		@Test
-		public void it_should_be_created_with_context() {
-			final MessagesContext mockContext= mock(MessagesContext.class);
+      @Test
+      public void it_should_be_created_with_context() {
+         final MessagesContext mockContext= mock(MessagesContext.class);
 
-			assertThat(new MessagesMethodArgumentResolver(mockContext)).isNotNull();
-		}
-	}
+         assertThat(new MessagesMethodArgumentResolver(mockContext)).isNotNull();
+      }
+   }
 
-	public static class SupportsParameterSpec {
+   public static class SupportsParameterSpec {
 
-		private MethodParameter mockedMethodParameter;
-		private MessagesContext mockedContext;
+      private MethodParameter mockedMethodParameter;
+      private MessagesContext mockedContext;
 
-		private HandlerMethodArgumentResolver sut;
-
-
-		@Before
-		public void setup() {
-			this.mockedMethodParameter= mock(MethodParameter.class);
-			this.mockedContext= mock(MessagesContext.class);
-			this.sut= new MessagesMethodArgumentResolver(this.mockedContext);
-		}
-
-		@Test
-		@SuppressWarnings("unchecked")
-		public void should_supports_a_messages_parameter() {
-
-			given((Class<Messages>) this.mockedMethodParameter.getParameterType()).willReturn(Messages.class);
-
-			final boolean isSupported= this.sut.supportsParameter(this.mockedMethodParameter);
-
-			assertThat(isSupported).isTrue();
-
-			verify(this.mockedMethodParameter).getParameterType();
-		}
-
-		@Test(expected= NullPointerException.class)
-		public void should_raise_an_exception_with_null_parameter() {
-			this.sut.supportsParameter(null);
-		}
-
-		@Test
-		@SuppressWarnings("unchecked")
-		public void should_not_support_another_type_of_parameters() {
-			given((Class<String>) this.mockedMethodParameter.getParameterType()).willReturn(String.class);
-
-			final boolean isSupported= this.sut.supportsParameter(this.mockedMethodParameter);
-
-			assertThat(isSupported).isFalse();
-
-			verify(this.mockedMethodParameter).getParameterType();
-		}
-	}
-
-	public static class ResolveArgumentSpec {
-
-		private MethodParameter mockedMethodParameter;
-		private ModelAndViewContainer mockedMAVContainer;
-		private NativeWebRequest mockedNativeWebRequest;
-		private MockedSpringHttpServletRequest mockedRequest;
-		private WebDataBinderFactory mockedWebDataBinderFactory;
-		private MessageSource mockedMessageSource;
-
-		private MessagesContext context;
-
-		private MessagesMethodArgumentResolver sut;
+      private HandlerMethodArgumentResolver sut;
 
 
-		@Before
-		public void setup() {
-			this.mockedMethodParameter= mock(MethodParameter.class);
-			this.mockedMAVContainer= mock(ModelAndViewContainer.class);
-			this.mockedNativeWebRequest= mock(NativeWebRequest.class);
-			this.mockedRequest= detachedHttpServletRequest();
-			this.mockedWebDataBinderFactory= mock(WebDataBinderFactory.class);
-			this.mockedMessageSource= mock(MessageSource.class);
+      @Before
+      public void setup() {
+         this.mockedMethodParameter= mock(MethodParameter.class);
+         this.mockedContext= mock(MessagesContext.class);
+         this.sut= new MessagesMethodArgumentResolver(this.mockedContext);
+      }
 
-			given(this.mockedNativeWebRequest.getNativeRequest()).willReturn(this.mockedRequest);
+      @Test
+      @SuppressWarnings("unchecked")
+      public void should_supports_a_messages_parameter() {
 
-			this.context= new MessagesContextBuilder(new MessagesStoreFlashScopeAccessorFactory())
-					.withMessageResolverStrategy(new MessageSourceMessageResolverAdapterStrategy(this.mockedMessageSource))
-					.build();
+         given((Class<Messages>) this.mockedMethodParameter.getParameterType()).willReturn(Messages.class);
 
-			this.sut= new MessagesMethodArgumentResolver(this.context);
-		}
+         final boolean isSupported= this.sut.supportsParameter(this.mockedMethodParameter);
 
-		private void initializeOutputFlash(MessagesStore store) {
-			this.mockedRequest.addOutputFlashAttribute(MessagesStoreFlashScopeAccessorFactory.MESSAGES_PARAMETER, store);
-		}
+         assertThat(isSupported).isTrue();
+
+         verify(this.mockedMethodParameter).getParameterType();
+      }
+
+      @Test(expected= NullPointerException.class)
+      public void should_raise_an_exception_with_null_parameter() {
+         this.sut.supportsParameter(null);
+      }
+
+      @Test
+      @SuppressWarnings("unchecked")
+      public void should_not_support_another_type_of_parameters() {
+         given((Class<String>) this.mockedMethodParameter.getParameterType()).willReturn(String.class);
+
+         final boolean isSupported= this.sut.supportsParameter(this.mockedMethodParameter);
+
+         assertThat(isSupported).isFalse();
+
+         verify(this.mockedMethodParameter).getParameterType();
+      }
+   }
+
+   public static class ResolveArgumentSpec {
+
+      private MethodParameter mockedMethodParameter;
+      private ModelAndViewContainer mockedMAVContainer;
+      private NativeWebRequest mockedNativeWebRequest;
+      private MockedSpringHttpServletRequest mockedRequest;
+      private WebDataBinderFactory mockedWebDataBinderFactory;
+      private MessageSource mockedMessageSource;
+
+      private MessagesContext context;
+
+      private MessagesMethodArgumentResolver sut;
 
 
-		@Test
-		public void it_should_never_return_null() {
-			initializeOutputFlash(new MessagesStore());
+      @Before
+      public void setup() {
+         this.mockedMethodParameter= mock(MethodParameter.class);
+         this.mockedMAVContainer= mock(ModelAndViewContainer.class);
+         this.mockedNativeWebRequest= mock(NativeWebRequest.class);
+         this.mockedRequest= detachedHttpServletRequest();
+         this.mockedWebDataBinderFactory= mock(WebDataBinderFactory.class);
+         this.mockedMessageSource= mock(MessageSource.class);
 
-			final Object argument= this.sut.resolveArgument(this.mockedMethodParameter, this.mockedMAVContainer, this.mockedNativeWebRequest, this.mockedWebDataBinderFactory);
-			assertThat(argument).isNotNull();
-		}
+         given(this.mockedNativeWebRequest.getNativeRequest()).willReturn(this.mockedRequest);
 
-		@Test
-		public void it_should_return_an_argument_instance() {
-			initializeOutputFlash(new MessagesStore());
+         this.context= new MessagesContextBuilder(new MessagesStoreFlashScopeAccessorFactory())
+               .withMessageResolverStrategy(new MessageSourceMessageResolverAdapterStrategy(this.mockedMessageSource))
+               .build();
 
-			final Object argument= this.sut.resolveArgument(this.mockedMethodParameter, this.mockedMAVContainer, this.mockedNativeWebRequest, this.mockedWebDataBinderFactory);
-			assertThat(argument).isInstanceOf(Messages.class);
-		}
+         this.sut= new MessagesMethodArgumentResolver(this.context);
+      }
 
-		@Test(expected= MessagesStoreNotFoundException.class)
-		public void it_should_raise_an_exception_with_uninitialized_context() {
-			this.sut.resolveArgument(this.mockedMethodParameter, this.mockedMAVContainer, this.mockedNativeWebRequest, this.mockedWebDataBinderFactory);
-		}
-	}
+      private void initializeOutputFlash(MessagesStore store) {
+         this.mockedRequest.addOutputFlashAttribute(MessagesStoreFlashScopeAccessorFactory.MESSAGES_PARAMETER, store);
+      }
+
+
+      @Test
+      public void it_should_never_return_null() {
+         initializeOutputFlash(new MessagesStore());
+
+         final Object argument= this.sut.resolveArgument(this.mockedMethodParameter, this.mockedMAVContainer, this.mockedNativeWebRequest, this.mockedWebDataBinderFactory);
+         assertThat(argument).isNotNull();
+      }
+
+      @Test
+      public void it_should_return_an_argument_instance() {
+         initializeOutputFlash(new MessagesStore());
+
+         final Object argument= this.sut.resolveArgument(this.mockedMethodParameter, this.mockedMAVContainer, this.mockedNativeWebRequest, this.mockedWebDataBinderFactory);
+         assertThat(argument).isInstanceOf(Messages.class);
+      }
+
+      @Test(expected= MessagesStoreNotFoundException.class)
+      public void it_should_raise_an_exception_with_uninitialized_context() {
+         this.sut.resolveArgument(this.mockedMethodParameter, this.mockedMAVContainer, this.mockedNativeWebRequest, this.mockedWebDataBinderFactory);
+      }
+   }
 }

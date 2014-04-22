@@ -10,11 +10,11 @@ import es.sandbox.ui.messages.spring.config.annotation.MessagesConfigurerAdapter
 @Configuration
 @EnableFlashMessages
 public class FlashMessagesConfigurer
-		extends MessagesConfigurerAdapter {
+      extends MessagesConfigurerAdapter {
 
 
-	@Override
-	public void configureCssClassesByLevel(CssClassesByLevel cssClasses) {
-		cssClasses.put(Level.ERROR, "alert alert-danger");
-	}
+   @Override
+   public void configureCssClassesByLevel(CssClassesByLevel cssClasses) {
+      cssClasses.put(Level.ERROR, "alert alert-danger");
+   }
 }

@@ -6,5 +6,5 @@ package es.sandbox.ui.messages;
  * @author 21/06/2013 - jesuslopez
  */
 public enum Level {
-	SUCCESS, INFO, WARNING, ERROR;
+   SUCCESS, INFO, WARNING, ERROR;
 }

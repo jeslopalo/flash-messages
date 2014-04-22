@@ -9,26 +9,26 @@ import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
 
 
 public class MessageSourceMessageResolverAdapterStrategy
-		implements MessageResolverStrategy {
+      implements MessageResolverStrategy {
 
-	private final MessageSourceAccessor messageSourceAccessor;
+   private final MessageSourceAccessor messageSourceAccessor;
 
 
-	public MessageSourceMessageResolverAdapterStrategy(MessageSource messageSource) {
+   public MessageSourceMessageResolverAdapterStrategy(MessageSource messageSource) {
 
-		if (messageSource == null) {
-			throw new NullPointerException("MessageSource can't be null");
-		}
-		this.messageSourceAccessor= new MessageSourceAccessor(messageSource);
-	}
+      if (messageSource == null) {
+         throw new NullPointerException("MessageSource can't be null");
+      }
+      this.messageSourceAccessor= new MessageSourceAccessor(messageSource);
+   }
 
-	/*
-	 * (non-Javadoc)
-	 * @see es.sandbox.ui.messages.resolver.MessageResolverStrategy#resolveMessage(java.lang.String,
-	 * java.io.Serializable[])
-	 */
-	@Override
-	public String resolve(String code, Serializable... arguments) {
-		return this.messageSourceAccessor.getMessage(code, arguments);
-	}
+   /*
+    * (non-Javadoc)
+    * @see es.sandbox.ui.messages.resolver.MessageResolverStrategy#resolveMessage(java.lang.String,
+    * java.io.Serializable[])
+    */
+   @Override
+   public String resolve(String code, Serializable... arguments) {
+      return this.messageSourceAccessor.getMessage(code, arguments);
+   }
 }
