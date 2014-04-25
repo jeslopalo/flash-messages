@@ -1,9 +1,6 @@
 package es.sandbox.ui.messages.argument;
 
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatIn;
-import static es.sandbox.test.assertion.ArgumentAssertions.blank;
-import static es.sandbox.test.assertion.ArgumentAssertions.empty;
-import static es.sandbox.test.assertion.ArgumentAssertions.nullArgument;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.io.Serializable;
@@ -26,14 +23,14 @@ public class TextArgumentSpecs {
 
          assertThatIn(TextArgument.class)
                .constructor(String.class, Serializable[].class)
-               .willThrowNullPointerException()
-               .invokedWith(nullArgument(), nullArgument());
+               .throwsNullPointerException()
+               .invokedWithNulls();
 
          assertThatIn(TextArgument.class)
                .constructor(String.class, Serializable[].class)
-               .willThrowIllegalArgumentException()
-               .invokedWith(empty(), nullArgument())
-               .invokedWith(blank(), nullArgument());
+               .throwsIllegalArgumentException()
+               .invokedWith("", null)
+               .invokedWith(" ", null);
       }
 
       @Test

@@ -1,9 +1,6 @@
 package es.sandbox.ui.messages.argument;
 
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatIn;
-import static es.sandbox.test.assertion.ArgumentAssertions.blank;
-import static es.sandbox.test.assertion.ArgumentAssertions.empty;
-import static es.sandbox.test.assertion.ArgumentAssertions.nullArgument;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.junit.Test;
@@ -20,14 +17,14 @@ public class LinkArgumentSpecs {
       public void it_should_fail_with_invalid_url() {
          assertThatIn(LinkArgument.class)
                .constructor(String.class)
-               .willThrowNullPointerException()
-               .invokedWith(nullArgument());
+               .throwsNullPointerException()
+               .invokedWithNulls();
 
          assertThatIn(LinkArgument.class)
                .constructor(String.class)
-               .willThrowIllegalArgumentException()
-               .invokedWith(empty())
-               .invokedWith(blank());
+               .throwsIllegalArgumentException()
+               .invokedWith("")
+               .invokedWith(" ");
       }
 
       @Test
