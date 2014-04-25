@@ -31,5 +31,35 @@ public class LinkArgumentSpecs {
       public void it_should_be_constructed_with_an_url() {
          assertThat(new LinkArgument("/an/url")).isNotNull();
       }
+
+      @Test
+      public void it_should_be_possible_to_change_url() {
+         final LinkArgument link= new LinkArgument("/an/url");
+
+         link.url("/another/one");
+
+         assertThat(link.toString())
+               .doesNotContain("/an/url")
+               .contains("/another/one");
+      }
+   }
+
+   public static class TitleSpecs {
+
+      @Test
+      public void it_should_do_nothing_with_null_title() {
+         new LinkArgument("/an/url").title(null);
+      }
+
+      @Test
+      public void it_should_set_link_title() {
+         final LinkArgument link= new LinkArgument("/an/url");
+
+         link.title(new TextArgument("a"));
+
+         assertThat(link.toString())
+               .contains("/an/url")
+               .contains("text{a}");
+      }
    }
 }
