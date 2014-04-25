@@ -42,7 +42,7 @@ public class MessagesPublisher implements Messages {
     */
    @Override
    public void success(String code, Serializable... arguments) {
-      this.store.success(resolveMessage(code, arguments));
+      this.store.add(Level.SUCCESS, resolveMessage(code, arguments));
    }
 
    /*
@@ -51,7 +51,7 @@ public class MessagesPublisher implements Messages {
     */
    @Override
    public void info(String code, Serializable... arguments) {
-      this.store.info(resolveMessage(code, arguments));
+      this.store.add(Level.INFO, resolveMessage(code, arguments));
    }
 
    /*
@@ -60,7 +60,7 @@ public class MessagesPublisher implements Messages {
     */
    @Override
    public void warning(String code, Serializable... arguments) {
-      this.store.warning(resolveMessage(code, arguments));
+      this.store.add(Level.WARNING, resolveMessage(code, arguments));
    }
 
    /*
@@ -69,7 +69,7 @@ public class MessagesPublisher implements Messages {
     */
    @Override
    public void error(String code, Serializable... arguments) {
-      this.store.error(resolveMessage(code, arguments));
+      this.store.add(Level.ERROR, resolveMessage(code, arguments));
    }
 
    /*
