@@ -35,19 +35,20 @@
 				<role>developer</role>
 			</roles>
 			<timezone>+1</timezone>
+			<url>https://github.com/jeslopalo</url>
 		</developer>
 	</developers>
-
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/jeslopalo/flash-messages/issues</url>
-	</issueManagement>
 
 	<scm>
 		<connection>scm:git:git@github.com:jeslopalo/flash-messages.git</connection>
 		<developerConnection>scm:git:git@github.com:jeslopalo/flash-messages.git</developerConnection>
 		<url>git@github.com:jeslopalo/flash-messages.git</url>
 	</scm>
+
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/jeslopalo/flash-messages/issues</url>
+	</issueManagement>
 
 	<prerequisites>
 		<maven>3.0.0</maven>
