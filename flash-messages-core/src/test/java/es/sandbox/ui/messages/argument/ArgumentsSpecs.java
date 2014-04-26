@@ -1,6 +1,6 @@
 package es.sandbox.ui.messages.argument;
 
-import static es.sandbox.test.assertion.ArgumentAssertions.assertThatIn;
+import static es.sandbox.test.assertion.ArgumentAssertions.assertThatStaticMethod;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.io.Serializable;
@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import es.sandbox.test.assertion.ArgumentAssertions;
 import es.sandbox.test.utils.ReflectionInvoker;
 
 
@@ -42,12 +41,11 @@ public class ArgumentsSpecs {
 
       @Test
       public void it_should_fail_with_not_valid_code() {
-         assertThatIn(Arguments.class)
-               .staticMethod("text", String.class, Serializable[].class)
-
+         assertThatStaticMethod(Arguments.class, "text", String.class, Serializable[].class)
                .throwsNullPointerException()
-               .invokedWithNulls()
+               .invokedWithNulls();
 
+         assertThatStaticMethod(Arguments.class, "text", String.class, Serializable[].class)
                .throwsIllegalArgumentException()
                .invokedWith("")
                .invokedWith(" ");
@@ -73,11 +71,12 @@ public class ArgumentsSpecs {
 
       @Test
       public void it_should_fail_with_not_valid_argument() {
-         ArgumentAssertions.assertThatIn(Arguments.class)
-               .staticMethod("link", String.class)
+         assertThatStaticMethod(Arguments.class, "link", String.class)
                .throwsIllegalArgumentException()
                .invokedWith("")
-               .invokedWith(" ")
+               .invokedWith(" ");
+
+         assertThatStaticMethod(Arguments.class, "link", String.class)
                .throwsNullPointerException()
                .invokedWithNulls();
       }
