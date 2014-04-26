@@ -7,7 +7,7 @@
 	<version>0.1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>flash-messages-parent</name>
+	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Flash messages parent pom</description>
 	<url>https://github.com/jeslopalo/flash-messages</url>
 	<inceptionYear>2013</inceptionYear>

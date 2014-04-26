@@ -12,7 +12,7 @@
 	<artifactId>flash-messages-showcase</artifactId>
 	<packaging>war</packaging>
 
-	<name>flash-messages-showcase</name>
+	<name>${project.groupId}:${project.artifactId}</name>
 	<description>Web application showcase for flash messages</description>
 
 	<dependencyManagement>

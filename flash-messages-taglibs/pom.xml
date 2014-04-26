@@ -12,7 +12,7 @@
 	<artifactId>flash-messages-taglibs</artifactId>
 	<packaging>jar</packaging>
 
-	<name>flash-messages-taglibs</name>
+	<name>${project.groupId}:${project.artifactId}</name>
 	<description>A set of Taglibs to print messages in views</description>
 
 	<dependencies>
@@ -38,7 +38,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 		</dependency>
-		
+
 		<!-- Testing -->
 		<dependency>
 			<!-- mockito -->
