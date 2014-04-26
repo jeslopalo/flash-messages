@@ -45,5 +45,11 @@
 			<groupId>nl.jqno.equalsverifier</groupId>
 			<artifactId>equalsverifier</artifactId>
 		</dependency>
+
+		<dependency>
+			<!-- Mockito -->
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+		</dependency>
 	</dependencies>
 </project>
