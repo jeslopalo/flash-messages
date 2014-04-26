@@ -11,6 +11,9 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import es.sandbox.ui.messages.resolver.MessageResolver;
+import es.sandbox.ui.messages.resolver.StringFormatMessageResolverStrategy;
+
 
 @RunWith(Enclosed.class)
 public class LinkArgumentSpecs {
@@ -117,6 +120,78 @@ public class LinkArgumentSpecs {
          this.sut.title("code", "arg1", "arg2");
 
          assertThat(this.sut.toString()).isEqualTo("link{/an/url, text{code, [arg1, arg2]}, null}");
+      }
+   }
+
+   public static class CssClassSpecs {
+
+      private final LinkArgument sut= new LinkArgument("/an/url");
+
+
+      @Test
+      public void it_should_ignore_invalid_css_class() {
+         assertThat(this.sut.cssClass(null).toString()).isEqualTo("link{/an/url, null, null}");
+         assertThat(this.sut.cssClass("").toString()).isEqualTo("link{/an/url, null, null}");
+         assertThat(this.sut.cssClass(" ").toString()).isEqualTo("link{/an/url, null, null}");
+      }
+
+      @Test
+      public void it_should_set_css_class() {
+         assertThat(this.sut.cssClass("theClass").toString()).isEqualTo("link{/an/url, null, theClass}");
+      }
+   }
+
+   public static class ResolvingSpecs {
+
+      private MessageResolver messageResolver;
+      private LinkArgument sut;
+
+
+      @Before
+      public void setup() {
+
+         this.messageResolver= new MessageResolver(new StringFormatMessageResolverStrategy());
+         this.sut= new LinkArgument("/an/url");
+      }
+
+      @Test
+      public void it_should_fail_with_null_message_resolver() {
+         this.sut.title("a link").cssClass("theClass");
+
+         assertThat(this.sut.resolve(this.messageResolver))
+               .isEqualTo("<a href=\"/an/url\" title=\"a link\" class=\"theClass\">a link</a>");
+      }
+
+      @Test
+      public void it_should_use_url_without_title() {
+         assertThat(this.sut.resolve(this.messageResolver))
+               .isEqualTo("<a href=\"/an/url\" title=\"/an/url\">/an/url</a>");
+      }
+
+      @Test
+      public void it_should_use_resolve_resolvable_title() {
+         this.sut.title(Arguments.text("This is %s %s!", "a", "link"));
+
+         assertThat(this.sut.resolve(this.messageResolver))
+               .isEqualTo("<a href=\"/an/url\" title=\"This is a link!\">This is a link!</a>");
+      }
+   }
+
+   public static class ToStringSpecs {
+
+      @Test
+      public void it_should_include_values() {
+         assertThat(new LinkArgument("/an/url").toString())
+               .isEqualTo("link{/an/url, null, null}");
+
+         assertThat(new LinkArgument("/an/url").title("title").toString())
+               .isEqualTo("link{/an/url, text{title}, null}");
+
+         assertThat(new LinkArgument("/an/url").cssClass("theClass").toString())
+               .isEqualTo("link{/an/url, null, theClass}");
+
+         assertThat(new LinkArgument("/an/url").title("title").cssClass("theClass").toString())
+               .isEqualTo("link{/an/url, text{title}, theClass}");
       }
    }
 }
