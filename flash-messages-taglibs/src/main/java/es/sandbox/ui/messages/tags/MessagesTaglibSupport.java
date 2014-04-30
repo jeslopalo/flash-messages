@@ -58,7 +58,7 @@ public class MessagesTaglibSupport {
       final MessagesContext context= context(request);
       if (context == null) {
          LOGGER.warn("MessageContext can't be accessed!");
-         return new Level[] {};
+         return new Level[0];
       }
       return context.levels();
    }
