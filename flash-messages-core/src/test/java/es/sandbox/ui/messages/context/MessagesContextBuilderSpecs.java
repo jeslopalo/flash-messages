@@ -160,7 +160,7 @@ public class MessagesContextBuilderSpecs {
       }
    }
 
-   public static class WithCssClassesByLevelSpecs {
-
-   }
+   // public static class WithCssClassesByLevelSpecs {
+   //
+   // }
 }
