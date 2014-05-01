@@ -2,6 +2,23 @@ language: java
 
 jdk:
   - oraclejdk7
+  - openjdk7
   - openjdk6
 
 after_success: ./src/main/scripts/build/cobertura.sh
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "kabyZRSGs4f+b9ByMdccPyeFdj3uDWaC9Q+xukeANUpCK1dRIJTsnZCVAuoi62fD5Vgrxn0OojaxNh3Xa8UnP1y/kgNHE69tsklFhcbnrgRLkvUmH9DEU4MPqG1jARUiyFPihoe1xj7yPG+hDGHHXHrOkur54PeLVXh8V6gmJx0="
+
+addons:
+  coverity_scan:
+    project:
+      name: "jeslopalo/flash-messages"
+      description: "A simple way to send &amp; show flash messages"
+    notification_email: jeslopalo@sandbox.es
+    build_command_prepend: mvn clean
+    build_command: mvn package
+    branch_pattern: coverity_scan
