@@ -159,4 +159,8 @@ public class MessagesContextBuilderSpecs {
          assertThat(contextWithOrderedLevels.levels()).containsExactly(Level.SUCCESS, Level.INFO, Level.WARNING, Level.ERROR);
       }
    }
+
+   public static class WithCssClassesByLevelSpecs {
+
+   }
 }
