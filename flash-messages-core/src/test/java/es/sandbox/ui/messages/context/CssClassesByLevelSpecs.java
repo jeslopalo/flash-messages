@@ -98,6 +98,27 @@ public class CssClassesByLevelSpecs {
       }
    }
 
+   public static class GettingLevelSpecs {
+
+      private CssClassesByLevel sut;
+
+
+      @Before
+      public void setup() {
+         this.sut= new CssClassesByLevel();
+      }
+
+      @Test
+      public void it_should_get_null_with_null_level() {
+         assertThat(this.sut.get(null)).isNull();
+      }
+
+      @Test
+      public void it_should_get_classes() {
+         assertThat(this.sut.get(Level.SUCCESS)).isEqualTo("alert alert-success");
+      }
+   }
+
    public static class EqualitySpecs {
 
       @Test
