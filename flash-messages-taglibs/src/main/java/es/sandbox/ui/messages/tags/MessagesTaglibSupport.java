@@ -43,7 +43,7 @@ public class MessagesTaglibSupport {
          return context.levelMessages(level, request);
       }
 
-      LOGGER.warn("Level messages can't be accessed!");
+      LOGGER.warn("[{}] level messages can't be accessed!", level);
       return new ArrayList<Message>();
    }
 
