@@ -1,8 +1,8 @@
 package es.sandbox.ui.messages.context;
 
-import java.util.EnumMap;
+import static org.apache.commons.lang3.StringUtils.trimToEmpty;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.EnumMap;
 
 import es.sandbox.ui.messages.Level;
 
@@ -56,7 +56,7 @@ public final class CssClassesByLevel {
     * @param cssClass
     */
    public void put(Level level, String cssClass) {
-      this.cssClasses.put(level, StringUtils.trimToEmpty(cssClass));
+      this.cssClasses.put(level, trimToEmpty(cssClass));
    }
 
    /**
@@ -64,6 +64,9 @@ public final class CssClassesByLevel {
     * @return
     */
    public String get(Level level) {
+      if (level == null) {
+         return null;
+      }
       return this.cssClasses.get(level);
    }
 
