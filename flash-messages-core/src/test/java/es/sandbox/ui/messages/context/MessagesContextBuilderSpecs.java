@@ -160,7 +160,27 @@ public class MessagesContextBuilderSpecs {
       }
    }
 
-   // public static class WithCssClassesByLevelSpecs {
-   //
-   // }
+   public static class WithCssClassesByLevelSpecs {
+
+      private MessagesStoreAccessorFactory mockFactory;
+      private MessagesContextBuilder sut;
+
+
+      @Before
+      public void setup() {
+         this.mockFactory= mock(MessagesStoreAccessorFactory.class);
+         this.sut= new MessagesContextBuilder(this.mockFactory);
+      }
+
+      @Test
+      public void it_should_set_null_class_in_all_levels_with_null() {
+
+         this.sut.withCssClassesByLevel(null);
+
+         final MessagesContext context= this.sut.build();
+         for (final Level level : Level.values()) {
+            assertThat(context.getLevelCssClass(level)).isNull();
+         }
+      }
+   }
 }

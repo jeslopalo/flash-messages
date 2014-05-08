@@ -63,9 +63,7 @@ public class MessagesContextBuilder {
     * @return
     */
    public MessagesContextBuilder withCssClassesByLevel(CssClassesByLevel cssClasses) {
-      if (cssClasses != null) {
-         this.cssClassesByLevel= new CssClassesByLevel(cssClasses);
-      }
+      this.cssClassesByLevel= new CssClassesByLevel(cssClasses);
       return this;
    }
 
