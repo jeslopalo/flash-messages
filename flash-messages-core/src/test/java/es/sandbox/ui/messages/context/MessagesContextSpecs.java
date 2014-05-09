@@ -16,6 +16,8 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import es.sandbox.ui.messages.Level;
+import es.sandbox.ui.messages.Messages;
+import es.sandbox.ui.messages.MessagesPublisher;
 import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
 import es.sandbox.ui.messages.resolver.StringFormatMessageResolverStrategy;
 import es.sandbox.ui.messages.store.MessagesStore;
@@ -108,4 +110,79 @@ public class MessagesContextSpecs {
          verify(this.mockMessagesStoreAccessor, never()).put(any(MessagesStore.class));
       }
    }
+
+   public static class PublisherSpecs {
+
+      private MessagesStoreAccessorFactory mockMessagesStoreAccessorFactory;
+      private HttpServletRequest mockHttpServletRequest;
+      private MessagesStoreAccessor mockMessagesStoreAccessor;
+      private MessagesContext sut;
+
+
+      @Before
+      public void setup() {
+         this.mockMessagesStoreAccessorFactory= mock(MessagesStoreAccessorFactory.class);
+         this.mockHttpServletRequest= mock(HttpServletRequest.class);
+         this.mockMessagesStoreAccessor= mock(MessagesStoreAccessor.class);
+
+         this.sut= new MessagesContext(this.mockMessagesStoreAccessorFactory, new StringFormatMessageResolverStrategy());
+      }
+
+      @Test(expected= NullPointerException.class)
+      public void it_should_raise_an_exception_with_null_request() {
+         this.sut.publisher(null);
+      }
+
+      @Test
+      public void it_should_return_a_publisher() {
+         given(this.mockMessagesStoreAccessorFactory.create(this.mockHttpServletRequest)).willReturn(this.mockMessagesStoreAccessor);
+         given(this.mockMessagesStoreAccessor.get()).willReturn(new MessagesStore());
+
+         final Messages messages= this.sut.publisher(this.mockHttpServletRequest);
+
+         assertThat(messages).isInstanceOf(MessagesPublisher.class);
+      }
+   }
+
+   public static class LevelMessagesSpecs {
+
+      private MessagesStoreAccessorFactory mockMessagesStoreAccessorFactory;
+      private HttpServletRequest mockHttpServletRequest;
+      private MessagesStoreAccessor mockMessagesStoreAccessor;
+      private MessagesContext sut;
+
+
+      @Before
+      public void setup() {
+         this.mockMessagesStoreAccessorFactory= mock(MessagesStoreAccessorFactory.class);
+         this.mockHttpServletRequest= mock(HttpServletRequest.class);
+         this.mockMessagesStoreAccessor= mock(MessagesStoreAccessor.class);
+
+         this.sut= new MessagesContext(this.mockMessagesStoreAccessorFactory, new StringFormatMessageResolverStrategy());
+      }
+
+      @Test(expected= NullPointerException.class)
+      public void it_should_raise_an_exception_with_null_level() {
+         given(this.mockMessagesStoreAccessorFactory.create(this.mockHttpServletRequest)).willReturn(this.mockMessagesStoreAccessor);
+         given(this.mockMessagesStoreAccessor.get()).willReturn(new MessagesStore());
+
+         this.sut.levelMessages(null, this.mockHttpServletRequest);
+      }
+
+      @Test(expected= NullPointerException.class)
+      public void it_should_raise_an_exception_with_null_request() {
+         this.sut.levelMessages(Level.SUCCESS, null);
+      }
+
+      @Test
+      public void it_should_return__messages_by_level() {
+         given(this.mockMessagesStoreAccessorFactory.create(this.mockHttpServletRequest)).willReturn(this.mockMessagesStoreAccessor);
+         given(this.mockMessagesStoreAccessor.get()).willReturn(new MessagesStore());
+
+         for (final Level level : Level.values()) {
+            assertThat(this.sut.levelMessages(level, this.mockHttpServletRequest)).isEmpty();
+         }
+      }
+   }
+
 }
