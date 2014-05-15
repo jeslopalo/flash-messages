@@ -17,7 +17,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import es.sandbox.ui.messages.Level;
 import es.sandbox.ui.messages.context.CssClassesByLevel;
 import es.sandbox.ui.messages.context.MessagesContext;
+import es.sandbox.ui.messages.spring.config.MessageSourceMessageResolverAdapterStrategy;
 import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessagesDefaultConfigurationSpecs.DefaultMessagesConfigurer;
+import es.sandbox.ui.messages.spring.scope.flash.MessagesStoreFlashScopeAccessorFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes= DefaultMessagesConfigurer.class)
@@ -27,16 +29,18 @@ public class EnableFlashMessagesDefaultConfigurationSpecs
 
    private ApplicationContext context;
    private CssClassesByLevel defaultCssClasses;
+   private DelegatingMessagesConfiguration defaultConfiguration;
 
-
-   @Before
-   public void setup() {
-      this.defaultCssClasses= new CssClassesByLevel();
-   }
 
    @Override
    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
       this.context= applicationContext;
+   }
+
+   @Before
+   public void setup() {
+      this.defaultCssClasses= new CssClassesByLevel();
+      this.defaultConfiguration= this.context.getBean(DelegatingMessagesConfiguration.class);
    }
 
    @Test
@@ -49,6 +53,33 @@ public class EnableFlashMessagesDefaultConfigurationSpecs
       for (final Level level : Level.values()) {
          assertThat(defaultContext.getLevelCssClass(level)).isEqualTo(this.defaultCssClasses.get(level));
       }
+   }
+
+   @Test
+   public void it_should_configure_default_messages_store_accessor_factory() {
+      assertThat(this.defaultConfiguration.configureMessagesStoreAccessorFactory())
+            .isInstanceOf(MessagesStoreFlashScopeAccessorFactory.class);
+   }
+
+   @Test
+   public void it_should_configure_default_message_resolver_strategy() {
+      assertThat(this.defaultConfiguration.configureMessageResolverStrategy())
+            .isInstanceOf(MessageSourceMessageResolverAdapterStrategy.class);
+   }
+
+   @Test
+   public void it_should_configure_default_levels() {
+      assertThat(this.defaultConfiguration.configureIncludedLevels())
+            .isEqualTo(Level.values());
+   }
+
+   @Test
+   public void it_should_configure_default_css_classes() {
+      final CssClassesByLevel configuredCssClassesByLevel= new CssClassesByLevel(this.defaultCssClasses);
+      this.defaultConfiguration.configureCssClassesByLevel(configuredCssClassesByLevel);
+
+      assertThat(configuredCssClassesByLevel)
+            .isEqualTo(this.defaultCssClasses);
    }
 
 

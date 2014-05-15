@@ -18,7 +18,10 @@ import es.sandbox.ui.messages.Level;
 import es.sandbox.ui.messages.context.CssClassesByLevel;
 import es.sandbox.ui.messages.context.MessagesContext;
 import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
+import es.sandbox.ui.messages.resolver.StringFormatMessageResolverStrategy;
 import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessagesCustomConfigurationSpecs.CustomMessagesConfigurer;
+import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessagesCustomConfigurationSpecs.CustomMessagesConfigurer.DummyMessagesStoreAccessorFactory;
+import es.sandbox.ui.messages.spring.scope.flash.MessagesStoreFlashScopeAccessorFactory;
 import es.sandbox.ui.messages.store.MessagesStoreAccessorFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,28 +31,57 @@ public class EnableFlashMessagesCustomConfigurationSpecs
       implements ApplicationContextAware {
 
    private ApplicationContext context;
-   private CssClassesByLevel defaultCssClasses;
+   private DelegatingMessagesConfiguration messagesConfiguration;
 
-
-   @Before
-   public void setup() {
-      this.defaultCssClasses= new CssClassesByLevel();
-   }
 
    @Override
    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
       this.context= applicationContext;
    }
 
+   @Before
+   public void setup() {
+      this.messagesConfiguration= this.context.getBean(DelegatingMessagesConfiguration.class);
+   }
+
    @Test
    public void it_should_load_customized_messages_context_bean() {
-      final MessagesContext defaultContext= this.context.getBean(MessagesContext.class);
+      final MessagesContext customizedContext= this.context.getBean(MessagesContext.class);
 
-      assertThat(defaultContext).isNotNull();
-      assertThat(defaultContext.levels()).isEqualTo(new Level[] { Level.SUCCESS, Level.ERROR });
+      assertThat(customizedContext).isNotNull();
+      assertThat(customizedContext.levels()).isEqualTo(new Level[] { Level.SUCCESS, Level.ERROR });
 
       for (final Level level : Level.values()) {
-         assertThat(defaultContext.getLevelCssClass(level)).isEqualTo(level.name().toLowerCase());
+         assertThat(customizedContext.getLevelCssClass(level)).isEqualTo(level.name().toLowerCase());
+      }
+   }
+
+
+   @Test
+   public void it_should_configure_dummy_messages_store_accessor_factory() {
+      assertThat(this.messagesConfiguration.configureMessagesStoreAccessorFactory())
+            .isInstanceOf(DummyMessagesStoreAccessorFactory.class);
+   }
+
+   @Test
+   public void it_should_configure_string_format_message_resolver_strategy() {
+      assertThat(this.messagesConfiguration.configureMessageResolverStrategy())
+            .isInstanceOf(StringFormatMessageResolverStrategy.class);
+   }
+
+   @Test
+   public void it_should_configure_only_success_and_error_levels() {
+      assertThat(this.messagesConfiguration.configureIncludedLevels())
+            .isEqualTo(new Level[] { Level.SUCCESS, Level.ERROR });
+   }
+
+   @Test
+   public void it_should_configure_css_classes() {
+      final CssClassesByLevel customizedCssClassesByLevel= new CssClassesByLevel();
+      this.messagesConfiguration.configureCssClassesByLevel(customizedCssClassesByLevel);
+
+      for (final Level level : Level.values()) {
+         assertThat(customizedCssClassesByLevel.get(level)).isEqualTo(level.name().toLowerCase());
       }
    }
 
@@ -61,12 +93,12 @@ public class EnableFlashMessagesCustomConfigurationSpecs
 
       @Override
       public MessagesStoreAccessorFactory configureMessagesStoreAccessorFactory() {
-         return super.configureMessagesStoreAccessorFactory();
+         return new DummyMessagesStoreAccessorFactory();
       }
 
       @Override
       public MessageResolverStrategy configureMessageResolverStrategy() {
-         return super.configureMessageResolverStrategy();
+         return new StringFormatMessageResolverStrategy();
       }
 
       @Override
@@ -79,6 +111,12 @@ public class EnableFlashMessagesCustomConfigurationSpecs
          for (final Level level : Level.values()) {
             cssClasses.put(level, level.name().toLowerCase());
          }
+      }
+
+
+      static class DummyMessagesStoreAccessorFactory
+            extends MessagesStoreFlashScopeAccessorFactory {
+
       }
    }
 }
