@@ -10,75 +10,79 @@ import es.sandbox.ui.messages.store.MessagesStoreAccessorFactory;
 
 @Configuration
 class DelegatingMessagesConfiguration
-		extends MessagesConfigurationSupport {
+      extends MessagesConfigurationSupport {
 
-	private MessagesConfigurer configurer;
+   private MessagesConfigurer configurer;
 
 
-	@Autowired(required= false)
-	void setMessagesConfigurer(MessagesConfigurer messagesConfigurer) { // NO_UCD (unused code)
-		this.configurer= messagesConfigurer;
-	}
+   @Autowired(required= false)
+   void setMessagesConfigurer(MessagesConfigurer messagesConfigurer) { // NO_UCD (unused code)
+      this.configurer= messagesConfigurer;
+   }
 
-	/*
-	 * (non-Javadoc)
-	 * @see es.sandbox.ui.messages.spring.MessagesConfigurationSupport#configureMessagesStoreAccessorFactory()
-	 */
-	@Override
-	protected MessagesStoreAccessorFactory configureMessagesStoreAccessorFactory() {
-		final MessagesStoreAccessorFactory candidate= configuredMessagesStoreAccessorFactory();
-		return candidate == null? super.configureMessagesStoreAccessorFactory() : candidate;
-	}
+   /*
+    * (non-Javadoc)
+    * @see es.sandbox.ui.messages.spring.MessagesConfigurationSupport#configureMessagesStoreAccessorFactory()
+    */
+   @Override
+   protected MessagesStoreAccessorFactory configureMessagesStoreAccessorFactory() {
+      final MessagesStoreAccessorFactory candidate= configuredMessagesStoreAccessorFactory();
+      return candidate == null? super.configureMessagesStoreAccessorFactory() : candidate;
+   }
 
-	private MessagesStoreAccessorFactory configuredMessagesStoreAccessorFactory() {
-		if (this.configurer != null) {
-			return this.configurer.configureMessagesStoreAccessorFactory();
-		}
-		return null;
-	}
+   private MessagesStoreAccessorFactory configuredMessagesStoreAccessorFactory() {
+      if (this.configurer != null) {
+         return this.configurer.configureMessagesStoreAccessorFactory();
+      }
+      return null;
+   }
 
-	/*
-	 * (non-Javadoc)
-	 * @see es.sandbox.ui.messages.spring.MessagesConfigurationSupport#configureMessageResolverStrategy()
-	 */
-	@Override
-	protected MessageResolverStrategy configureMessageResolverStrategy() {
-		final MessageResolverStrategy candidate= configuredMessageResolverStrategy();
-		return candidate == null? super.configureMessageResolverStrategy() : candidate;
-	}
+   /*
+    * (non-Javadoc)
+    * @see es.sandbox.ui.messages.spring.MessagesConfigurationSupport#configureMessageResolverStrategy()
+    */
+   @Override
+   protected MessageResolverStrategy configureMessageResolverStrategy() {
+      final MessageResolverStrategy candidate= configuredMessageResolverStrategy();
+      return candidate == null? super.configureMessageResolverStrategy() : candidate;
+   }
 
-	private MessageResolverStrategy configuredMessageResolverStrategy() {
-		if (this.configurer != null) {
-			return this.configurer.configureMessageResolverStrategy();
-		}
-		return null;
-	}
+   private MessageResolverStrategy configuredMessageResolverStrategy() {
+      if (this.configurer != null) {
+         return this.configurer.configureMessageResolverStrategy();
+      }
+      return null;
+   }
 
-	/*
-	 * (non-Javadoc)
-	 * @see es.sandbox.ui.messages.spring.MessagesConfigurationSupport#configureIncludedLevels()
-	 */
-	@Override
-	protected Level[] configureIncludedLevels() {
-		final Level[] levels= configuredIncludedLevels();
-		return levels == null? super.configureIncludedLevels() : levels;
-	}
+   /*
+    * (non-Javadoc)
+    * @see es.sandbox.ui.messages.spring.MessagesConfigurationSupport#configureIncludedLevels()
+    */
+   @Override
+   protected Level[] configureIncludedLevels() {
+      final Level[] levels= configuredIncludedLevels();
+      return levels == null? super.configureIncludedLevels() : levels;
+   }
 
-	private Level[] configuredIncludedLevels() {
-		if (this.configurer != null) {
-			return this.configurer.configureIncludedLevels();
-		}
-		return null;
-	}
+   private Level[] configuredIncludedLevels() {
+      if (this.configurer != null) {
+         return this.configurer.configureIncludedLevels();
+      }
+      return null;
+   }
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * es.sandbox.ui.messages.spring.MessagesConfigurationSupport#configureCssClassesByLevel(es.sandbox.ui.messages.
-	 * context.CssClassesByLevel)
-	 */
-	@Override
-	protected void configureCssClassesByLevel(CssClassesByLevel cssClassesByLevel) {
-		this.configurer.configureCssClassesByLevel(cssClassesByLevel);
-	}
+   /*
+    * (non-Javadoc)
+    * @see
+    * es.sandbox.ui.messages.spring.MessagesConfigurationSupport#configureCssClassesByLevel(es.sandbox.ui.messages.
+    * context.CssClassesByLevel)
+    */
+   @Override
+   protected void configureCssClassesByLevel(CssClassesByLevel cssClassesByLevel) {
+      super.configureCssClassesByLevel(cssClassesByLevel);
+
+      if (this.configurer != null) {
+         this.configurer.configureCssClassesByLevel(cssClassesByLevel);
+      }
+   }
 }
