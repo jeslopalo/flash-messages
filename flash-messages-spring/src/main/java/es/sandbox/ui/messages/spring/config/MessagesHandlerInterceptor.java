@@ -20,6 +20,10 @@ public class MessagesHandlerInterceptor
 
 
    public MessagesHandlerInterceptor(MessagesContext context) {
+      if (context == null) {
+         throw new NullPointerException("Context can't be null");
+      }
+
       this.context= context;
    }
 
