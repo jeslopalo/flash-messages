@@ -19,15 +19,15 @@ import es.sandbox.ui.messages.context.CssClassesByLevel;
 import es.sandbox.ui.messages.context.MessagesContext;
 import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
 import es.sandbox.ui.messages.resolver.StringFormatMessageResolverStrategy;
-import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessagesCustomConfigurationSpecs.CustomMessagesConfigurer;
-import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessagesCustomConfigurationSpecs.CustomMessagesConfigurer.DummyMessagesStoreAccessorFactory;
+import es.sandbox.ui.messages.spring.config.annotation.ConfigurationExtendingAndCustomizingMessagesConfigurationAdapterSpecs.CustomMessagesConfigurer;
+import es.sandbox.ui.messages.spring.config.annotation.ConfigurationExtendingAndCustomizingMessagesConfigurationAdapterSpecs.CustomMessagesConfigurer.DummyMessagesStoreAccessorFactory;
 import es.sandbox.ui.messages.spring.scope.flash.MessagesStoreFlashScopeAccessorFactory;
 import es.sandbox.ui.messages.store.MessagesStoreAccessorFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes= CustomMessagesConfigurer.class)
 @WebAppConfiguration
-public class EnableFlashMessagesCustomConfigurationSpecs
+public class ConfigurationExtendingAndCustomizingMessagesConfigurationAdapterSpecs
       implements ApplicationContextAware {
 
    private ApplicationContext context;

@@ -18,18 +18,19 @@ import es.sandbox.ui.messages.Level;
 import es.sandbox.ui.messages.context.CssClassesByLevel;
 import es.sandbox.ui.messages.context.MessagesContext;
 import es.sandbox.ui.messages.spring.config.MessageSourceMessageResolverAdapterStrategy;
-import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessagesDefaultConfigurationSpecs.DefaultMessagesConfigurer;
+import es.sandbox.ui.messages.spring.config.annotation.ConfigurationExtendingMessagesConfigurationAdapterSpecs.ExtendingMessagesConfigurationAdapterConfigurer;
 import es.sandbox.ui.messages.spring.scope.flash.MessagesStoreFlashScopeAccessorFactory;
 
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= DefaultMessagesConfigurer.class)
+@ContextConfiguration(classes= ExtendingMessagesConfigurationAdapterConfigurer.class)
 @WebAppConfiguration
-public class EnableFlashMessagesDefaultConfigurationSpecs
+public class ConfigurationExtendingMessagesConfigurationAdapterSpecs
       implements ApplicationContextAware {
 
    private ApplicationContext context;
    private CssClassesByLevel defaultCssClasses;
-   private DelegatingMessagesConfiguration defaultConfiguration;
+   private DelegatingMessagesConfiguration messagesConfiguration;
 
 
    @Override
@@ -40,43 +41,44 @@ public class EnableFlashMessagesDefaultConfigurationSpecs
    @Before
    public void setup() {
       this.defaultCssClasses= new CssClassesByLevel();
-      this.defaultConfiguration= this.context.getBean(DelegatingMessagesConfiguration.class);
+      this.messagesConfiguration= this.context.getBean(DelegatingMessagesConfiguration.class);
    }
 
    @Test
    public void it_should_load_default_messages_context_bean() {
-      final MessagesContext defaultContext= this.context.getBean(MessagesContext.class);
+      final MessagesContext customizedContext= this.context.getBean(MessagesContext.class);
 
-      assertThat(defaultContext).isNotNull();
-      assertThat(defaultContext.levels()).isEqualTo(Level.values());
+      assertThat(customizedContext).isNotNull();
+      assertThat(customizedContext.levels()).isEqualTo(Level.values());
 
       for (final Level level : Level.values()) {
-         assertThat(defaultContext.getLevelCssClass(level)).isEqualTo(this.defaultCssClasses.get(level));
+         assertThat(customizedContext.getLevelCssClass(level)).isEqualTo(this.defaultCssClasses.get(level));
       }
    }
 
+
    @Test
    public void it_should_configure_default_messages_store_accessor_factory() {
-      assertThat(this.defaultConfiguration.configureMessagesStoreAccessorFactory())
+      assertThat(this.messagesConfiguration.configureMessagesStoreAccessorFactory())
             .isInstanceOf(MessagesStoreFlashScopeAccessorFactory.class);
    }
 
    @Test
    public void it_should_configure_default_message_resolver_strategy() {
-      assertThat(this.defaultConfiguration.configureMessageResolverStrategy())
+      assertThat(this.messagesConfiguration.configureMessageResolverStrategy())
             .isInstanceOf(MessageSourceMessageResolverAdapterStrategy.class);
    }
 
    @Test
    public void it_should_configure_default_levels() {
-      assertThat(this.defaultConfiguration.configureIncludedLevels())
+      assertThat(this.messagesConfiguration.configureIncludedLevels())
             .isEqualTo(Level.values());
    }
 
    @Test
    public void it_should_configure_default_css_classes() {
       final CssClassesByLevel configuredCssClassesByLevel= new CssClassesByLevel(this.defaultCssClasses);
-      this.defaultConfiguration.configureCssClassesByLevel(configuredCssClassesByLevel);
+      this.messagesConfiguration.configureCssClassesByLevel(configuredCssClassesByLevel);
 
       assertThat(configuredCssClassesByLevel)
             .isEqualTo(this.defaultCssClasses);
@@ -86,7 +88,7 @@ public class EnableFlashMessagesDefaultConfigurationSpecs
    @Configuration
    @EnableFlashMessages
    @Import(FixtureMessagesContextConfiguration.class)
-   static class DefaultMessagesConfigurer {
-
+   static class ExtendingMessagesConfigurationAdapterConfigurer
+         extends MessagesConfigurerAdapter {
    }
 }
