@@ -36,6 +36,7 @@ final class MessagesStoreFlashScopeAccessor
 
       assertThatRequestIsNotNull(request);
       assertThatFlashParameterIsValid(flashParameter);
+      LOGGER.trace("The messages will be stored in flash scope param [{}]", flashParameter);
 
       this.request= request;
       this.parameterName= flashParameter;
