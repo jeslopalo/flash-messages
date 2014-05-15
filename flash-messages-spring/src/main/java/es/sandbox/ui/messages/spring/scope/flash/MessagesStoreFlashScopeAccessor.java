@@ -32,7 +32,7 @@ final class MessagesStoreFlashScopeAccessor
     * @throws IllegalArgumentException
     */
    MessagesStoreFlashScopeAccessor(HttpServletRequest request, String flashParameter)
-         throws IllegalArgumentException {
+         throws NullPointerException, IllegalArgumentException {
 
       assertThatRequestIsNotNull(request);
       assertThatFlashParameterIsValid(flashParameter);
@@ -62,7 +62,7 @@ final class MessagesStoreFlashScopeAccessor
    }
 
    private void initialize() {
-      if (!existsStoreInCurrentRequest() && existsStoreFromPreviousRequest()) {
+      if (!existsStoreInCurrentRequest()) {
          copyFromPreviousToCurrentRequest();
       }
    }

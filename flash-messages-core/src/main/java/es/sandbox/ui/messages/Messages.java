@@ -11,7 +11,7 @@ public interface Messages {
     * @throws NullPointerException
     * @throws IllegalArgumentException
     */
-   void success(String code, Serializable... arguments);
+   void addSuccess(String code, Serializable... arguments);
 
    /**
     * @param code
@@ -19,7 +19,7 @@ public interface Messages {
     * @throws NullPointerException
     * @throws IllegalArgumentException
     */
-   void info(String code, Serializable... arguments);
+   void addInfo(String code, Serializable... arguments);
 
    /**
     * @param code
@@ -27,7 +27,7 @@ public interface Messages {
     * @throws NullPointerException
     * @throws IllegalArgumentException
     */
-   void warning(String code, Serializable... arguments);
+   void addWarning(String code, Serializable... arguments);
 
    /**
     * @param code
@@ -35,7 +35,7 @@ public interface Messages {
     * @throws NullPointerException
     * @throws IllegalArgumentException
     */
-   void error(String code, Serializable... arguments);
+   void addError(String code, Serializable... arguments);
 
    /**
     * Clear all {@link Level} messages

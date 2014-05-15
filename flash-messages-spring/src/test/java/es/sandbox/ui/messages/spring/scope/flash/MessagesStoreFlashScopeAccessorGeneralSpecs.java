@@ -20,7 +20,40 @@ public class MessagesStoreFlashScopeAccessorGeneralSpecs {
    private static final MessagesStore EXAMPLE_STORE= new MessagesStore();
 
 
-   public static class PutStoreInFlashScopeSpec {
+   public static class ContainsStoreInFlashScopeSpecs {
+
+      private MockedSpringHttpServletRequest mockedRequest;
+      private MessagesStoreAccessor sut;
+
+
+      @Before
+      public void setup() {
+         this.mockedRequest= detachedHttpServletRequest();
+         this.sut= new MessagesStoreFlashScopeAccessor(this.mockedRequest, EXAMPLE_KEY);
+      }
+
+      @Test
+      public void it_should_not_contains_store_in_flash() {
+
+         assertThat(this.sut.contains()).isFalse();
+      }
+
+      @Test
+      public void it_should_contains_store_from_previous_request() {
+         this.mockedRequest.addInputFlashAttribute(EXAMPLE_KEY, EXAMPLE_STORE);
+
+         assertThat(this.sut.contains()).isTrue();
+      }
+
+      @Test
+      public void it_should_contains_store() {
+         this.mockedRequest.addOutputFlashAttribute(EXAMPLE_KEY, EXAMPLE_STORE);
+
+         assertThat(this.sut.contains()).isTrue();
+      }
+   }
+
+   public static class PutStoreInFlashScopeSpecs {
 
       private MockedSpringHttpServletRequest mockedRequest;
       private MessagesStoreAccessor sut;

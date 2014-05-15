@@ -41,7 +41,7 @@ public class MessagesPublisher implements Messages {
     * @see es.sandbox.ui.messages.Messages#success(java.lang.String, java.io.Serializable[])
     */
    @Override
-   public void success(String code, Serializable... arguments) {
+   public void addSuccess(String code, Serializable... arguments) {
       this.store.add(Level.SUCCESS, resolveMessage(code, arguments));
    }
 
@@ -50,7 +50,7 @@ public class MessagesPublisher implements Messages {
     * @see es.sandbox.ui.messages.Messages#info(java.lang.String, java.io.Serializable[])
     */
    @Override
-   public void info(String code, Serializable... arguments) {
+   public void addInfo(String code, Serializable... arguments) {
       this.store.add(Level.INFO, resolveMessage(code, arguments));
    }
 
@@ -59,7 +59,7 @@ public class MessagesPublisher implements Messages {
     * @see es.sandbox.ui.messages.Messages#warning(java.lang.String, java.io.Serializable[])
     */
    @Override
-   public void warning(String code, Serializable... arguments) {
+   public void addWarning(String code, Serializable... arguments) {
       this.store.add(Level.WARNING, resolveMessage(code, arguments));
    }
 
@@ -68,7 +68,7 @@ public class MessagesPublisher implements Messages {
     * @see es.sandbox.ui.messages.Messages#error(java.lang.String, java.io.Serializable[])
     */
    @Override
-   public void error(String code, Serializable... arguments) {
+   public void addError(String code, Serializable... arguments) {
       this.store.add(Level.ERROR, resolveMessage(code, arguments));
    }
 
