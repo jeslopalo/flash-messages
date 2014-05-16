@@ -4,4 +4,4 @@ flash-messages
 [![Coverage Status](https://coveralls.io/repos/jeslopalo/flash-messages/badge.png)](https://coveralls.io/r/jeslopalo/flash-messages)
 
 
-A simple way to send &amp; show flash messages
+A simple way to send &amp; show flash messages.
