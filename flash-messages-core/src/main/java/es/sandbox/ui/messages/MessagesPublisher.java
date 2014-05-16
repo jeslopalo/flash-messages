@@ -1,7 +1,5 @@
 package es.sandbox.ui.messages;
 
-import java.io.Serializable;
-
 import es.sandbox.ui.messages.resolver.MessageResolver;
 import es.sandbox.ui.messages.store.MessagesStore;
 
@@ -32,43 +30,50 @@ public class MessagesPublisher implements Messages {
       }
    }
 
-   private String resolveMessage(String code, Serializable... arguments) {
+   private String resolveMessage(String code, Object... arguments) {
       return this.messageResolver.resolve(code, arguments);
    }
 
    /*
     * (non-Javadoc)
-    * @see es.sandbox.ui.messages.Messages#success(java.lang.String, java.io.Serializable[])
+    * @see es.sandbox.ui.messages.Messages#addSuccess(java.lang.String, java.lang.Object[])
     */
    @Override
-   public void success(String code, Serializable... arguments) {
+   public void addSuccess(String code, Object... arguments)
+         throws NullPointerException, IllegalArgumentException {
       this.store.add(Level.SUCCESS, resolveMessage(code, arguments));
    }
 
    /*
     * (non-Javadoc)
-    * @see es.sandbox.ui.messages.Messages#info(java.lang.String, java.io.Serializable[])
+    * @see es.sandbox.ui.messages.Messages#addInfo(java.lang.String, java.lang.Object[])
     */
    @Override
-   public void info(String code, Serializable... arguments) {
+   public void addInfo(String code, Object... arguments)
+         throws NullPointerException, IllegalArgumentException {
+
       this.store.add(Level.INFO, resolveMessage(code, arguments));
    }
 
    /*
     * (non-Javadoc)
-    * @see es.sandbox.ui.messages.Messages#warning(java.lang.String, java.io.Serializable[])
+    * @see es.sandbox.ui.messages.Messages#addWarning(java.lang.String, java.lang.Object[])
     */
    @Override
-   public void warning(String code, Serializable... arguments) {
+   public void addWarning(String code, Object... arguments)
+         throws NullPointerException, IllegalArgumentException {
+
       this.store.add(Level.WARNING, resolveMessage(code, arguments));
    }
 
    /*
     * (non-Javadoc)
-    * @see es.sandbox.ui.messages.Messages#error(java.lang.String, java.io.Serializable[])
+    * @see es.sandbox.ui.messages.Messages#addError(java.lang.String, java.lang.Object[])
     */
    @Override
-   public void error(String code, Serializable... arguments) {
+   public void addError(String code, Object... arguments)
+         throws NullPointerException, IllegalArgumentException {
+
       this.store.add(Level.ERROR, resolveMessage(code, arguments));
    }
 
@@ -89,7 +94,6 @@ public class MessagesPublisher implements Messages {
    public boolean isEmpty() {
       return this.store.isEmpty();
    }
-
 
    /*
     * (non-Javadoc)

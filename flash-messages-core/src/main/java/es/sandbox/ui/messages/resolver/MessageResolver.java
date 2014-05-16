@@ -1,6 +1,5 @@
 package es.sandbox.ui.messages.resolver;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class MessageResolver {
     * @param arguments
     * @return
     */
-   public String resolve(String code, Serializable... arguments) {
+   public String resolve(String code, Object... arguments) {
       assertThatCodeIsValid(code);
 
       return this.strategy.resolve(code, arguments(arguments));
@@ -44,17 +43,17 @@ public class MessageResolver {
       }
    }
 
-   private Serializable[] arguments(Serializable... arguments) {
-      final List<Serializable> resolved= new ArrayList<Serializable>();
+   private Object[] arguments(Object... arguments) {
+      final List<Object> resolved= new ArrayList<Object>();
       if (arguments != null) {
-         for (final Serializable argument : arguments) {
+         for (final Object argument : arguments) {
             resolved.add(resolveSingle(argument));
          }
       }
-      return resolved.toArray(new Serializable[0]);
+      return resolved.toArray(new Object[0]);
    }
 
-   private Serializable resolveSingle(Serializable argument) {
+   private Object resolveSingle(Object argument) {
       if (argument instanceof Resolvable) {
          return ((Resolvable) argument).resolve(this);
       }

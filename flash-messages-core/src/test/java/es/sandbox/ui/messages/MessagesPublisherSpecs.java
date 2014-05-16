@@ -2,9 +2,8 @@ package es.sandbox.ui.messages;
 
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatMethod;
+import static org.apache.commons.lang3.StringUtils.capitalize;
 import static org.fest.assertions.api.Assertions.assertThat;
-
-import java.io.Serializable;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -68,11 +67,11 @@ public class MessagesPublisherSpecs {
       }
 
       private void itShouldFailWithInvalidCode(Level level) {
-         assertThatMethod(this.sut, level.name().toLowerCase(), String.class, Serializable[].class)
+         assertThatMethod(this.sut, "add" + capitalize(level.name().toLowerCase()), String.class, Object[].class)
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatMethod(this.sut, level.name().toLowerCase(), String.class, Serializable[].class)
+         assertThatMethod(this.sut, "add" + capitalize(level.name().toLowerCase()), String.class, Object[].class)
                .throwsIllegalArgumentException()
                .invokedWith("")
                .invokedWith(" ");
@@ -80,38 +79,38 @@ public class MessagesPublisherSpecs {
 
       @Test
       public void it_should_add_message_codes_to_the_level() {
-         this.sut.info("infoCode");
+         this.sut.addInfo("infoCode");
          assertThat(this.messagesStore.getMessages(Level.INFO)).hasSize(1);
          assertThat(this.messagesStore.getMessages(Level.INFO).get(0).getText()).isEqualTo("infoCode");
 
-         this.sut.error("errorCode");
+         this.sut.addError("errorCode");
          assertThat(this.messagesStore.getMessages(Level.ERROR)).hasSize(1);
          assertThat(this.messagesStore.getMessages(Level.ERROR).get(0).getText()).isEqualTo("errorCode");
 
-         this.sut.success("successCode");
+         this.sut.addSuccess("successCode");
          assertThat(this.messagesStore.getMessages(Level.SUCCESS)).hasSize(1);
          assertThat(this.messagesStore.getMessages(Level.SUCCESS).get(0).getText()).isEqualTo("successCode");
 
-         this.sut.warning("warningCode");
+         this.sut.addWarning("warningCode");
          assertThat(this.messagesStore.getMessages(Level.WARNING)).hasSize(1);
          assertThat(this.messagesStore.getMessages(Level.WARNING).get(0).getText()).isEqualTo("warningCode");
       }
 
       @Test
       public void it_should_add_messages_to_the_level() {
-         this.sut.info("infoCode %s", "!");
+         this.sut.addInfo("infoCode %s", "!");
          assertThat(this.messagesStore.getMessages(Level.INFO)).hasSize(1);
          assertThat(this.messagesStore.getMessages(Level.INFO).get(0).getText()).isEqualTo("infoCode !");
 
-         this.sut.error("errorCode %s", "!");
+         this.sut.addError("errorCode %s", "!");
          assertThat(this.messagesStore.getMessages(Level.ERROR)).hasSize(1);
          assertThat(this.messagesStore.getMessages(Level.ERROR).get(0).getText()).isEqualTo("errorCode !");
 
-         this.sut.success("successCode %s", "!");
+         this.sut.addSuccess("successCode %s", "!");
          assertThat(this.messagesStore.getMessages(Level.SUCCESS)).hasSize(1);
          assertThat(this.messagesStore.getMessages(Level.SUCCESS).get(0).getText()).isEqualTo("successCode !");
 
-         this.sut.warning("warningCode %s", "!");
+         this.sut.addWarning("warningCode %s", "!");
          assertThat(this.messagesStore.getMessages(Level.WARNING)).hasSize(1);
          assertThat(this.messagesStore.getMessages(Level.WARNING).get(0).getText()).isEqualTo("warningCode !");
       }
@@ -138,7 +137,7 @@ public class MessagesPublisherSpecs {
 
       @Test
       public void it_should_be_not_empty_with_messages() {
-         this.sut.success("code");
+         this.sut.addSuccess("code");
 
          assertThat(this.sut.isEmpty()).isFalse();
       }
@@ -147,7 +146,7 @@ public class MessagesPublisherSpecs {
       public void it_should_delegate_on_store() {
          assertThat(this.sut.isEmpty()).isEqualTo(this.messagesStore.isEmpty());
 
-         this.sut.error("code");
+         this.sut.addError("code");
 
          assertThat(this.sut.isEmpty()).isEqualTo(this.messagesStore.isEmpty());
       }
@@ -176,7 +175,7 @@ public class MessagesPublisherSpecs {
 
       @Test
       public void it_should_clear_messages() {
-         this.sut.warning("code");
+         this.sut.addWarning("code");
 
          this.sut.clear();
          assertThat(this.sut.isEmpty()).isTrue();
@@ -209,10 +208,10 @@ public class MessagesPublisherSpecs {
       public void it_should_delegate_on_store() {
          assertThat(this.sut.toString()).isEqualTo(this.messagesStore.toString());
 
-         this.sut.success("message 1");
+         this.sut.addSuccess("message 1");
          assertThat(this.sut.toString()).isEqualTo(this.messagesStore.toString());
 
-         this.sut.error("message 2");
+         this.sut.addError("message 2");
          assertThat(this.sut.toString()).isEqualTo(this.messagesStore.toString());
       }
    }

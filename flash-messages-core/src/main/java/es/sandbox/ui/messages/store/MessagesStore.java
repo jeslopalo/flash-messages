@@ -123,6 +123,10 @@ public final class MessagesStore
     * @return
     */
    public List<Message> getMessages(final Level level) {
+      if (level == null) {
+         throw new NullPointerException("Level can't be null");
+      }
+
       return Collections.unmodifiableList(this.messages.get(level));
    }
 
@@ -133,6 +137,10 @@ public final class MessagesStore
     * @return
     */
    boolean containsMessages(final Level level) {
+      if (level == null) {
+         throw new NullPointerException("Level can't be null");
+      }
+
       return !this.messages.get(level).isEmpty();
    }
 

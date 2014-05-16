@@ -4,8 +4,6 @@ import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatMethod;
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import java.io.Serializable;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -77,11 +75,11 @@ public class LinkArgumentSpecs {
 
       @Test
       public void it_should_fail_with_invalid_code() {
-         assertThatMethod(this.sut, "title", String.class, Serializable[].class)
+         assertThatMethod(this.sut, "title", String.class, Object[].class)
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatMethod(this.sut, "title", String.class, Serializable[].class)
+         assertThatMethod(this.sut, "title", String.class, Object[].class)
                .throwsIllegalArgumentException()
                .invokedWith("", null)
                .invokedWith(" ", null);
@@ -89,14 +87,14 @@ public class LinkArgumentSpecs {
 
       @Test
       public void it_should_work_with_null_argument() {
-         this.sut.title("code", (Serializable) null);
+         this.sut.title("code", (Object) null);
 
          assertThat(this.sut.toString()).isEqualTo("link{/an/url, text{code, [null]}, null}");
       }
 
       @Test
       public void it_should_work_with_null_array_of_arguments() {
-         this.sut.title("code", (Serializable[]) null);
+         this.sut.title("code", (Object[]) null);
 
          assertThat(this.sut.toString()).isEqualTo("link{/an/url, text{code}, null}");
       }

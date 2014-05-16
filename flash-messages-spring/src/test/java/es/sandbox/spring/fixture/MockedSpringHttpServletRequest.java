@@ -42,6 +42,7 @@ public final class MockedSpringHttpServletRequest
       }
    }
 
+
    public final void register() {
       RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(this));
    }
@@ -49,6 +50,7 @@ public final class MockedSpringHttpServletRequest
    public final void unregister() {
       RequestContextHolder.resetRequestAttributes();
    }
+
 
    public <T> void addInputFlashAttribute(final String key, final T value) {
       @SuppressWarnings("unchecked")
@@ -63,8 +65,14 @@ public final class MockedSpringHttpServletRequest
       outputFlashMap.put(key, value);
    }
 
+
    public final <T> void assertThatOutputFlashScopeContains(final String key, final T value) {
       final FlashMap flash= RequestContextUtils.getOutputFlashMap(this);
       assertThat(flash).contains(entry(key, value));
+   }
+
+   public final <T> void assertThatOutputFlashScopeDoesNotContain(final String key) {
+      final FlashMap flash= RequestContextUtils.getOutputFlashMap(this);
+      assertThat(flash).doesNotContainKey(key);
    }
 }

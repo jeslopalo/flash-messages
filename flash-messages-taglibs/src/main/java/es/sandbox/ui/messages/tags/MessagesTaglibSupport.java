@@ -1,5 +1,7 @@
 package es.sandbox.ui.messages.tags;
 
+import static org.apache.commons.lang3.StringUtils.trimToEmpty;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -41,7 +43,7 @@ public class MessagesTaglibSupport {
          return context.levelMessages(level, request);
       }
 
-      LOGGER.warn("Level messages can't be accessed!");
+      LOGGER.warn("[{}] level messages can't be accessed!", level);
       return new ArrayList<Message>();
    }
 
@@ -75,6 +77,6 @@ public class MessagesTaglibSupport {
          LOGGER.warn("MessageContext can't be accessed!");
          return "";
       }
-      return context.getLevelCssClass(level);
+      return trimToEmpty(context.getLevelCssClass(level));
    }
 }

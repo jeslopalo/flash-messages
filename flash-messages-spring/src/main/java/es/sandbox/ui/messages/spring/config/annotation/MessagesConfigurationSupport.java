@@ -28,131 +28,131 @@ import es.sandbox.ui.messages.store.MessagesStoreAccessorFactory;
 
 
 public class MessagesConfigurationSupport
-		extends WebMvcConfigurerAdapter {
+      extends WebMvcConfigurerAdapter {
 
-	private HandlerExceptionResolver handlerExceptionResolver;
-	private MessageSource messageSource;
-
-
-	@Autowired
-	void setMessageSource(MessageSource messageSource) {
-		this.messageSource= messageSource;
-	}
-
-	@Autowired
-	void setHandlerExceptionResolver(HandlerExceptionResolver handlerExceptionResolver) {
-		this.handlerExceptionResolver= handlerExceptionResolver;
-	}
+   private HandlerExceptionResolver handlerExceptionResolver;
+   private MessageSource messageSource;
 
 
-	/**
+   @Autowired
+   void setMessageSource(MessageSource messageSource) {
+      this.messageSource= messageSource;
+   }
+
+   @Autowired
+   void setHandlerExceptionResolver(HandlerExceptionResolver handlerExceptionResolver) {
+      this.handlerExceptionResolver= handlerExceptionResolver;
+   }
+
+
+   /**
 	 * 
 	 */
-	@PostConstruct
-	private void configureMessagesExceptionArgumentResolvers() {
-		for (final HandlerExceptionResolver resolver : ((HandlerExceptionResolverComposite) this.handlerExceptionResolver).getExceptionResolvers()) {
-			if (resolver instanceof ExceptionHandlerExceptionResolver) {
-				configureCustomHandlerMethodArgumentResolver((ExceptionHandlerExceptionResolver) resolver);
-			}
-		}
-	}
+   @PostConstruct
+   private void configureMessagesExceptionArgumentResolvers() {
+      for (final HandlerExceptionResolver resolver : ((HandlerExceptionResolverComposite) this.handlerExceptionResolver).getExceptionResolvers()) {
+         if (resolver instanceof ExceptionHandlerExceptionResolver) {
+            configureCustomHandlerMethodArgumentResolver((ExceptionHandlerExceptionResolver) resolver);
+         }
+      }
+   }
 
-	private void configureCustomHandlerMethodArgumentResolver(final ExceptionHandlerExceptionResolver exceptionHandlerExceptionResolver) {
-		final List<HandlerMethodArgumentResolver> resolvers= new ArrayList<HandlerMethodArgumentResolver>();
-		resolvers.addAll(exceptionHandlerExceptionResolver.getArgumentResolvers().getResolvers());
-		resolvers.add(messagesMethodArgumentResolver());
+   private void configureCustomHandlerMethodArgumentResolver(final ExceptionHandlerExceptionResolver exceptionHandlerExceptionResolver) {
+      final List<HandlerMethodArgumentResolver> resolvers= new ArrayList<HandlerMethodArgumentResolver>();
+      resolvers.addAll(exceptionHandlerExceptionResolver.getArgumentResolvers().getResolvers());
+      resolvers.add(messagesMethodArgumentResolver());
 
-		exceptionHandlerExceptionResolver.setArgumentResolvers(resolvers);
-	}
-
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addArgumentResolvers(java.util.List)
-	 */
-	@Override
-	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-		argumentResolvers.add(messagesMethodArgumentResolver());
-	}
+      exceptionHandlerExceptionResolver.setArgumentResolvers(resolvers);
+   }
 
 
-	private MessagesMethodArgumentResolver messagesMethodArgumentResolver() {
-		return new MessagesMethodArgumentResolver(messagesContext());
-	}
+   /*
+    * (non-Javadoc)
+    * @see
+    * org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addArgumentResolvers(java.util.List)
+    */
+   @Override
+   public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+      argumentResolvers.add(messagesMethodArgumentResolver());
+   }
 
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addInterceptors(org.springframework
-	 * .web.servlet.config.annotation.InterceptorRegistry)
-	 */
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new MessagesHandlerInterceptor(messagesContext()));
-	}
+   private MessagesMethodArgumentResolver messagesMethodArgumentResolver() {
+      return new MessagesMethodArgumentResolver(messagesContext());
+   }
 
 
-	/**
-	 * @return
-	 */
-	@Bean
-	protected MessagesContext messagesContext() { // NO_UCD (use private)
-		return new MessagesContextBuilder(configureMessagesStoreAccessorFactory())
-				.withMessageResolverStrategy(configureMessageResolverStrategy())
-				.withLevels(includedLevels())
-				.withCssClassesByLevel(cssClassesByLevel())
-				.build();
-	}
+   /*
+    * (non-Javadoc)
+    * @see
+    * org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addInterceptors(org.springframework
+    * .web.servlet.config.annotation.InterceptorRegistry)
+    */
+   @Override
+   public void addInterceptors(InterceptorRegistry registry) {
+      registry.addInterceptor(new MessagesHandlerInterceptor(messagesContext()));
+   }
 
 
-	/**
-	 * Override this method to add a custom {@link MessagesStoreAccessorFactory}
-	 * 
-	 * @return
-	 */
-	protected MessagesStoreAccessorFactory configureMessagesStoreAccessorFactory() {
-		return new MessagesStoreFlashScopeAccessorFactory();
-	}
-
-	/**
-	 * Override this method to add a custom {@link MessageResolverStrategy}
-	 * 
-	 * @return
-	 */
-	protected MessageResolverStrategy configureMessageResolverStrategy() {
-		return new MessageSourceMessageResolverAdapterStrategy(this.messageSource);
-	}
+   /**
+    * @return
+    */
+   @Bean
+   MessagesContext messagesContext() {
+      return new MessagesContextBuilder(configureMessagesStoreAccessorFactory())
+            .withMessageResolverStrategy(configureMessageResolverStrategy())
+            .withLevels(includedLevels())
+            .withCssClassesByLevel(cssClassesByLevel())
+            .build();
+   }
 
 
-	private Level[] includedLevels() {
-		return configureIncludedLevels();
-	}
+   /**
+    * Override this method to add a custom {@link MessagesStoreAccessorFactory}
+    * 
+    * @return
+    */
+   protected MessagesStoreAccessorFactory configureMessagesStoreAccessorFactory() {
+      return new MessagesStoreFlashScopeAccessorFactory();
+   }
 
-	/**
-	 * Override this method to configure {@link Level} values
-	 * that will be used.
-	 * 
-	 * @return
-	 */
-	protected Level[] configureIncludedLevels() {
-		return Level.values();
-	}
+   /**
+    * Override this method to add a custom {@link MessageResolverStrategy}
+    * 
+    * @return
+    */
+   protected MessageResolverStrategy configureMessageResolverStrategy() {
+      return new MessageSourceMessageResolverAdapterStrategy(this.messageSource);
+   }
 
 
-	private CssClassesByLevel cssClassesByLevel() {
-		final CssClassesByLevel cssClassesByLevel= new CssClassesByLevel();
-		configureCssClassesByLevel(cssClassesByLevel);
-		return cssClassesByLevel;
-	}
+   private Level[] includedLevels() {
+      return configureIncludedLevels();
+   }
 
-	/**
-	 * Override this method to configure custom css classes in each {@link Level}
-	 * 
-	 * @param cssClassesByLevel
-	 */
-	protected void configureCssClassesByLevel(CssClassesByLevel cssClassesByLevel) {
+   /**
+    * Override this method to configure {@link Level} values
+    * that will be used.
+    * 
+    * @return
+    */
+   protected Level[] configureIncludedLevels() {
+      return Level.values();
+   }
 
-	}
+
+   private CssClassesByLevel cssClassesByLevel() {
+      final CssClassesByLevel cssClassesByLevel= new CssClassesByLevel();
+      configureCssClassesByLevel(cssClassesByLevel);
+      return cssClassesByLevel;
+   }
+
+   /**
+    * Override this method to configure custom css classes in each {@link Level}
+    * 
+    * @param cssClassesByLevel
+    */
+   protected void configureCssClassesByLevel(CssClassesByLevel cssClassesByLevel) {
+
+   }
 }

@@ -17,8 +17,11 @@ import org.junit.runner.RunWith;
 
 import es.sandbox.test.utils.ReflectionInvoker;
 import es.sandbox.ui.messages.Level;
+import es.sandbox.ui.messages.context.CssClassesByLevel;
 import es.sandbox.ui.messages.context.MessagesContext;
 import es.sandbox.ui.messages.context.MessagesContextBuilder;
+import es.sandbox.ui.messages.store.MessagesStore;
+import es.sandbox.ui.messages.store.MessagesStoreAccessor;
 import es.sandbox.ui.messages.store.MessagesStoreAccessorFactory;
 
 @RunWith(Enclosed.class)
@@ -68,6 +71,102 @@ public class MessagesTaglibSupportSpecs {
          given(this.mockRequest.getAttribute(MessagesContext.MESSAGES_CONTEXT_PARAMETER)).willReturn(context);
 
          assertThat(MessagesTaglibSupport.levels(this.mockRequest)).containsExactly(Level.ERROR, Level.SUCCESS);
+      }
+   }
+
+   public static final class LevelCssClassSpecs {
+
+      private HttpServletRequest mockRequest;
+      private MessagesStoreAccessorFactory mockFactory;
+      private MessagesContextBuilder contextBuilder;
+
+
+      @Before
+      public void setup() {
+         this.mockRequest= mock(HttpServletRequest.class);
+         this.mockFactory= mock(MessagesStoreAccessorFactory.class);
+
+         this.contextBuilder= new MessagesContextBuilder(this.mockFactory);
+      }
+
+      @Test
+      public void it_should_be_empty_without_context_in_request() {
+         assertThat(MessagesTaglibSupport.levelCssClass(Level.SUCCESS, this.mockRequest)).isEmpty();
+      }
+
+      @Test
+      public void it_should_be_empty_without_level() {
+         final MessagesContext context= this.contextBuilder.build();
+
+         given(this.mockRequest.getAttribute(MessagesContext.MESSAGES_CONTEXT_PARAMETER)).willReturn(context);
+
+         assertThat(MessagesTaglibSupport.levelCssClass(null, this.mockRequest)).isEmpty();
+      }
+
+      @Test
+      public void it_should_be_empty_without_request() {
+         assertThat(MessagesTaglibSupport.levelCssClass(Level.SUCCESS, null)).isEmpty();
+      }
+
+      @Test
+      public void it_should_return_level_class() {
+         final MessagesContext context= this.contextBuilder.build();
+
+         given(this.mockRequest.getAttribute(MessagesContext.MESSAGES_CONTEXT_PARAMETER)).willReturn(context);
+
+         final CssClassesByLevel defaultsByLevel= new CssClassesByLevel();
+
+         for (final Level level : Level.values()) {
+            assertThat(MessagesTaglibSupport.levelCssClass(level, this.mockRequest)).isEqualTo(defaultsByLevel.get(level));
+         }
+      }
+   }
+
+   public static final class LevelMessagesSpecs {
+
+      private HttpServletRequest mockRequest;
+      private MessagesStoreAccessorFactory mockFactory;
+      private MessagesStoreAccessor mockAccessor;
+      private MessagesContextBuilder contextBuilder;
+
+
+      @Before
+      public void setup() {
+         this.mockRequest= mock(HttpServletRequest.class);
+         this.mockFactory= mock(MessagesStoreAccessorFactory.class);
+         this.mockAccessor= mock(MessagesStoreAccessor.class);
+
+
+         this.contextBuilder= new MessagesContextBuilder(this.mockFactory);
+      }
+
+      @Test
+      public void it_should_be_empty_without_level() {
+         final MessagesContext context= this.contextBuilder.build();
+
+         given(this.mockRequest.getAttribute(MessagesContext.MESSAGES_CONTEXT_PARAMETER)).willReturn(context);
+
+         assertThat(MessagesTaglibSupport.levelMessages(null, this.mockRequest)).isEmpty();
+      }
+
+      @Test
+      public void it_should_be_empty_without_request() {
+         final MessagesContext context= this.contextBuilder.build();
+
+         given(this.mockRequest.getAttribute(MessagesContext.MESSAGES_CONTEXT_PARAMETER)).willReturn(context);
+
+         assertThat(MessagesTaglibSupport.levelMessages(Level.SUCCESS, null)).isEmpty();
+      }
+
+      @Test
+      public void it_should_be_empty_without_messages() {
+         final MessagesContext context= this.contextBuilder.build();
+
+         given(this.mockRequest.getAttribute(MessagesContext.MESSAGES_CONTEXT_PARAMETER)).willReturn(context);
+         given(this.mockFactory.create(this.mockRequest)).willReturn(this.mockAccessor);
+         given(this.mockAccessor.get()).willReturn(new MessagesStore());
+
+         assertThat(MessagesTaglibSupport.levelMessages(Level.SUCCESS, this.mockRequest)).isEmpty();
       }
    }
 }

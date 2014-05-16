@@ -32,10 +32,11 @@ final class MessagesStoreFlashScopeAccessor
     * @throws IllegalArgumentException
     */
    MessagesStoreFlashScopeAccessor(HttpServletRequest request, String flashParameter)
-         throws IllegalArgumentException {
+         throws NullPointerException, IllegalArgumentException {
 
       assertThatRequestIsNotNull(request);
       assertThatFlashParameterIsValid(flashParameter);
+      LOGGER.trace("The messages will be stored in flash scope param [{}]", flashParameter);
 
       this.request= request;
       this.parameterName= flashParameter;
@@ -62,7 +63,7 @@ final class MessagesStoreFlashScopeAccessor
    }
 
    private void initialize() {
-      if (!existsStoreInCurrentRequest() && existsStoreFromPreviousRequest()) {
+      if (!existsStoreInCurrentRequest()) {
          copyFromPreviousToCurrentRequest();
       }
    }

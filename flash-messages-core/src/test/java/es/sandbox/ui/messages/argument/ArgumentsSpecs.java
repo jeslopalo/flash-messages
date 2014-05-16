@@ -3,7 +3,6 @@ package es.sandbox.ui.messages.argument;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatStaticMethod;
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
@@ -41,11 +40,11 @@ public class ArgumentsSpecs {
 
       @Test
       public void it_should_fail_with_not_valid_code() {
-         assertThatStaticMethod(Arguments.class, "text", String.class, Serializable[].class)
+         assertThatStaticMethod(Arguments.class, "text", String.class, Object[].class)
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatStaticMethod(Arguments.class, "text", String.class, Serializable[].class)
+         assertThatStaticMethod(Arguments.class, "text", String.class, Object[].class)
                .throwsIllegalArgumentException()
                .invokedWith("")
                .invokedWith(" ");
