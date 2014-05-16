@@ -98,7 +98,7 @@ public class MessagesConfigurationSupport
     * @return
     */
    @Bean
-   protected MessagesContext messagesContext() {
+   MessagesContext messagesContext() {
       return new MessagesContextBuilder(configureMessagesStoreAccessorFactory())
             .withMessageResolverStrategy(configureMessageResolverStrategy())
             .withLevels(includedLevels())

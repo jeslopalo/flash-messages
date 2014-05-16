@@ -19,18 +19,18 @@ import es.sandbox.ui.messages.context.CssClassesByLevel;
 import es.sandbox.ui.messages.context.MessagesContext;
 import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
 import es.sandbox.ui.messages.resolver.StringFormatMessageResolverStrategy;
-import es.sandbox.ui.messages.spring.config.annotation.ConfigurationExtendingAndCustomizingMessagesConfigurationAdapterSpecs.ExtendingAndExtendingMessagesConfigurationAdapterConfigurer;
+import es.sandbox.ui.messages.spring.config.annotation.AdvancedConfigurationExtendingAndCustomizingMessagesConfigurationSupportSpecs.ExtendingAndCustomizingMessagesConfigurationSupport;
 import es.sandbox.ui.messages.spring.scope.memory.InMemoryMessagesStoreAccessorFactory;
 import es.sandbox.ui.messages.store.MessagesStoreAccessorFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= ExtendingAndExtendingMessagesConfigurationAdapterConfigurer.class)
+@ContextConfiguration(classes= ExtendingAndCustomizingMessagesConfigurationSupport.class)
 @WebAppConfiguration
-public class ConfigurationExtendingAndCustomizingMessagesConfigurationAdapterSpecs
+public class AdvancedConfigurationExtendingAndCustomizingMessagesConfigurationSupportSpecs
       implements ApplicationContextAware {
 
    private ApplicationContext context;
-   private DelegatingMessagesConfiguration messagesConfiguration;
+   private ExtendingAndCustomizingMessagesConfigurationSupport messagesConfiguration;
 
 
    @Override
@@ -40,7 +40,7 @@ public class ConfigurationExtendingAndCustomizingMessagesConfigurationAdapterSpe
 
    @Before
    public void setup() {
-      this.messagesConfiguration= this.context.getBean(DelegatingMessagesConfiguration.class);
+      this.messagesConfiguration= this.context.getBean(ExtendingAndCustomizingMessagesConfigurationSupport.class);
    }
 
    @Test
@@ -54,7 +54,6 @@ public class ConfigurationExtendingAndCustomizingMessagesConfigurationAdapterSpe
          assertThat(customizedContext.getLevelCssClass(level)).isEqualTo(level.name().toLowerCase());
       }
    }
-
 
    @Test
    public void it_should_configure_dummy_messages_store_accessor_factory() {
@@ -86,29 +85,30 @@ public class ConfigurationExtendingAndCustomizingMessagesConfigurationAdapterSpe
 
 
    @Configuration
-   @EnableFlashMessages
    @Import(FixtureMessagesContextConfiguration.class)
-   static class ExtendingAndExtendingMessagesConfigurationAdapterConfigurer extends MessagesConfigurerAdapter {
+   static class ExtendingAndCustomizingMessagesConfigurationSupport
+         extends MessagesConfigurationSupport {
+
 
       @Override
-      public MessagesStoreAccessorFactory configureMessagesStoreAccessorFactory() {
+      protected MessagesStoreAccessorFactory configureMessagesStoreAccessorFactory() {
          return new InMemoryMessagesStoreAccessorFactory();
       }
 
       @Override
-      public MessageResolverStrategy configureMessageResolverStrategy() {
+      protected MessageResolverStrategy configureMessageResolverStrategy() {
          return new StringFormatMessageResolverStrategy();
       }
 
       @Override
-      public Level[] configureIncludedLevels() {
+      protected Level[] configureIncludedLevels() {
          return new Level[] { Level.SUCCESS, Level.ERROR };
       }
 
       @Override
-      public void configureCssClassesByLevel(CssClassesByLevel cssClasses) {
+      protected void configureCssClassesByLevel(CssClassesByLevel cssClassesByLevel) {
          for (final Level level : Level.values()) {
-            cssClasses.put(level, level.name().toLowerCase());
+            cssClassesByLevel.put(level, level.name().toLowerCase());
          }
       }
    }
