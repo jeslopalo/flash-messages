@@ -1,6 +1,5 @@
 package es.sandbox.ui.messages.argument;
 
-import java.io.Serializable;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -15,14 +14,14 @@ public class TextArgument implements Text, Resolvable {
    private static final long serialVersionUID= -859002353190973160L;
 
    private final String code;
-   private final Serializable[] arguments;
+   private final Object[] arguments;
 
 
    /**
     * @param code
     * @param arguments
     */
-   TextArgument(String code, Serializable... arguments) {
+   TextArgument(String code, Object... arguments) {
       assertThatCodeIsValid(code);
 
       this.code= code;
@@ -54,7 +53,7 @@ public class TextArgument implements Text, Resolvable {
       return this.code;
    }
 
-   Serializable[] getArguments() {
+   Object[] getArguments() {
       return this.arguments;
    }
 

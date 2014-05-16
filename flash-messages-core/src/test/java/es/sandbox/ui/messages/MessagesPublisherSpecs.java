@@ -5,8 +5,6 @@ import static es.sandbox.test.assertion.ArgumentAssertions.assertThatMethod;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import java.io.Serializable;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -69,11 +67,11 @@ public class MessagesPublisherSpecs {
       }
 
       private void itShouldFailWithInvalidCode(Level level) {
-         assertThatMethod(this.sut, "add" + capitalize(level.name().toLowerCase()), String.class, Serializable[].class)
+         assertThatMethod(this.sut, "add" + capitalize(level.name().toLowerCase()), String.class, Object[].class)
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatMethod(this.sut, "add" + capitalize(level.name().toLowerCase()), String.class, Serializable[].class)
+         assertThatMethod(this.sut, "add" + capitalize(level.name().toLowerCase()), String.class, Object[].class)
                .throwsIllegalArgumentException()
                .invokedWith("")
                .invokedWith(" ");

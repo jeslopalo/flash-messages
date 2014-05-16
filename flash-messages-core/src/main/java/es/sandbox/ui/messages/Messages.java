@@ -1,6 +1,5 @@
 package es.sandbox.ui.messages;
 
-import java.io.Serializable;
 
 
 public interface Messages {
@@ -11,7 +10,7 @@ public interface Messages {
     * @throws NullPointerException
     * @throws IllegalArgumentException
     */
-   void addSuccess(String code, Serializable... arguments);
+   void addSuccess(String code, Object... arguments);
 
    /**
     * @param code
@@ -19,7 +18,7 @@ public interface Messages {
     * @throws NullPointerException
     * @throws IllegalArgumentException
     */
-   void addInfo(String code, Serializable... arguments);
+   void addInfo(String code, Object... arguments);
 
    /**
     * @param code
@@ -27,7 +26,7 @@ public interface Messages {
     * @throws NullPointerException
     * @throws IllegalArgumentException
     */
-   void addWarning(String code, Serializable... arguments);
+   void addWarning(String code, Object... arguments);
 
    /**
     * @param code
@@ -35,7 +34,7 @@ public interface Messages {
     * @throws NullPointerException
     * @throws IllegalArgumentException
     */
-   void addError(String code, Serializable... arguments);
+   void addError(String code, Object... arguments);
 
    /**
     * Clear all {@link Level} messages

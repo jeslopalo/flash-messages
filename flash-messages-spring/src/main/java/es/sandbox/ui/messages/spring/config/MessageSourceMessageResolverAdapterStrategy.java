@@ -1,7 +1,5 @@
 package es.sandbox.ui.messages.spring.config;
 
-import java.io.Serializable;
-
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
 
@@ -24,11 +22,10 @@ public class MessageSourceMessageResolverAdapterStrategy
 
    /*
     * (non-Javadoc)
-    * @see es.sandbox.ui.messages.resolver.MessageResolverStrategy#resolveMessage(java.lang.String,
-    * java.io.Serializable[])
+    * @see es.sandbox.ui.messages.resolver.MessageResolverStrategy#resolve(java.lang.String, java.lang.Object[])
     */
    @Override
-   public String resolve(String code, Serializable... arguments) {
+   public String resolve(String code, Object... arguments) {
       return this.messageSourceAccessor.getMessage(code, arguments);
    }
 }

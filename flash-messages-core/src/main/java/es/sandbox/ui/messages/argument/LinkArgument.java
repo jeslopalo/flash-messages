@@ -1,6 +1,5 @@
 package es.sandbox.ui.messages.argument;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,8 +10,6 @@ import es.sandbox.ui.messages.resolver.Resolvable;
 
 
 public class LinkArgument implements Link, Resolvable {
-
-   private static final long serialVersionUID= 7002144539900854365L;
 
    private static final String LINK_FORMAT= "<a href=\"%s\" title=\"%s\" class=\"%s\">%s</a>";
    private static final String LINK_FORMAT_WITHOUT_CSS_CLASS= "<a href=\"%s\" title=\"%s\">%s</a>";
@@ -50,7 +47,7 @@ public class LinkArgument implements Link, Resolvable {
    }
 
    @Override
-   public LinkArgument title(String code, Serializable... arguments) {
+   public LinkArgument title(String code, Object... arguments) {
       this.text= new TextArgument(code, arguments);
       return this;
    }
@@ -65,15 +62,15 @@ public class LinkArgument implements Link, Resolvable {
    public String resolve(MessageResolver messageResolver) {
       MessageResolver.assertThatIsNotNull(messageResolver);
 
-      return String.format(linkFormat(), (Object[]) arguments(messageResolver));
+      return String.format(linkFormat(), arguments(messageResolver));
    }
 
    private String linkFormat() {
       return this.cssClass == null? LINK_FORMAT_WITHOUT_CSS_CLASS : LINK_FORMAT;
    }
 
-   private Serializable[] arguments(MessageResolver messageResolver) {
-      final List<Serializable> arguments= new ArrayList<Serializable>();
+   private Object[] arguments(MessageResolver messageResolver) {
+      final List<Object> arguments= new ArrayList<Object>();
 
       final String title= this.text == null? null : ((Resolvable) this.text).resolve(messageResolver);
 
@@ -84,7 +81,7 @@ public class LinkArgument implements Link, Resolvable {
       }
       arguments.add(StringUtils.defaultString(title, this.url));
 
-      return arguments.toArray(new Serializable[0]);
+      return arguments.toArray(new Object[0]);
    }
 
    @Override

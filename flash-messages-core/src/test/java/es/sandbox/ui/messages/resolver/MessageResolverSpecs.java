@@ -3,8 +3,6 @@ package es.sandbox.ui.messages.resolver;
 import static es.sandbox.ui.messages.resolver.ResolvableFixture.resolvable;
 import static org.fest.assertions.api.Assertions.assertThat;
 
-import java.io.Serializable;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -60,12 +58,12 @@ public class MessageResolverSpecs {
 
       @Test
       public void it_should_resolve_messages_with_null_argument() {
-         assertThat(this.sut.resolve("message", (Serializable) null)).isEqualTo("message");
+         assertThat(this.sut.resolve("message", (Object) null)).isEqualTo("message");
       }
 
       @Test
       public void it_should_resolve_messages_with_null_array_of_arguments() {
-         assertThat(this.sut.resolve("message", (Serializable[]) null)).isEqualTo("message");
+         assertThat(this.sut.resolve("message", (Object[]) null)).isEqualTo("message");
       }
 
 
