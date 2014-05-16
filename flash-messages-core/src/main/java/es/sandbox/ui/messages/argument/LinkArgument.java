@@ -9,7 +9,7 @@ import es.sandbox.ui.messages.resolver.MessageResolver;
 import es.sandbox.ui.messages.resolver.Resolvable;
 
 
-public class LinkArgument implements Link, Resolvable {
+class LinkArgument implements Link, Resolvable {
 
    private static final String LINK_FORMAT= "<a href=\"%s\" title=\"%s\" class=\"%s\">%s</a>";
    private static final String LINK_FORMAT_WITHOUT_CSS_CLASS= "<a href=\"%s\" title=\"%s\">%s</a>";

@@ -1,7 +1,6 @@
 package es.sandbox.ui.messages.argument;
 
 
-
 public class Arguments {
 
    /**

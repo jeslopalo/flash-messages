@@ -9,9 +9,7 @@ import es.sandbox.ui.messages.resolver.MessageResolver;
 import es.sandbox.ui.messages.resolver.Resolvable;
 
 
-public class TextArgument implements Text, Resolvable {
-
-   private static final long serialVersionUID= -859002353190973160L;
+class TextArgument implements Text, Resolvable {
 
    private final String code;
    private final Object[] arguments;

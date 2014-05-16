@@ -39,7 +39,8 @@ public class MessagesPublisher implements Messages {
     * @see es.sandbox.ui.messages.Messages#addSuccess(java.lang.String, java.lang.Object[])
     */
    @Override
-   public void addSuccess(String code, Object... arguments) {
+   public void addSuccess(String code, Object... arguments)
+         throws NullPointerException, IllegalArgumentException {
       this.store.add(Level.SUCCESS, resolveMessage(code, arguments));
    }
 
@@ -48,7 +49,9 @@ public class MessagesPublisher implements Messages {
     * @see es.sandbox.ui.messages.Messages#addInfo(java.lang.String, java.lang.Object[])
     */
    @Override
-   public void addInfo(String code, Object... arguments) {
+   public void addInfo(String code, Object... arguments)
+         throws NullPointerException, IllegalArgumentException {
+
       this.store.add(Level.INFO, resolveMessage(code, arguments));
    }
 
@@ -57,7 +60,9 @@ public class MessagesPublisher implements Messages {
     * @see es.sandbox.ui.messages.Messages#addWarning(java.lang.String, java.lang.Object[])
     */
    @Override
-   public void addWarning(String code, Object... arguments) {
+   public void addWarning(String code, Object... arguments)
+         throws NullPointerException, IllegalArgumentException {
+
       this.store.add(Level.WARNING, resolveMessage(code, arguments));
    }
 
@@ -66,7 +71,9 @@ public class MessagesPublisher implements Messages {
     * @see es.sandbox.ui.messages.Messages#addError(java.lang.String, java.lang.Object[])
     */
    @Override
-   public void addError(String code, Object... arguments) {
+   public void addError(String code, Object... arguments)
+         throws NullPointerException, IllegalArgumentException {
+
       this.store.add(Level.ERROR, resolveMessage(code, arguments));
    }
 
@@ -87,7 +94,6 @@ public class MessagesPublisher implements Messages {
    public boolean isEmpty() {
       return this.store.isEmpty();
    }
-
 
    /*
     * (non-Javadoc)

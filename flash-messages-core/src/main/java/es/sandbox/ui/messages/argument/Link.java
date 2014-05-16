@@ -1,8 +1,7 @@
 package es.sandbox.ui.messages.argument;
 
 
-
-public interface Link {
+public interface Link extends Argument {
 
    /**
     * @param url
