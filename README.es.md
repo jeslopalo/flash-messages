@@ -130,6 +130,13 @@ import es.sandbox.ui.messages.spring.config.annotation.MessagesConfigurerAdapter
 @EnableFlashMessages
 public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
 
+    @Bean
+    public MessageSource messageSource() {      
+        ReloadableResourceBundleMessageSource messageSource= new ReloadableResourceBundleMessageSource();
+        messageSource.setBasenames("WEB-INF/i18n/messages");        
+        return messageSource;
+    }
+    
     /**
      * Sets the styles of flash-messages to be compatibles 
      * with twitter bootstrap alerts
