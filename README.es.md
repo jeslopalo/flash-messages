@@ -1,7 +1,6 @@
 #flash-messages
 
-_A simple way to send &amp; show *flash messages*_
-
+_Una forma sencilla de enviar &amp; mostrar mensajes flash_
 
 |Build| State |
 |--------|--------|
@@ -11,12 +10,29 @@ _A simple way to send &amp; show *flash messages*_
 |Coverity Scan |[![Coverity Scan Build Status](https://scan.coverity.com/projects/2142/badge.svg?branch=0.1.0)](https://scan.coverity.com/projects/2142?branch=0.1.0)|
 |Project|[![Project Stats](https://www.ohloh.net/p/flash-messages/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/flash-messages) |
 
-##Flash!
+#Flash!
 Al aplicar el patrón [Post/Redirect/Get](http://en.wikipedia.org/wiki/Post/Redirect/Get) en el desarrollo de aplicaciones web, siempre me topo con el problema de presentar el resultado al usuario en forma de mensaje despues de la redirección.
 
 Si bien, es un problema conocido y resuelto en otras plataformas como Ruby, en Java no parece existir una solución sencilla y elegante.
 
 *flash-messages* es una forma fácil de presentar mensajes flash tras una redirección en aplicaciones Java.
+
+```java
+public String post(Messages messages, SomeForm form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {        
+        return "form";
+    }
+    
+    Result result= this.service.doSomething(form.getValue());
+    if (result.isSuccessful()) {
+        messages.addSuccess("messages.success-after-post", result.getValue());
+        return "redirect:/successful-target-after-post";
+    }
+    
+    messages.addError("messages.error-in-service", form.getValue());
+    return "redirect:/error-target-after-post";
+}
+```
 
 Hoy es posible utilizar *flash-messages* en aplicaciones web basadas en **Spring MVC** y con vistas escritas en **JSTL**. En futuras releases será posible usarla en aplicaciones **JEE** standalone y con otras tecnologías de vista (ie. **Thymeleaf**, etc.).
 
@@ -24,16 +40,9 @@ Dependiendo del stack tecnológico de tu aplicación, será necesario declarar u
 
 Empecemos.
 
-### ¿Cómo empezar?
-####Descarga directa
-Puedes descargar directamente la última versión desde GitHub: 
-
- - `flash-messages-core`        **(_[0.1.0-SNAPSHOT](http://)_)**
- - `flash-messages-spring`      **(_[0.1.0-SNAPSHOT](http://)_)**
- - `flash-messages-taglibs`     **(_[0.1.0-SNAPSHOT](http://)_)**
-
+## ¿Cómo empezar?
+###Obtener las dependencias
 ####Maven
-
 #####Bill Of Materials (BOM)
 *flash-messages* incluye un BOM ([Bill Of Materials](http://howtodoinjava.com/2014/02/18/maven-bom-bill-of-materials-dependency/)) para facilitar el uso de sus modulos.
 
@@ -71,6 +80,13 @@ Habiendo importado el *BOM* en tu `pom.xml` podrás declarar las dependencias de
     ...
 </dependencies>
 ```
+####Descarga directa
+Puedes descargar directamente la última versión desde GitHub: 
+
+ - `flash-messages-core`        **(_[0.1.0-SNAPSHOT](http://)_)**
+ - `flash-messages-spring`      **(_[0.1.0-SNAPSHOT](http://)_)**
+ - `flash-messages-taglibs`     **(_[0.1.0-SNAPSHOT](http://)_)**
+
 ####Construir desde el código fuente
 Para construir la última versión directamente desde el código e instalar las librerías en tu repositorio local puedes ejecutar:
 
@@ -82,4 +98,19 @@ $ cd flash-messages
 $ mvn clean install
 ```
 
+###Configurando Spring MVC
+*flash-messages* se configura mediante JavaConfig en **spring-mvc**.
 
+####1.- Configuración básica:
+
+Para obtener la configuración por defecto tan sólo es necesario añadir ```@EnableFlashMessages``` a una clase ```@Configuration```. 
+```java
+   import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
+   
+   @Configuration
+   @EnableFlashMessages
+   public class DefaultMessagesConfigurer {
+
+   }
+```
+####2.- 
