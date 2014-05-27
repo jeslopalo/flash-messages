@@ -1,5 +1,4 @@
 #flash-messages
-
 _Una forma sencilla de enviar &amp; mostrar mensajes flash_
 
 |Build| State |
@@ -18,7 +17,8 @@ Si bien, es un problema conocido y resuelto en otras plataformas como Ruby, en J
 *flash-messages* es una forma fácil de presentar mensajes flash tras una redirección en aplicaciones Java.
 
 ```java
-public String post(Messages messages, SomeForm form, BindingResult bindingResult) {
+@RequestMapping(value="/target", method= RequestMethod.POST)
+public String post(Messages messages, @ModelAttribute FormBackingBean form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {        
         return "form";
     }
@@ -101,8 +101,7 @@ $ mvn clean install
 ###Configurando Spring MVC
 *flash-messages* se configura mediante JavaConfig en **spring-mvc**.
 
-####1.- Configuración básica:
-
+####1.- Configuración mínima:
 Para obtener la configuración por defecto tan sólo es necesario añadir ```@EnableFlashMessages``` a una clase ```@Configuration```. 
 ```java
    import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
@@ -110,7 +109,37 @@ Para obtener la configuración por defecto tan sólo es necesario añadir ```@En
    @Configuration
    @EnableFlashMessages
    public class DefaultMessagesConfigurer {
-
+   
+    @Bean
+    public MessageSource messageSource() {      
+            final ReloadableResourceBundleMessageSource messageSource= new ReloadableResourceBundleMessageSource();
+            messageSource.setBasenames("WEB-INF/i18n/messages");        
+            return messageSource;
+       }
    }
 ```
-####2.- 
+####2.- Configuración personalizada
+Para poder personalizar algunos elementos de *flash-messages* podemos extender ```MessagesConfigurerAdapter``` y sobreescribir aquella configuración que queramos personalizar.
+```java
+    import es.sandbox.ui.messages.Level;
+    import es.sandbox.ui.messages.context.CssClassesByLevel;
+    import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
+    import es.sandbox.ui.messages.spring.config.annotation.MessagesConfigurerAdapter;
+    
+    @Configuration
+    @EnableFlashMessages
+    public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
+    
+        /**
+         * Sets the styles of flash-messages to be compatibles 
+         * with twitter bootstrap alerts
+         */
+         @Override
+         public void configureCssClassesByLevel(CssClassesByLevel cssClasses) {
+            cssClasses.put(Level.ERROR, "alert alert-danger");
+         }
+    }
+
+```
+
+
