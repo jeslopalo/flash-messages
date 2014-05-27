@@ -104,41 +104,41 @@ $ mvn clean install
 ####1.- Configuración mínima:
 Para obtener la configuración por defecto tan sólo es necesario añadir ```@EnableFlashMessages``` a una clase ```@Configuration```. 
 ```java
-   import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
+import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
    
-   @Configuration
-   @EnableFlashMessages
-   public class DefaultMessagesConfigurer {
+@Configuration
+@EnableFlashMessages
+public class DefaultMessagesConfigurer {
    
     @Bean
     public MessageSource messageSource() {      
-            final ReloadableResourceBundleMessageSource messageSource= new ReloadableResourceBundleMessageSource();
-            messageSource.setBasenames("WEB-INF/i18n/messages");        
-            return messageSource;
-       }
-   }
+        ReloadableResourceBundleMessageSource messageSource= new ReloadableResourceBundleMessageSource();
+        messageSource.setBasenames("WEB-INF/i18n/messages");        
+        return messageSource;
+    }
+}
 ```
-####2.- Configuración personalizada
+####2.- Configuración personalizada:
 Para poder personalizar algunos elementos de *flash-messages* podemos extender ```MessagesConfigurerAdapter``` y sobreescribir aquella configuración que queramos personalizar.
 ```java
-    import es.sandbox.ui.messages.Level;
-    import es.sandbox.ui.messages.context.CssClassesByLevel;
-    import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
-    import es.sandbox.ui.messages.spring.config.annotation.MessagesConfigurerAdapter;
-    
-    @Configuration
-    @EnableFlashMessages
-    public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
-    
-        /**
-         * Sets the styles of flash-messages to be compatibles 
-         * with twitter bootstrap alerts
-         */
-         @Override
-         public void configureCssClassesByLevel(CssClassesByLevel cssClasses) {
-            cssClasses.put(Level.ERROR, "alert alert-danger");
-         }
-    }
+import es.sandbox.ui.messages.Level;
+import es.sandbox.ui.messages.context.CssClassesByLevel;
+import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
+import es.sandbox.ui.messages.spring.config.annotation.MessagesConfigurerAdapter;
+
+@Configuration
+@EnableFlashMessages
+public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
+
+    /**
+     * Sets the styles of flash-messages to be compatibles 
+     * with twitter bootstrap alerts
+     */
+     @Override
+     public void configureCssClassesByLevel(CssClassesByLevel cssClasses) {
+        cssClasses.put(Level.ERROR, "alert alert-danger");
+     }
+}
 
 ```
 
