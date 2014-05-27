@@ -36,6 +36,14 @@ public String post(Messages messages, @ModelAttribute FormBackingBean form, Bind
 
 Hoy es posible utilizar *flash-messages* en aplicaciones web basadas en **Spring MVC** y con vistas escritas en **JSTL**. En futuras releases será posible usarla en aplicaciones **JEE** standalone y con otras tecnologías de vista (ie. **Thymeleaf**, etc.).
 
+```jsp
+<%@ taglib prefix="flash" uri="http://sandbox.es/tags/flash-messages" %>
+
+...
+<flash:messages />
+...
+```
+
 Dependiendo del stack tecnológico de tu aplicación, será necesario declarar unas dependencias u otras.
 
 Empecemos.
@@ -130,13 +138,6 @@ import es.sandbox.ui.messages.spring.config.annotation.MessagesConfigurerAdapter
 @EnableFlashMessages
 public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
 
-    @Bean
-    public MessageSource messageSource() {      
-        ReloadableResourceBundleMessageSource messageSource= new ReloadableResourceBundleMessageSource();
-        messageSource.setBasenames("WEB-INF/i18n/messages");        
-        return messageSource;
-    }
-    
     /**
      * Sets the styles of flash-messages to be compatibles 
      * with twitter bootstrap alerts
