@@ -10,43 +10,17 @@ _An easy way to send &amp; show *flash messages*_
 |Project|[![Project Stats](https://www.ohloh.net/p/flash-messages/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/flash-messages) |
 
 #Flash!
-When applying the pattern [Post/Redirect/Get](http://kcy.me/15fxw) in the development of web applications, I always run into the same problem: how to communicate the result to the user as a message after the redirection..
+When applying the [Post/Redirect/Get](http://kcy.me/15fxw) pattern in web application development, I always run into the same problem: __how to communicate the result to the user after the redirection__.
 
 While it is a known problem and it has been resolved in other platforms (like Ruby), Java does not seem to provide a simple and elegant solution.
 
-*flash-messages* is an easy way to communicate flash messages after a redirect in Java web applications.
+*flash-messages* is an easy way to communicate flash messages after a redirection in Java web applications.
 
-```java
-@RequestMapping(value="/target", method= RequestMethod.POST)
-public String post(Messages messages, @ModelAttribute FormBackingBean form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {        
-        return "form";
-    }
-    
-    Result result= this.service.doSomething(form.getValue());
-    if (result.isSuccessful()) {
-        messages.addSuccess("messages.success-after-post", result.getValue());
-        return "redirect:/successful-target-after-post";
-    }
-    
-    messages.addError("messages.error-in-service", form.getValue());
-    return "redirect:/error-target-after-post";
-}
-```
+Today, you can use *flash-messages* in applications which use **spring-mvc** as web framework and **Jstl** to render views. 
 
-Today, you can use *flash-messages* in web-applications which use **spring-mvc** as web framework and **Jstl** to render views. 
+In future releases it will be possible to use it in **JEE** applications and possibly with another view technologies (ie. **Thymeleaf**, **Freemarker**, ...)
 
-```jsp
-<%@ taglib prefix="flash" uri="http://sandbox.es/tags/flash-messages" %>
-
-...
-<flash:messages />
-...
-
-```
-In future releases it will be possible to use it in **JEE** applications with another view technologies like **Thymeleaf**, etc.
-
-Let's start.
+Let's start!
 
 ##Getting started
 ###Get it into your project
@@ -151,3 +125,40 @@ public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
 ```
 The main elements that can be configured or reimplemented are the _levels of messages_, the _strategy for resolving messages_ or _where messages are stored_.
 
+###Writing messages
+In order to write messages, just declare an argument of type ```Messages``` in the handler method of the controller (or in a ```@ExceptionHandler``` method), then you can add messages to different levels.
+
+```java
+@RequestMapping(value="/target", method= RequestMethod.POST)
+String post(Messages messages, @ModelAttribute FormBackingBean form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {        
+        return "form";
+    }
+    
+    Result result= this.service.doSomething(form.getValue());
+    if (result.isSuccessful()) {
+        messages.addSuccess("messages.success-after-post", result.getValue());
+        return "redirect:/successful-target-after-post";
+    }
+    
+    messages.addError("messages.error-in-service", form.getValue());
+    return "redirect:/error-target-after-post";
+}
+
+@ExceptionHandler(ServiceException.class)
+String handle(ServiceException exception, Messages messages) {
+    messages.addError("messages.service-exception");
+    return "somewhere";
+}
+```
+
+###Painting messages
+Finally, you must include the ```<flash:messages />``` taglib in your views (or better in your decorator).
+```jsp
+<%@ taglib prefix="flash" uri="http://sandbox.es/tags/flash-messages" %>
+
+...
+<flash:messages />
+...
+
+```
