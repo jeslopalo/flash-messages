@@ -22,6 +22,13 @@ In future releases it will be possible to use it in **JEE** applications and pos
 
 Let's start!
 
+##Features
+- Seamless integration with ```@RequestMapping``` and ```@ExceptionHandler``` methods in the ```@Controller```s of the **spring-mvc** framework
+- Different levels of messages (ie. __SUCCESS__, __INFO__, __WARNING__, __ERROR__) 
+- Resolution of __i18n__ messages with arguments
+- Resolution of __i18n__ arguments (ie TextArgument, LinkArgument) 
+- Easy integration with the **Twitter Bootstrap** alerts
+ 
 ##Getting started
 ###Get it into your project
 ####Maven
