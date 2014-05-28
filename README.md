@@ -1,10 +1,153 @@
-flash-messages
-==============
-[![Build Status](https://travis-ci.org/jeslopalo/flash-messages.svg?branch=0.1.0)](https://travis-ci.org/jeslopalo/flash-messages)
-[![Coverage Status](https://coveralls.io/repos/jeslopalo/flash-messages/badge.png?branch=0.1.0)](https://coveralls.io/r/jeslopalo/flash-messages?branch=0.1.0)
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/2142/badge.svg?branch=0.1.0)](https://scan.coverity.com/projects/2142?branch=0.1.0)
-[![Project Stats](https://www.ohloh.net/p/flash-messages/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/flash-messages)
+#flash-messages
+_An easy way to send &amp; show *flash messages*_
 
-A simple way to send &amp; show flash messages
+|Build| State |
+|--------|--------|
+|Version|0.1.0-SNAPSHOT|
+|Status |[![Build Status](https://travis-ci.org/jeslopalo/flash-messages.svg?branch=0.1.0)](https://travis-ci.org/jeslopalo/flash-messages)     |
+|Coverage |[![Coverage Status](https://coveralls.io/repos/jeslopalo/flash-messages/badge.png?branch=0.1.0)](https://coveralls.io/r/jeslopalo/flash-messages?branch=0.1.0)|
+|Coverity Scan |[![Coverity Scan Build Status](https://scan.coverity.com/projects/2142/badge.svg?branch=0.1.0)](https://scan.coverity.com/projects/2142?branch=0.1.0)|
+|Project|[![Project Stats](https://www.ohloh.net/p/flash-messages/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/flash-messages) |
 
-> **Work in progress!**
+#Flash!
+When applying the pattern [Post/Redirect/Get](http://kcy.me/15fxw) in the development of web applications, I always run into the same problem: how to communicate the result to the user as a message after the redirection..
+
+While it is a known problem and it has been resolved in other platforms (like Ruby), Java does not seem to provide a simple and elegant solution.
+
+*flash-messages* is an easy way to communicate flash messages after a redirect in Java web applications.
+
+```java
+@RequestMapping(value="/target", method= RequestMethod.POST)
+public String post(Messages messages, @ModelAttribute FormBackingBean form, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {        
+        return "form";
+    }
+    
+    Result result= this.service.doSomething(form.getValue());
+    if (result.isSuccessful()) {
+        messages.addSuccess("messages.success-after-post", result.getValue());
+        return "redirect:/successful-target-after-post";
+    }
+    
+    messages.addError("messages.error-in-service", form.getValue());
+    return "redirect:/error-target-after-post";
+}
+```
+
+Today, you can use *flash-messages* in web-applications which use **spring-mvc** as web framework and **Jstl** to render views. 
+
+```jsp
+<%@ taglib prefix="flash" uri="http://sandbox.es/tags/flash-messages" %>
+
+...
+<flash:messages />
+...
+
+```
+In future releases it will be possible to use it in **JEE** applications with another view technologies like **Thymeleaf**, etc.
+
+Let's start.
+
+##Getting started
+###Get it into your project
+####Maven
+#####Bill Of Materials (BOM)
+*flash-messages* artifacts are in Maven Central and includes a BOM ([Bill Of Materials](http://kcy.me/15g1b)) to facilitate the use of its modules.
+```xml
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+          <groupId>es.sandbox.ui.messages</groupId>
+          <artifactId>flash-messages-bom</artifactId>
+          <version>0.1.0-SNAPSHOT</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+```
+
+#####Artifacts
+After importing the *BOM* in your `pom.xml` you can easily declare the modules.
+```xml
+<dependencies>
+    ...
+    <dependency>
+        <groupId>es.sandbox.ui.messages</groupId>
+        <artifactId>flash-messages-core</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>es.sandbox.ui.messages</groupId>
+        <artifactId>flash-messages-spring</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>es.sandbox.ui.messages</groupId>
+        <artifactId>flash-messages-taglibs</artifactId>
+    </dependency>
+    ...
+</dependencies>
+```
+####Download
+You can download the latest version directly from GitHub:
+
+ - `flash-messages-core`        **(_[0.1.0-SNAPSHOT](http://)_)**
+ - `flash-messages-spring`      **(_[0.1.0-SNAPSHOT](http://)_)**
+ - `flash-messages-taglibs`     **(_[0.1.0-SNAPSHOT](http://)_)**
+
+####Building from sources
+To build the latest version directly from source and install the libraries in your local repository you can run:
+
+```sh
+$ mkdir flash-messages-repository
+$ cd flash-messages-repository
+$ git clone https://github.com/jeslopalo/flash-messages.git
+$ cd flash-messages
+$ mvn clean install
+```
+
+###Configuration
+*flash-messages* is configured using [JavaConfig](http://kcy.me/15fuu) in **spring-mvc**. It has only been tested with versions equal or superior to **3.2.6.RELEASE**.
+
+####Default configuration
+
+In order to obtain the default configuration, just add ```@EnableFlashMessages``` to a ```@Configuration``` class (the same location with ```@EnableWebMvc``` should be enough).
+```java
+import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
+   
+@Configuration
+@EnableFlashMessages
+@EnableWebMvc
+public class DefaultMessagesConfigurer {
+   
+    @Bean
+    public MessageSource messageSource() {      
+        ReloadableResourceBundleMessageSource messageSource= new ReloadableResourceBundleMessageSource();
+        messageSource.setBasenames("WEB-INF/i18n/messages");        
+        return messageSource;
+    }
+}
+```
+####Custom configuration
+To modify the default behavior of *flash-messages* just extend ```MessagesConfigurerAdapter``` and override those methods that you want to customize.
+```java
+import es.sandbox.ui.messages.Level;
+import es.sandbox.ui.messages.context.CssClassesByLevel;
+import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
+import es.sandbox.ui.messages.spring.config.annotation.MessagesConfigurerAdapter;
+
+@Configuration
+@EnableFlashMessages
+public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
+
+    /**
+     * Sets the styles of flash-messages to be compatible 
+     * with twitter bootstrap alerts
+     */
+     @Override
+     public void configureCssClassesByLevel(CssClassesByLevel cssClasses) {
+        cssClasses.put(Level.ERROR, "alert alert-danger");
+     }
+}
+```
+The main elements that can be configured or reimplemented are the _levels of messages_, the _strategy for resolving messages_ or _where messages are stored_.
+

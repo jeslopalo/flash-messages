@@ -107,10 +107,10 @@ $ mvn clean install
 ```
 
 ###Configurando Spring MVC
-*flash-messages* se configura mediante JavaConfig en **spring-mvc**.
+*flash-messages* se configura en **spring-mvc** mediante [JavaConfig](http://kcy.me/15fuu). Aunque probablemente funcione con versiones a partir de la 3.0.X, *flash-messages* sólo ha sido probado con versiones iguales o superiores a la **3.2.6.RELEASE**.
 
 ####1.- Configuración mínima:
-Para obtener la configuración por defecto tan sólo es necesario añadir ```@EnableFlashMessages``` a una clase ```@Configuration```. 
+Para obtener la configuración por defecto tan sólo es necesario añadir ```@EnableFlashMessages``` a una clase ```@Configuration``` (por ejemplo la misma con ```@EnableWebMvc```. 
 ```java
 import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
    
@@ -139,7 +139,7 @@ import es.sandbox.ui.messages.spring.config.annotation.MessagesConfigurerAdapter
 public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
 
     /**
-     * Sets the styles of flash-messages to be compatibles 
+     * Sets the styles of flash-messages to be compatible 
      * with twitter bootstrap alerts
      */
      @Override
@@ -147,7 +147,5 @@ public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
         cssClasses.put(Level.ERROR, "alert alert-danger");
      }
 }
-
 ```
-
-
+Entre otras cosas se pueden configurar los niveles que serán presentados, la estrategia para resolver los mensajes o bien configurar una implementación propia de dónde se almacenan los mensajes.
