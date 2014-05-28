@@ -76,8 +76,7 @@ You can download the latest version directly from GitHub:
  - `flash-messages-taglibs`     **(_[0.1.0-SNAPSHOT](http://)_)**
 
 ####Building from sources
-To build the latest version directly from source and install the libraries in your local repository you can run:
-
+You can build the latest version directly from source and then install the modules into your local repository. Just run:
 ```sh
 $ mkdir flash-messages-repository
 $ cd flash-messages-repository
@@ -87,11 +86,10 @@ $ mvn clean install
 ```
 
 ###Configuration
-*flash-messages* is configured using [JavaConfig](http://kcy.me/15fuu) in **spring-mvc**. It has only been tested with versions equal or superior to **3.2.6.RELEASE**.
+*flash-messages* is configured using [JavaConfig](http://kcy.me/15fuu) in **spring-mvc**. It has been tested with versions greater or equal than **3.2.6.RELEASE**.
 
 ####Default configuration
-
-In order to obtain the default configuration, just add ```@EnableFlashMessages``` to a ```@Configuration``` class (the same location with ```@EnableWebMvc``` should be enough).
+In order to obtain the default configuration, just add ```@EnableFlashMessages``` to a ```@Configuration``` class (the same with ```@EnableWebMvc``` should be enough).
 ```java
 import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
    
@@ -130,10 +128,10 @@ public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
      }
 }
 ```
-The main elements that can be configured or reimplemented are the _levels of messages_, the _strategy for resolving messages_ or _where messages are stored_.
+The main elements that can be configured or customized are:  _levels of messages_, the _strategy for resolving i18n messages_ or _modify the scope where messages are stored_.
 
 ###Writing messages
-In order to write messages, just declare an argument of type ```Messages``` in the handler method of the controller (or in a ```@ExceptionHandler``` method), then you can add messages to different levels.
+In order to write messages, just declare an argument of type ```Messages``` in the handler method of the controller (or in a ```@ExceptionHandler``` method), then you can add your messages to different levels.
 
 ```java
 @RequestMapping(value="/target", method= RequestMethod.POST)
@@ -160,7 +158,7 @@ String handle(ServiceException exception, Messages messages) {
 ```
 
 ###Painting messages
-Finally, you must include the ```<flash:messages />``` taglib in your views (or better in your decorator).
+Finally, you must to include the ```<flash:messages />``` taglib in your views (or better in your decorator template).
 ```jsp
 <%@ taglib prefix="flash" uri="http://sandbox.es/tags/flash-messages" %>
 
