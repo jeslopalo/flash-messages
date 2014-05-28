@@ -18,7 +18,7 @@ While it is a known problem and it has been resolved in other platforms (like Ru
 
 Today, you can use *flash-messages* in applications which use **spring-mvc** as web framework and **Jstl** to render views. 
 
-In future releases it will be possible to use it in **JEE** applications and possibly with another view technologies (ie. **Thymeleaf**, **Freemarker**, ...)
+In future releases, it will be possible to use it in **JEE** applications and possibly with another view technologies like **Thymeleaf** or **Freemarker**.
 
 Let's start!
 
