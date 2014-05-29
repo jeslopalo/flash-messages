@@ -10,7 +10,7 @@ _An easy way to send &amp; show *flash messages*_
 |Project|[![Project Stats](https://www.ohloh.net/p/flash-messages/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/flash-messages) |
 
 #Flash!
-When applying the [Post/Redirect/Get](http://kcy.me/15fxw) pattern in web application development, I always run into the same problem: __how to communicate the result to the user after the redirection__.
+When applying the [Post/Redirect/Get](http://kcy.me/15fxw) pattern in web application development, I run always into the same problem: __how to communicate the result to the user after the redirection__.
 
 While it is a known problem and it has been resolved in other platforms (like Ruby), Java does not seem to provide a simple and elegant solution.
 
@@ -23,17 +23,21 @@ In future releases, it will be possible to use it in **JEE** applications and po
 Let's start!
 
 ##Features
-- Seamless integration with ```@RequestMapping``` and ```@ExceptionHandler``` methods in the ```@Controller```s of the **spring-mvc** framework
+- Seamless integration with ```@RequestMapping``` and ```@ExceptionHandler``` methods in the **spring-mvc** framework ```@Controller```'s
 - Different levels of messages (ie. __SUCCESS__, __INFO__, __WARNING__, __ERROR__) 
 - Resolution of __i18n__ messages with arguments
 - Resolution of __i18n__ arguments (ie TextArgument, LinkArgument) 
 - Easy integration with the **Twitter Bootstrap** alerts
  
+
 ##Getting started
+
 ###Get it into your project
+
 ####Maven
+
 #####Bill Of Materials (BOM)
-*flash-messages* artifacts are in Maven Central and includes a BOM ([Bill Of Materials](http://kcy.me/15g1b)) to facilitate the use of its modules.
+*flash-messages* artifacts are in **Maven Central** and includes a BOM ([Bill Of Materials](http://kcy.me/15g1b)) to facilitate the use of its modules.
 ```xml
 <dependencyManagement>
     <dependencies>
@@ -68,6 +72,7 @@ After importing the *BOM* in your `pom.xml` you can easily declare the modules.
     ...
 </dependencies>
 ```
+
 ####Download
 You can download the latest version directly from GitHub:
 
@@ -76,13 +81,13 @@ You can download the latest version directly from GitHub:
  - `flash-messages-taglibs`     **(_[0.1.0-SNAPSHOT](http://)_)**
 
 ####Building from sources
-You can build the latest version directly from source and then install the modules into your local repository. Just run:
+You can build the latest version directly from source. Just run:
 ```sh
 $ mkdir flash-messages-repository
 $ cd flash-messages-repository
 $ git clone https://github.com/jeslopalo/flash-messages.git
 $ cd flash-messages
-$ mvn clean install
+$ mvn clean package
 ```
 
 ###Configuration
@@ -106,6 +111,7 @@ public class DefaultMessagesConfigurer {
     }
 }
 ```
+
 ####Custom configuration
 To modify the default behavior of *flash-messages* just extend ```MessagesConfigurerAdapter``` and override those methods that you want to customize.
 ```java
@@ -128,10 +134,11 @@ public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
      }
 }
 ```
-The main elements that can be configured or customized are:  _levels of messages_, the _strategy for resolving i18n messages_ or _modify the scope where messages are stored_.
+
+The main elements that can be configured or customized are:  _levels of messages_, the _css classes applied to the levels_, the _strategy to resolve i18n messages_ or _modify the scope where messages are stored_.
 
 ###Writing messages
-In order to write messages, just declare an argument of type ```Messages``` in the handler method of the controller (or in a ```@ExceptionHandler``` method), then you can add your messages to different levels.
+In order to write messages, just declare an argument of type ```Messages``` in the handler method (or in a ```@ExceptionHandler``` method), then you can add messages to the different levels.
 
 ```java
 @RequestMapping(value="/target", method= RequestMethod.POST)
