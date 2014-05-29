@@ -1,4 +1,4 @@
-#flash-messages
+# flash-messages
 _An easy way to send &amp; show *flash messages*_
 
 |Build| State |
@@ -9,7 +9,7 @@ _An easy way to send &amp; show *flash messages*_
 |Coverity Scan |[![Coverity Scan Build Status](https://scan.coverity.com/projects/2142/badge.svg?branch=0.1.0)](https://scan.coverity.com/projects/2142?branch=0.1.0)|
 |Project|[![Project Stats](https://www.ohloh.net/p/flash-messages/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/flash-messages) |
 
-#Flash!
+# Flash!
 When applying the [Post/Redirect/Get](http://kcy.me/15fxw) pattern in web application development, I run always into the same problem: __how to communicate the result to the user after the redirection__.
 
 While it is a known problem and it has been resolved in other platforms (like Ruby), Java does not seem to provide a simple and elegant solution.
@@ -22,7 +22,7 @@ In future releases, it will be possible to use it in **JEE** applications and po
 
 Let's start!
 
-##Features
+## Features
 - Seamless integration with ```@RequestMapping``` and ```@ExceptionHandler``` methods in the **spring-mvc** framework ```@Controller```'s
 - Different levels of messages (ie. __SUCCESS__, __INFO__, __WARNING__, __ERROR__) 
 - Resolution of __i18n__ messages with arguments
@@ -30,13 +30,13 @@ Let's start!
 - Easy integration with the **Twitter Bootstrap** alerts
  
 
-##Getting started
+## Getting started
 
-###Get it into your project
+### Get it into your project
 
-####Maven
+#### Maven
 
-#####Bill Of Materials (BOM)
+##### Bill Of Materials (BOM)
 *flash-messages* artifacts are in **Maven Central** and includes a BOM ([Bill Of Materials](http://kcy.me/15g1b)) to facilitate the use of its modules.
 ```xml
 <dependencyManagement>
@@ -52,7 +52,7 @@ Let's start!
 </dependencyManagement>
 ```
 
-#####Artifacts
+##### Artifacts
 After importing the *BOM* in your `pom.xml` you can easily declare the modules.
 ```xml
 <dependencies>
@@ -73,14 +73,14 @@ After importing the *BOM* in your `pom.xml` you can easily declare the modules.
 </dependencies>
 ```
 
-####Download
+#### Download
 You can download the latest version directly from GitHub:
 
  - `flash-messages-core`        **(_[0.1.0-SNAPSHOT](http://)_)**
  - `flash-messages-spring`      **(_[0.1.0-SNAPSHOT](http://)_)**
  - `flash-messages-taglibs`     **(_[0.1.0-SNAPSHOT](http://)_)**
 
-####Building from sources
+#### Building from sources
 You can build the latest version directly from source. Just run:
 ```sh
 $ mkdir flash-messages-repository
@@ -90,10 +90,10 @@ $ cd flash-messages
 $ mvn clean package
 ```
 
-###Configuration
-*flash-messages* is configured using [JavaConfig](http://kcy.me/15fuu) in **spring-mvc**. It has been tested with versions greater or equal than **3.2.6.RELEASE**.
+### Configuration
+*flash-messages* is configured using **spring** [JavaConfig](http://kcy.me/15fuu). It has been tested with versions greater or equal than **3.2.6.RELEASE**.
 
-####Default configuration
+#### Default configuration
 In order to obtain the default configuration, just add ```@EnableFlashMessages``` to a ```@Configuration``` class (the same with ```@EnableWebMvc``` should be enough).
 ```java
 import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
@@ -112,7 +112,7 @@ public class DefaultMessagesConfigurer {
 }
 ```
 
-####Custom configuration
+#### Custom configuration
 To modify the default behavior of *flash-messages* just extend ```MessagesConfigurerAdapter``` and override those methods that you want to customize.
 ```java
 import es.sandbox.ui.messages.Level;
@@ -137,7 +137,7 @@ public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
 
 The main elements that can be configured or customized are:  _levels of messages_, the _css classes applied to the levels_, the _strategy to resolve i18n messages_ or _modify the scope where messages are stored_.
 
-###Writing messages
+### Writing messages
 In order to write messages, just declare an argument of type ```Messages``` in the handler method (or in a ```@ExceptionHandler``` method), then you can add messages to the different levels.
 
 ```java
@@ -164,7 +164,7 @@ String handle(ServiceException exception, Messages messages) {
 }
 ```
 
-###Painting messages
+### Painting messages
 Finally, you must to include the ```<flash:messages />``` taglib in your views (or better in your decorator template).
 ```jsp
 <%@ taglib prefix="flash" uri="http://sandbox.es/tags/flash-messages" %>
