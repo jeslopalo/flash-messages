@@ -1,5 +1,6 @@
 package es.sandbox.ui.messages.context;
 
+import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -39,7 +40,7 @@ public class MessagesContextSpecs {
 
       @Test
       public void it_should_fail_with_invalid_arguments() {
-         assertThatConstructor(MessagesContext.class, MessagesStoreAccessorFactory.class, MessageResolverStrategy.class)
+         assertThatConstructor(MessagesContext.class, arguments(MessagesStoreAccessorFactory.class, MessageResolverStrategy.class))
                .throwsNullPointerException()
                .invokedWith(null, new StringFormatMessageResolverStrategy())
                .invokedWith(this.mockMessagesStoreAccessorFactory, null);

@@ -1,5 +1,6 @@
 package es.sandbox.ui.messages.argument;
 
+import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatMethod;
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -20,11 +21,11 @@ public class LinkArgumentSpecs {
 
       @Test
       public void it_should_fail_with_invalid_url() {
-         assertThatConstructor(LinkArgument.class, String.class)
+         assertThatConstructor(LinkArgument.class, arguments(String.class))
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatConstructor(LinkArgument.class, String.class)
+         assertThatConstructor(LinkArgument.class, arguments(String.class))
                .throwsIllegalArgumentException()
                .invokedWith("")
                .invokedWith(" ");
@@ -75,11 +76,11 @@ public class LinkArgumentSpecs {
 
       @Test
       public void it_should_fail_with_invalid_code() {
-         assertThatMethod(this.sut, "title", String.class, Object[].class)
+         assertThatMethod(this.sut, "title", arguments(String.class, Object[].class))
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatMethod(this.sut, "title", String.class, Object[].class)
+         assertThatMethod(this.sut, "title", arguments(String.class, Object[].class))
                .throwsIllegalArgumentException()
                .invokedWith("", null)
                .invokedWith(" ", null);

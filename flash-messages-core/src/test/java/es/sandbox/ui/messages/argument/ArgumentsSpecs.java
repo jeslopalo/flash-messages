@@ -1,5 +1,6 @@
 package es.sandbox.ui.messages.argument;
 
+import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatStaticMethod;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -40,11 +41,11 @@ public class ArgumentsSpecs {
 
       @Test
       public void it_should_fail_with_not_valid_code() {
-         assertThatStaticMethod(Arguments.class, "text", String.class, Object[].class)
+         assertThatStaticMethod(Arguments.class, "text", arguments(String.class, Object[].class))
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatStaticMethod(Arguments.class, "text", String.class, Object[].class)
+         assertThatStaticMethod(Arguments.class, "text", arguments(String.class, Object[].class))
                .throwsIllegalArgumentException()
                .invokedWith("")
                .invokedWith(" ");
@@ -70,12 +71,12 @@ public class ArgumentsSpecs {
 
       @Test
       public void it_should_fail_with_not_valid_argument() {
-         assertThatStaticMethod(Arguments.class, "link", String.class)
+         assertThatStaticMethod(Arguments.class, "link", arguments(String.class))
                .throwsIllegalArgumentException()
                .invokedWith("")
                .invokedWith(" ");
 
-         assertThatStaticMethod(Arguments.class, "link", String.class)
+         assertThatStaticMethod(Arguments.class, "link", arguments(String.class))
                .throwsNullPointerException()
                .invokedWithNulls();
       }

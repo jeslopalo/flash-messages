@@ -1,6 +1,7 @@
 package es.sandbox.ui.messages.spring.scope.flash;
 
 import static es.sandbox.spring.fixture.MockedSpringHttpServletRequest.detachedHttpServletRequest;
+import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -32,13 +33,13 @@ public class MessagesStoreFlashScopeAccessorCreationSpecs {
 
       @Test
       public void it_should_fail_with_invalid_args() {
-         assertThatConstructor(MessagesStoreFlashScopeAccessor.class, HttpServletRequest.class, String.class)
+         assertThatConstructor(MessagesStoreFlashScopeAccessor.class, arguments(HttpServletRequest.class, String.class))
                .throwsNullPointerException()
                .invokedWithNulls()
                .invokedWith(null, "key")
                .invokedWith(detachedHttpServletRequest(), null);
 
-         assertThatConstructor(MessagesStoreFlashScopeAccessor.class, HttpServletRequest.class, String.class)
+         assertThatConstructor(MessagesStoreFlashScopeAccessor.class, arguments(HttpServletRequest.class, String.class))
                .throwsIllegalArgumentException()
                .invokedWith(detachedHttpServletRequest(), "")
                .invokedWith(detachedHttpServletRequest(), " ");

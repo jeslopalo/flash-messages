@@ -1,5 +1,6 @@
 package es.sandbox.ui.messages;
 
+import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatMethod;
 import static org.apache.commons.lang3.StringUtils.capitalize;
@@ -32,7 +33,7 @@ public class MessagesPublisherSpecs {
 
       @Test
       public void it_should_fail_with_invalid_arguments() {
-         assertThatConstructor(MessagesPublisher.class, MessageResolver.class, MessagesStore.class)
+         assertThatConstructor(MessagesPublisher.class, arguments(MessageResolver.class, MessagesStore.class))
                .throwsNullPointerException()
                .invokedWithNulls()
                .invokedWith(null, this.messagesStore)
@@ -67,14 +68,18 @@ public class MessagesPublisherSpecs {
       }
 
       private void itShouldFailWithInvalidCode(Level level) {
-         assertThatMethod(this.sut, "add" + capitalize(level.name().toLowerCase()), String.class, Object[].class)
+         assertThatMethod(this.sut, methodName(level), arguments(String.class, Object[].class))
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatMethod(this.sut, "add" + capitalize(level.name().toLowerCase()), String.class, Object[].class)
+         assertThatMethod(this.sut, methodName(level), arguments(String.class, Object[].class))
                .throwsIllegalArgumentException()
                .invokedWith("")
                .invokedWith(" ");
+      }
+
+      private String methodName(Level level) {
+         return "add" + capitalize(level.name().toLowerCase());
       }
 
       @Test

@@ -1,5 +1,6 @@
 package es.sandbox.ui.messages.argument;
 
+import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -18,11 +19,11 @@ public class TextArgumentSpecs {
 
       @Test
       public void it_should_fail_with_invalid_code() {
-         assertThatConstructor(TextArgument.class, String.class, Object[].class)
+         assertThatConstructor(TextArgument.class, arguments(String.class, Object[].class))
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatConstructor(TextArgument.class, String.class, Object[].class)
+         assertThatConstructor(TextArgument.class, arguments(String.class, Object[].class))
                .throwsIllegalArgumentException()
                .invokedWith("", null)
                .invokedWith(" ", null);
