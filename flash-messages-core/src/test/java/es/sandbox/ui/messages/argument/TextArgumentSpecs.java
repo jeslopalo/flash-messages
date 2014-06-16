@@ -9,7 +9,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import es.sandbox.ui.messages.resolver.MessageResolver;
-import es.sandbox.ui.messages.resolver.StringFormatMessageResolverStrategy;
+import es.sandbox.ui.messages.resolver.StringFormatMessageResolverAdapter;
 
 
 @RunWith(Enclosed.class)
@@ -73,7 +73,7 @@ public class TextArgumentSpecs {
       public void it_should_resolve_delegating_in_message_resolver() {
          final TextArgument sut= new TextArgument("code %s", 3L);
 
-         assertThat(sut.resolve(new MessageResolver(new StringFormatMessageResolverStrategy()))).isEqualTo("code 3");
+         assertThat(sut.resolve(new MessageResolver(new StringFormatMessageResolverAdapter()))).isEqualTo("code 3");
       }
    }
 

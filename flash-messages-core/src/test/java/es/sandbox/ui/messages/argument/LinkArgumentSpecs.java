@@ -11,7 +11,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import es.sandbox.ui.messages.resolver.MessageResolver;
-import es.sandbox.ui.messages.resolver.StringFormatMessageResolverStrategy;
+import es.sandbox.ui.messages.resolver.StringFormatMessageResolverAdapter;
 
 
 @RunWith(Enclosed.class)
@@ -149,7 +149,7 @@ public class LinkArgumentSpecs {
       @Before
       public void setup() {
 
-         this.messageResolver= new MessageResolver(new StringFormatMessageResolverStrategy());
+         this.messageResolver= new MessageResolver(new StringFormatMessageResolverAdapter());
          this.sut= new LinkArgument("/an/url");
       }
 

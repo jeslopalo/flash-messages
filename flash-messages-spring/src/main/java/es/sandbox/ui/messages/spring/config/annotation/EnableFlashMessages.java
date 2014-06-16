@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Import;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-@Import(DelegatingMessagesConfiguration.class)
+@Import(DelegatingFlashMessagesConfiguration.class)
 public @interface EnableFlashMessages {
 
 }

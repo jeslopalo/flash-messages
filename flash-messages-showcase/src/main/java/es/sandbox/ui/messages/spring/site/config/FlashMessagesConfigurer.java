@@ -2,15 +2,15 @@ package es.sandbox.ui.messages.spring.site.config;
 
 import org.springframework.context.annotation.Configuration;
 
+import es.sandbox.ui.messages.CssClassesByLevel;
 import es.sandbox.ui.messages.Level;
-import es.sandbox.ui.messages.context.CssClassesByLevel;
 import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
-import es.sandbox.ui.messages.spring.config.annotation.MessagesConfigurerAdapter;
+import es.sandbox.ui.messages.spring.config.annotation.FlashMessagesConfigurerAdapter;
 
 @Configuration
 @EnableFlashMessages
 public class FlashMessagesConfigurer
-      extends MessagesConfigurerAdapter {
+      extends FlashMessagesConfigurerAdapter {
 
 
    @Override

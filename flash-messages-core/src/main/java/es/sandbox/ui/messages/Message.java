@@ -25,7 +25,7 @@ public final class Message
     * @param text
     * @return
     */
-   public static Message create(Level level, String text) {
+   static Message create(Level level, String text) {
       return new Message(level, text);
    }
 

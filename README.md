@@ -18,7 +18,7 @@ While it is a known problem and it has been resolved in other platforms (like Ru
 
 Today, you can use *flash-messages* in applications which use **spring-mvc** as web framework and **Jstl** to render views. 
 
-In future releases, it will be possible to use it in **JEE** applications and possibly with another view technologies like **Thymeleaf** or **Freemarker**.
+In future releases, it will be possible to use it in **JavaEE** applications and possibly with another view technologies like **Thymeleaf** or **Freemarker**.
 
 Let's start!
 
@@ -101,7 +101,7 @@ import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
 @Configuration
 @EnableFlashMessages
 @EnableWebMvc
-public class DefaultMessagesConfigurer {
+public class DefaultFlashMessagesConfigurer {
    
     @Bean
     public MessageSource messageSource() {      
@@ -116,13 +116,13 @@ public class DefaultMessagesConfigurer {
 To modify the default behavior of *flash-messages* just extend ```MessagesConfigurerAdapter``` and override those methods that you want to customize.
 ```java
 import es.sandbox.ui.messages.Level;
-import es.sandbox.ui.messages.context.CssClassesByLevel;
+import es.sandbox.ui.messages.CssClassesByLevel;
 import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
-import es.sandbox.ui.messages.spring.config.annotation.MessagesConfigurerAdapter;
+import es.sandbox.ui.messages.spring.config.annotation.FlashMessagesConfigurerAdapter;
 
 @Configuration
 @EnableFlashMessages
-public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
+public class CustomFlashMessagesConfigurer extends FlashMessagesConfigurerAdapter {
 
     /**
      * Sets the styles of flash-messages to be compatible 
@@ -138,28 +138,28 @@ public class CustomMessagesConfigurer extends MessagesConfigurerAdapter {
 The main elements that can be configured or customized are:  _levels of messages_, the _css classes applied to the levels_, the _strategy to resolve i18n messages_ or _modify the scope where messages are stored_.
 
 ### Writing messages
-In order to write messages, just declare an argument of type ```Messages``` in the handler method (or in a ```@ExceptionHandler``` method), then you can add messages to the different levels.
+In order to write messages, just declare an argument of type ```Flash``` in the handler method (or in a ```@ExceptionHandler``` method), then you can add messages to the different levels.
 
 ```java
 @RequestMapping(value="/target", method= RequestMethod.POST)
-String post(Messages messages, @ModelAttribute FormBackingBean form, BindingResult bindingResult) {
+String post(Flash flash, @ModelAttribute FormBackingBean form, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {        
         return "form";
     }
     
     Result result= this.service.doSomething(form.getValue());
     if (result.isSuccessful()) {
-        messages.addSuccess("messages.success-after-post", result.getValue());
+        flash.success("messages.success-after-post", result.getValue());
         return "redirect:/successful-target-after-post";
     }
     
-    messages.addError("messages.error-in-service", form.getValue());
+    flash.error("messages.error-in-service", form.getValue());
     return "redirect:/error-target-after-post";
 }
 
 @ExceptionHandler(ServiceException.class)
-String handle(ServiceException exception, Messages messages) {
-    messages.addError("messages.service-exception");
+String handle(ServiceException exception, Flash flash) {
+    flash.error("messages.service-exception");
     return "somewhere";
 }
 ```

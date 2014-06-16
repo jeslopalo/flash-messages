@@ -33,7 +33,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 
    /**
-    * Messages to support internationalization/localization.
+    * MessageSource to support internationalization/localization.
     * TODO: move messages and application text to property files.
     */
    @Bean
