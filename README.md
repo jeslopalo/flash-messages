@@ -101,7 +101,7 @@ import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
 @Configuration
 @EnableFlashMessages
 @EnableWebMvc
-public class DefaultFlashMessagesConfigurer {
+public class WebMvcConfigurer {
    
     @Bean
     public MessageSource messageSource() {      
@@ -113,7 +113,7 @@ public class DefaultFlashMessagesConfigurer {
 ```
 
 #### Custom configuration
-To modify the default behavior of *flash-messages* just extend ```MessagesConfigurerAdapter``` and override those methods that you want to customize.
+To modify the default behavior of *flash-messages* just extend ```FlashMessagesConfigurerAdapter``` and override those methods that you want to customize.
 ```java
 import es.sandbox.ui.messages.Level;
 import es.sandbox.ui.messages.CssClassesByLevel;
