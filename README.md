@@ -26,7 +26,7 @@ Let's start!
 - Seamless integration with ```@RequestMapping``` and ```@ExceptionHandler``` methods in the **spring-mvc** framework ```@Controller```'s
 - Different levels of messages (ie. __SUCCESS__, __INFO__, __WARNING__, __ERROR__) 
 - Resolution of __i18n__ messages with arguments
-- Resolution of __i18n__ arguments (ie TextArgument, LinkArgument) 
+- Resolution of __i18n__ arguments (ie Text, Link) 
 - Easy integration with the **Twitter Bootstrap** alerts
  
 
@@ -102,13 +102,14 @@ import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
 @EnableFlashMessages
 @EnableWebMvc
 public class WebMvcConfigurer {
-   
+    ...
     @Bean
     public MessageSource messageSource() {      
         ReloadableResourceBundleMessageSource messageSource= new ReloadableResourceBundleMessageSource();
         messageSource.setBasenames("WEB-INF/i18n/messages");        
         return messageSource;
     }
+    ...
 }
 ```
 
