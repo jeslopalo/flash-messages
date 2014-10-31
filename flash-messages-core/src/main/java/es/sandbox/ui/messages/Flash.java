@@ -4,7 +4,20 @@ import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
 
 
 /**
- * Allow controllers to publish flash messages.
+ * <p>
+ * Allow controllers to add flash messages in the view.
+ * <p>
+ * Some examples:
+ * <p>
+ * 
+ * <pre>
+ * flash.success(&quot;i18n.message.code&quot;);
+ * flash.error(&quot;i18n.message.code&quot;, 1L, new Date());
+ * flash.warning(&quot;i18n.message.code&quot;, Arguments.text(&quot;i18n.argument.code&quot;));
+ * flash.info(&quot;i18n.message.code&quot;, Arguments.link(&quot;/path/to/somewhere&quot;).title(&quot;i18n.argument.code&quot;));
+ * </pre>
+ * 
+ * <br/>
  * 
  * @author jeslopalo
  * @since v0.1
@@ -12,7 +25,7 @@ import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
 public interface Flash {
 
    /**
-    * Publish a new success message. It will be resolved
+    * Flash a new <b>success message</b>. It will be resolved
     * using the configured {@link MessageResolverStrategy}
     * 
     * @param code
@@ -24,7 +37,7 @@ public interface Flash {
          throws NullPointerException, IllegalArgumentException;
 
    /**
-    * Publish a new info message. It will be resolved
+    * Flash a new <b>info message</b>. It will be resolved
     * using the configured {@link MessageResolverStrategy}
     * 
     * @param code
@@ -36,7 +49,7 @@ public interface Flash {
          throws NullPointerException, IllegalArgumentException;
 
    /**
-    * Publish a new warning message. It will be resolved
+    * Flash a new <b>warning message</b>. It will be resolved
     * using the configured {@link MessageResolverStrategy}
     * 
     * @param code
@@ -48,7 +61,7 @@ public interface Flash {
          throws NullPointerException, IllegalArgumentException;
 
    /**
-    * Publish a new error message. It will be resolved
+    * Flash a new <b>error message</b>. It will be resolved
     * using the configured {@link MessageResolverStrategy}
     * 
     * @param code
