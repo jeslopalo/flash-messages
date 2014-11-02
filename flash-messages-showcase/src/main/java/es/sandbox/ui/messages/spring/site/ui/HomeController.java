@@ -60,10 +60,10 @@ public class HomeController {
    @RequestMapping(value= "/e", method= RequestMethod.GET)
    public String e(Flash flash) {
 
-      flash.success("Paso por <b>E</b>" + 1);
-      flash.success("Paso por <b>E</b>" + 2);
-      flash.success("Paso por <b>E</b>" + 3);
-      flash.success("Paso por <b>E</b>" + 4);
+      flash.success("<b>Hey!</b> I'm passing through <b>E</b> controller! (without i18n)");
+      flash.success("<b>Hey!</b> I'm passing through <b>E</b> controller! (without i18n)");
+      flash.success("<b>Hey!</b> I'm passing through <b>E</b> controller! (without i18n)");
+      flash.success("<b>Hey!</b> I'm passing through <b>E</b> controller! (without i18n)");
 
       LOGGER.debug("{} -> R({}): {}", "E", "D", flash);
       return "redirect:/demo/d";
@@ -71,7 +71,7 @@ public class HomeController {
 
    @RequestMapping(value= "/f", method= RequestMethod.GET)
    public String f(Flash flash, HttpServletRequest request) {
-      flash.success("Paso por <b>F</b>");
+      flash.success("<b>Hey!</b> I'm passing through <b>F</b> controller! (without i18n)");
 
       LOGGER.debug("{} -> R({}): {}", "F", "C", flash);
 
@@ -80,17 +80,17 @@ public class HomeController {
 
    @RequestMapping(value= "/exception", method= RequestMethod.GET)
    public String exception(Flash flash, HttpServletRequest request) {
-      flash.warning("Paso por <b>exception</b>");
+      flash.warning("<b>Hey!</b> I'm passing through <b>exception</b> controller! (without i18n)");
 
       LOGGER.debug("{} -> F({}): {}", "exception", "home", flash);
 
-      throw new IllegalArgumentException("Mensaje de excepción!!!!");
+      throw new IllegalArgumentException("Exception message!!!!");
    }
 
    @ExceptionHandler(Exception.class)
    public String handleException(Exception exception, Flash flash) {
       LOGGER.error("Error!", exception);
-      flash.error("Atencion excepcion " + exception.getLocalizedMessage());
+      flash.error("Warning: " + exception.getLocalizedMessage());
       return "home";
    }
 }
