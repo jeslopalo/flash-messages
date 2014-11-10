@@ -168,7 +168,7 @@
 		<dependency>
 			<groupId>es.sandbox.test</groupId>
 			<artifactId>sandbox-test-support</artifactId>
-			<version>[0.0.1,1.0)</version>
+			<version>[0,1)</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
