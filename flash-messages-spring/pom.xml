@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>es.sandbox.ui.messages</groupId>
 		<artifactId>flash-messages-parent</artifactId>
-		<version>0.1.2-SNAPSHOT</version>
+		<version>0.1.2</version>
 		<relativePath>../flash-messages-parent/pom.xml</relativePath>
 	</parent>
 
@@ -31,7 +31,7 @@
 			<!-- Flash messages core -->
 			<groupId>es.sandbox.ui.messages</groupId>
 			<artifactId>flash-messages-core</artifactId>
-			<version>0.1.2-SNAPSHOT</version>
+			<version>0.1.2</version>
 		</dependency>
 
 		<dependency>
