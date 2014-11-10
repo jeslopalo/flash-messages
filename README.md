@@ -3,7 +3,7 @@ _An easy way to send &amp; show *flash messages*_
 
 |Build| State |
 |--------|--------|
-|Version|0.1.0|
+|Version| [ ![Download](https://api.bintray.com/packages/jeslopalo/sandbox-maven-repository/flash-messages/images/download.svg) ](https://bintray.com/jeslopalo/sandbox-maven-repository/flash-messages/_latestVersion)|
 |Status |[![Build Status](https://travis-ci.org/jeslopalo/flash-messages.svg?branch=master)](https://travis-ci.org/jeslopalo/flash-messages)     |
 |Coverage |[![Coverage Status](https://coveralls.io/repos/jeslopalo/flash-messages/badge.png?branch=master)](https://coveralls.io/r/jeslopalo/flash-messages?branch=master)|
 |Coverity Scan |[![Coverity Scan Build Status](https://scan.coverity.com/projects/2142/badge.svg?branch=master)](https://scan.coverity.com/projects/2142?branch=master)|
@@ -44,7 +44,7 @@ Let's start!
         <dependency>
           <groupId>es.sandbox.ui.messages</groupId>
           <artifactId>flash-messages-bom</artifactId>
-          <version>0.1.0</version>
+          <version>0.1.3</version>
           <type>pom</type>
           <scope>import</scope>
         </dependency>
@@ -76,9 +76,9 @@ After importing the *BOM* in your `pom.xml` you can easily declare the modules.
 #### Download
 You can download the latest version directly from GitHub:
 
- - `flash-messages-core`        **(_[0.1.0](http://https://github.com/jeslopalo/flash-messages-core/archive/v0.1.0.zip)_)**
- - `flash-messages-spring`      **(_[0.1.0](http://https://github.com/jeslopalo/flash-messages-spring/archive/v0.1.0.zip)_)**
- - `flash-messages-taglibs`     **(_[0.1.0](http://https://github.com/jeslopalo/flash-messages-taglibs/archive/v0.1.0.zip)_)**
+ - `flash-messages-core`        **(_[0.1.3](https://repo1.maven.org/maven2/es/sandbox/ui/messages/flash-messages-core/0.1.3/flash-messages-core-0.1.3.jar)_)**
+ - `flash-messages-spring`      **(_[0.1.3](https://repo1.maven.org/maven2/es/sandbox/ui/messages/flash-messages-spring/0.1.3/flash-messages-spring-0.1.3.jar)_)**
+ - `flash-messages-taglibs`     **(_[0.1.3](https://repo1.maven.org/maven2/es/sandbox/ui/messages/flash-messages-taglibs/0.1.3/flash-messages-taglibs-0.1.3.jar)_)**
 
 #### Building from sources
 You can build the latest version directly from source. Just run:
