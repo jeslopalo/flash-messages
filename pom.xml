@@ -54,11 +54,11 @@
 	</properties>
 
 	<modules>
-		<module>flash-messages-bom</module>
 		<module>flash-messages-parent</module>
 		<module>flash-messages-core</module>
 		<module>flash-messages-taglibs</module>
 		<module>flash-messages-spring</module>
+		<module>flash-messages-bom</module>
 	</modules>
 
 	<profiles>
