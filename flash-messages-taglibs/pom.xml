@@ -6,7 +6,7 @@
 		<groupId>es.sandbox.ui.messages</groupId>
 		<artifactId>flash-messages-parent</artifactId>
 		<version>0.1.0-SNAPSHOT</version>
-		<relativePath></relativePath>
+		<relativePath>../flash-messages-parent/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>flash-messages-taglibs</artifactId>
