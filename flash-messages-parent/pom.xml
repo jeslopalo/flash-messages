@@ -46,13 +46,6 @@
 		</repository>
 	</distributionManagement>
 
-	<scm>
-		<connection>scm:git:ssh://github.com/jeslopalo/flash-messages.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/jeslopalo/flash-messages.git</developerConnection>
-		<url>https://github.com/jeslopalo/flash-messages</url>
-		<tag>HEAD</tag>
-	</scm>
-
 	<issueManagement>
 		<system>GitHub</system>
 		<url>https://github.com/jeslopalo/flash-messages/issues</url>
