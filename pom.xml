@@ -1,9 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>es.sandbox.ui.messages</groupId>
+    <parent>
+        <groupId>es.sandbox.ui.messages</groupId>
+        <artifactId>flash-messages-parent</artifactId>
+        <version>0.1.3-SNAPSHOT</version>
+        <relativePath>./flash-messages-parent/pom.xml</relativePath>
+    </parent>
+	
 	<artifactId>flash-messages</artifactId>
-	<version>0.1.3</version>
 	<packaging>pom</packaging>
 
 	<name>Flash Messages multimodule super POM</name>
@@ -11,45 +16,8 @@
 	<url>https://github.com/jeslopalo/flash-messages</url>
 	<inceptionYear>2013</inceptionYear>
 
-	<licenses>
-		<license>
-			<name>The MIT License</name>
-			<url>http://www.opensource.org/licenses/mit-license.php</url>
-			<distribution>repo</distribution>
-			<comments>It would be awesome to know that you're using it!</comments>
-		</license>
-	</licenses>
-
-	<organization>
-		<name>Jesús López Alonso [@jeslopalo]</name>
-		<url>\\sandbox.es</url>
-	</organization>
-
-	<developers>
-		<developer>
-			<id>jeslopalo</id>
-			<name>Jesús López</name>
-			<email>jeslopalo at sandbox dot es</email>
-			<roles>
-				<role>developer</role>
-			</roles>
-			<timezone>+1</timezone>
-			<url>https://github.com/jeslopalo</url>
-		</developer>
-	</developers>
-
-    <scm>
-        <connection>scm:git:https://github.com/jeslopalo/flash-messages.git</connection>
-        <developerConnection>scm:git:git@github.com:jeslopalo/flash-messages.git</developerConnection>
-        <url>https://github.com/jeslopalo/flash-messages</url>
-        <tag>HEAD</tag>
-    </scm>
-
 	<properties>
 		<maven.deploy.skip>true</maven.deploy.skip>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
-		<java.version>1.6</java.version>
 	</properties>
 
 	<modules>
@@ -67,90 +35,6 @@
 				<module>flash-messages-showcase</module>
 			</modules>
 		</profile>
-		
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>2.0.4</version>
-                        <executions>
-                            <execution>
-                                <id>attach-sources</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>               
-        
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.8.1</version>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-        
-                        <configuration>
-                            <links>
-                                <link>http://download.oracle.com/javase/6/docs/api/</link>
-                            </links>
-                            <detectLinks>true</detectLinks>
-        
-                            <!-- bootclasspath required by Sun's JVM -->
-                            <bootclasspath>${sun.boot.class.path}</bootclasspath>
-                            <!-- General Javadoc settings -->
-                            <doctitle>${project.name} (${project.version})</doctitle>
-                            <!-- Apple's JVM sometimes requires more memory -->
-                            <additionalJOption>-J-Xmx1024m</additionalJOption>
-        
-                            <show>package</show>
-                            <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-                            <docletArtifact>
-                                <groupId>org.umlgraph</groupId>
-                                <artifactId>umlgraph</artifactId>
-                                <version>5.6</version>
-                            </docletArtifact>
-        
-                            <additionalparam>
-                                -views
-                                -all
-                                -constructors
-                                -hide java.(util|lang).*
-                                -inferdep
-                                -inferdepinpackage
-                                -inferrel
-                            </additionalparam>
-                            <useStandardDocletOptions>true</useStandardDocletOptions>
-                        </configuration>
-                    </plugin>            
-                </plugins>
-            </build>
-        </profile>
-		
 	</profiles>
 
 	<build>
