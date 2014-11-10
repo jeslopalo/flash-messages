@@ -12,7 +12,7 @@
 	<artifactId>flash-messages-core</artifactId>
 	<packaging>jar</packaging>
 
-	<name>${project.groupId}:${project.artifactId}</name>
+	<name>Flash Messages Core</name>
 	<description>A simple way to send &#038; show flash messages</description>
 
 	<dependencies>

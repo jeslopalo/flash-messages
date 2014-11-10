@@ -12,7 +12,7 @@
 	<artifactId>flash-messages-bom</artifactId>
 	<packaging>pom</packaging>
 
-	<name>${project.groupId}:${project.artifactId}</name>
+	<name>Flash Messages Bill Of Materials</name>
 	<description>Flash messages BOM (Bill Of Materials)</description>
 
 	<dependencyManagement>
