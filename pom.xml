@@ -16,6 +16,13 @@
 	<url>https://github.com/jeslopalo/flash-messages</url>
 	<inceptionYear>2013</inceptionYear>
 
+    <scm>
+        <connection>scm:git:ssh://github.com/jeslopalo/flash-messages.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/jeslopalo/flash-messages.git</developerConnection>
+        <url>https://github.com/jeslopalo/flash-messages</url>
+        <tag>HEAD</tag>
+    </scm>
+
 	<properties>
 		<maven.deploy.skip>true</maven.deploy.skip>
 	</properties>
