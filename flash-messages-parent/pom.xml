@@ -3,7 +3,7 @@
 
    <groupId>es.sandbox.ui.messages</groupId>
    <artifactId>flash-messages-parent</artifactId>
-   <version>0.1.4</version>
+   <version>0.1.5-SNAPSHOT</version>
    <packaging>pom</packaging>
 
    <name>Flash Messages POM</name>
@@ -42,7 +42,7 @@
       <connection>scm:git:ssh://github.com/jeslopalo/flash-messages.git</connection>
       <developerConnection>scm:git:ssh://git@github.com/jeslopalo/flash-messages.git</developerConnection>
       <url>https://github.com/jeslopalo/flash-messages</url>
-      <tag>v0.1.4</tag>
+      <tag>HEAD</tag>
    </scm>
 
    <distributionManagement>
