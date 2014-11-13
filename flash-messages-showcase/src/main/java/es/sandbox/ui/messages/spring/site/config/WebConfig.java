@@ -24,7 +24,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@Import(FlashMessagesConfigurer.class)
+@Import({ GlobalControllerExceptionHandler.class, FlashMessagesConfigurer.class })
 @ComponentScan(basePackages= "es.sandbox.ui.messages.spring.site.ui")
 public class WebConfig extends WebMvcConfigurerAdapter {
 

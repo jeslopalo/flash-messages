@@ -87,8 +87,18 @@ public class HomeController {
       throw new IllegalArgumentException("Exception message!!!!");
    }
 
-   @ExceptionHandler(Exception.class)
-   public String handleException(Exception exception, Flash flash) {
+   @RequestMapping(value= "/global-exception", method= RequestMethod.GET)
+   public String globalException(Flash flash, HttpServletRequest request) {
+      flash.warning("<b>Hey!</b> I'm passing through <b>global-exception</b> controller! (without i18n)");
+
+      LOGGER.debug("{} -> F({}): {}", "global-exception", "home", flash);
+
+      throw new UnsupportedOperationException("Unsupported Operation Exception message!!!!");
+   }
+
+
+   @ExceptionHandler(IllegalArgumentException.class)
+   public String handleException(IllegalArgumentException exception, Flash flash) {
       LOGGER.error("Error!", exception);
       flash.error("Warning: " + exception.getLocalizedMessage());
       return "home";

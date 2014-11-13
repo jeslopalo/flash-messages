@@ -38,6 +38,8 @@
 				<p><a href="/status/demo/f">Controller F!</a> /f -R{m}-&gt; /c -R-&gt; /d -F(m,m)-&gt; /home </p>
 			
 				<p><a href="/status/demo/exception">Controller exception!</a> /exception -E(m)-&gt; @ExceptionHandler -F(m,m)-&gt; /home</p>
+				
+				<p><a href="/status/demo/global-exception">Global controller exception!</a> /global-exception -E(m)-&gt; @ExceptionHandler -F(m,m)-&gt; /home</p>
 			</div>
 			<div class="col-md-6">
 				<flash:messages />

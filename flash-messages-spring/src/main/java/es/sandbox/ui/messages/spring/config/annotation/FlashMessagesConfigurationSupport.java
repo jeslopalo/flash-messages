@@ -5,7 +5,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -28,20 +31,27 @@ import es.sandbox.ui.messages.spring.scope.flash.FlashScopeStoreAccessorFactory;
 
 
 public class FlashMessagesConfigurationSupport
-      extends WebMvcConfigurerAdapter {
+      extends WebMvcConfigurerAdapter
+      implements ApplicationContextAware {
 
    private HandlerExceptionResolver handlerExceptionResolver;
    private MessageSource messageSource;
+   private ApplicationContext applicationContext;
 
+
+   @Autowired
+   void setHandlerExceptionResolver(HandlerExceptionResolver handlerExceptionResolver) {
+      this.handlerExceptionResolver= handlerExceptionResolver;
+   }
 
    @Autowired
    void setMessageSource(MessageSource messageSource) {
       this.messageSource= messageSource;
    }
 
-   @Autowired
-   void setHandlerExceptionResolver(HandlerExceptionResolver handlerExceptionResolver) {
-      this.handlerExceptionResolver= handlerExceptionResolver;
+   @Override
+   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+      this.applicationContext= applicationContext;
    }
 
 
@@ -63,8 +73,9 @@ public class FlashMessagesConfigurationSupport
       resolvers.add(flashMessagesMethodArgumentResolver());
 
       exceptionHandlerExceptionResolver.setArgumentResolvers(resolvers);
+      exceptionHandlerExceptionResolver.setApplicationContext(this.applicationContext);
+      exceptionHandlerExceptionResolver.afterPropertiesSet();
    }
-
 
    /*
     * (non-Javadoc)
