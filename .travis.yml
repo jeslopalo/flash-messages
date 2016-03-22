@@ -2,8 +2,9 @@ language: java
 
 jdk:
   - oraclejdk7
+  - oraclejdk8
   - openjdk7
-  - openjdk6
+  - openjdk8
 
 after_success: ./src/main/scripts/build/cobertura.sh
 
@@ -21,4 +22,4 @@ addons:
     notification_email: jeslopalo@sandbox.es
     build_command_prepend: mvn clean
     build_command: mvn package
-    branch_pattern: coverity_scan
+    branch_pattern: master
