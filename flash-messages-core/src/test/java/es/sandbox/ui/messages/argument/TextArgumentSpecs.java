@@ -1,5 +1,6 @@
 package es.sandbox.ui.messages.argument;
 
+import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -8,7 +9,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import es.sandbox.ui.messages.resolver.MessageResolver;
-import es.sandbox.ui.messages.resolver.StringFormatMessageResolverStrategy;
+import es.sandbox.ui.messages.resolver.StringFormatMessageResolverAdapter;
 
 
 @RunWith(Enclosed.class)
@@ -18,11 +19,11 @@ public class TextArgumentSpecs {
 
       @Test
       public void it_should_fail_with_invalid_code() {
-         assertThatConstructor(TextArgument.class, String.class, Object[].class)
+         assertThatConstructor(TextArgument.class, arguments(String.class, Object[].class))
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatConstructor(TextArgument.class, String.class, Object[].class)
+         assertThatConstructor(TextArgument.class, arguments(String.class, Object[].class))
                .throwsIllegalArgumentException()
                .invokedWith("", null)
                .invokedWith(" ", null);
@@ -72,7 +73,7 @@ public class TextArgumentSpecs {
       public void it_should_resolve_delegating_in_message_resolver() {
          final TextArgument sut= new TextArgument("code %s", 3L);
 
-         assertThat(sut.resolve(new MessageResolver(new StringFormatMessageResolverStrategy()))).isEqualTo("code 3");
+         assertThat(sut.resolve(new MessageResolver(new StringFormatMessageResolverAdapter()))).isEqualTo("code 3");
       }
    }
 

@@ -1,6 +1,6 @@
 package es.sandbox.ui.messages;
 
-import static es.sandbox.ui.messages.MessageFixtureGenerator.fixturer;
+import static es.sandbox.ui.messages.MessageFixturer.fixturer;
 import static org.fest.assertions.api.Assertions.assertThat;
 import nl.jqno.equalsverifier.EqualsVerifier;
 
@@ -13,9 +13,9 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class MessageEqualitySpecs {
 
-   private static final DateTime EXAMPLE_TIMESTAMP= MessageFixtureGenerator.EXAMPLE_TIMESTAMP;
-   private static final Level EXAMPLE_LEVEL= MessageFixtureGenerator.EXAMPLE_LEVEL;
-   private static final String EXAMPLE_TEXT= MessageFixtureGenerator.EXAMPLE_TEXT;
+   private static final DateTime EXAMPLE_TIMESTAMP= MessageFixturer.EXAMPLE_TIMESTAMP;
+   private static final Level EXAMPLE_LEVEL= MessageFixturer.EXAMPLE_LEVEL;
+   private static final String EXAMPLE_TEXT= MessageFixturer.EXAMPLE_TEXT;
 
 
    public static class EqualityContractSpec {

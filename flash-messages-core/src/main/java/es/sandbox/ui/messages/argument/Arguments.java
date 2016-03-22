@@ -1,6 +1,11 @@
 package es.sandbox.ui.messages.argument;
 
-
+/**
+ * Build flash message arguments.
+ * 
+ * @author jeslopalo
+ * @since v0.1
+ */
 public class Arguments {
 
    /**
@@ -13,6 +18,9 @@ public class Arguments {
    }
 
    /**
+    * Build a new {@link Text} argument. {@link Text} consists of
+    * a multilingual code and a number of optional arguments.
+    * 
     * @param code
     * @param arguments
     * @return
@@ -22,6 +30,9 @@ public class Arguments {
    }
 
    /**
+    * Build a new {@link Link} argument. {@link Link} consists of
+    * an url.
+    * 
     * @param url
     * @return
     */

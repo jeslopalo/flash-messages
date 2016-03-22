@@ -10,9 +10,9 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class MessageRehydrationSpecs {
 
-   private static final DateTime EXAMPLE_TIMESTAMP= MessageFixtureGenerator.EXAMPLE_TIMESTAMP;
-   private static final Level EXAMPLE_LEVEL= MessageFixtureGenerator.EXAMPLE_LEVEL;
-   private static final String EXAMPLE_TEXT= MessageFixtureGenerator.EXAMPLE_TEXT;
+   private static final DateTime EXAMPLE_TIMESTAMP= MessageFixturer.EXAMPLE_TIMESTAMP;
+   private static final Level EXAMPLE_LEVEL= MessageFixturer.EXAMPLE_LEVEL;
+   private static final String EXAMPLE_TEXT= MessageFixturer.EXAMPLE_TEXT;
 
 
    public static class MessageTimestampSpecs {

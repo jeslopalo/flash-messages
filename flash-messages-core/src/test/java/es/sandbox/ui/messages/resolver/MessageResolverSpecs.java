@@ -21,7 +21,7 @@ public class MessageResolverSpecs {
 
       @Test
       public void it_should_be_constructed() {
-         assertThat(new MessageResolver(new StringFormatMessageResolverStrategy())).isNotNull();
+         assertThat(new MessageResolver(new StringFormatMessageResolverAdapter())).isNotNull();
       }
    }
 
@@ -32,7 +32,7 @@ public class MessageResolverSpecs {
 
       @Before
       public void setup() {
-         this.sut= new MessageResolver(new StringFormatMessageResolverStrategy());
+         this.sut= new MessageResolver(new StringFormatMessageResolverAdapter());
       }
 
       @Test(expected= NullPointerException.class)
@@ -87,12 +87,12 @@ public class MessageResolverSpecs {
 
       @Before
       public void setup() {
-         this.sut= new MessageResolver(new StringFormatMessageResolverStrategy());
+         this.sut= new MessageResolver(new StringFormatMessageResolverAdapter());
       }
 
       @Test
       public void it_should_include_strategy_name_in_to_string() {
-         assertThat(this.sut.toString()).isEqualTo("MessageResolver(StringFormatMessageResolverStrategy)");
+         assertThat(this.sut.toString()).isEqualTo("MessageResolver(StringFormatMessageResolverAdapter)");
       }
    }
 
@@ -105,7 +105,7 @@ public class MessageResolverSpecs {
 
       @Test
       public void it_should_do_nothing_with_not_null_resolver() {
-         MessageResolver.assertThatIsNotNull(new MessageResolver(new StringFormatMessageResolverStrategy()));
+         MessageResolver.assertThatIsNotNull(new MessageResolver(new StringFormatMessageResolverAdapter()));
       }
    }
 }

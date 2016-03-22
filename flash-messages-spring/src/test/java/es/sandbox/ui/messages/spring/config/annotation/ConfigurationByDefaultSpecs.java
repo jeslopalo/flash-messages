@@ -14,22 +14,22 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import es.sandbox.ui.messages.Context;
+import es.sandbox.ui.messages.CssClassesByLevel;
 import es.sandbox.ui.messages.Level;
-import es.sandbox.ui.messages.context.CssClassesByLevel;
-import es.sandbox.ui.messages.context.MessagesContext;
-import es.sandbox.ui.messages.spring.config.MessageSourceMessageResolverAdapterStrategy;
-import es.sandbox.ui.messages.spring.config.annotation.ConfigurationByDefaultSpecs.DefaultMessagesConfigurer;
-import es.sandbox.ui.messages.spring.scope.flash.MessagesStoreFlashScopeAccessorFactory;
+import es.sandbox.ui.messages.spring.config.MessageSourceMessageResolverAdapter;
+import es.sandbox.ui.messages.spring.config.annotation.ConfigurationByDefaultSpecs.DefaultFlashMessagesConfigurer;
+import es.sandbox.ui.messages.spring.scope.flash.FlashScopeStoreAccessorFactory;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= DefaultMessagesConfigurer.class)
+@ContextConfiguration(classes= DefaultFlashMessagesConfigurer.class)
 @WebAppConfiguration
 public class ConfigurationByDefaultSpecs
       implements ApplicationContextAware {
 
    private ApplicationContext context;
    private CssClassesByLevel defaultCssClasses;
-   private DelegatingMessagesConfiguration defaultConfiguration;
+   private DelegatingFlashMessagesConfiguration defaultConfiguration;
 
 
    @Override
@@ -40,15 +40,15 @@ public class ConfigurationByDefaultSpecs
    @Before
    public void setup() {
       this.defaultCssClasses= new CssClassesByLevel();
-      this.defaultConfiguration= this.context.getBean(DelegatingMessagesConfiguration.class);
+      this.defaultConfiguration= this.context.getBean(DelegatingFlashMessagesConfiguration.class);
    }
 
    @Test
    public void it_should_load_default_messages_context_bean() {
-      final MessagesContext defaultContext= this.context.getBean(MessagesContext.class);
+      final Context defaultContext= this.context.getBean(Context.class);
 
       assertThat(defaultContext).isNotNull();
-      assertThat(defaultContext.levels()).isEqualTo(Level.values());
+      assertThat(defaultContext.levels()).containsExactly(Level.values());
 
       for (final Level level : Level.values()) {
          assertThat(defaultContext.getLevelCssClass(level)).isEqualTo(this.defaultCssClasses.get(level));
@@ -57,14 +57,14 @@ public class ConfigurationByDefaultSpecs
 
    @Test
    public void it_should_configure_default_messages_store_accessor_factory() {
-      assertThat(this.defaultConfiguration.configureMessagesStoreAccessorFactory())
-            .isInstanceOf(MessagesStoreFlashScopeAccessorFactory.class);
+      assertThat(this.defaultConfiguration.configureFlashStoreAccessorFactory())
+            .isInstanceOf(FlashScopeStoreAccessorFactory.class);
    }
 
    @Test
    public void it_should_configure_default_message_resolver_strategy() {
       assertThat(this.defaultConfiguration.configureMessageResolverStrategy())
-            .isInstanceOf(MessageSourceMessageResolverAdapterStrategy.class);
+            .isInstanceOf(MessageSourceMessageResolverAdapter.class);
    }
 
    @Test
@@ -85,8 +85,8 @@ public class ConfigurationByDefaultSpecs
 
    @Configuration
    @EnableFlashMessages
-   @Import(FixtureMessagesContextConfiguration.class)
-   static class DefaultMessagesConfigurer {
+   @Import(FixtureFlashMessagesContextConfiguration.class)
+   static class DefaultFlashMessagesConfigurer {
 
    }
 }

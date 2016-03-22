@@ -1,6 +1,6 @@
 package es.sandbox.ui.messages;
 
-import static es.sandbox.ui.messages.MessageFixtureGenerator.fixturer;
+import static es.sandbox.ui.messages.MessageFixturer.fixturer;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class MessageToStringSpecs {
 
       @Test
       public void it_should_include_timestamp() {
-         assertThat(this.sut.toString()).contains(String.format("%1$tF %1$tT", MessageFixtureGenerator.EXAMPLE_TIMESTAMP.toDate()));
+         assertThat(this.sut.toString()).contains(String.format("%1$tF %1$tT", MessageFixturer.EXAMPLE_TIMESTAMP.toDate()));
       }
 
       @Test

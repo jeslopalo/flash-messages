@@ -36,6 +36,11 @@
 		<appender-ref ref="FILE" />
 	</logger>
 
+    <logger name="org.springframework.web.servlet.mvc.method.annotation" additivity="false">
+        <level value="ALL" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </logger>
 	<!-- Third party loggers -->
 	<logger name="org.springframework" additivity="false">
 		<level value="DEBUG" />

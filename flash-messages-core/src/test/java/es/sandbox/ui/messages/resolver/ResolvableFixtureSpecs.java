@@ -60,7 +60,7 @@ public class ResolvableFixtureSpecs {
 
    public static class ResolvableSpecs {
 
-      private final MessageResolver messageResolver= new MessageResolver(new StringFormatMessageResolverStrategy());
+      private final MessageResolver messageResolver= new MessageResolver(new StringFormatMessageResolverAdapter());
       private ResolvableFixture sut;
 
 

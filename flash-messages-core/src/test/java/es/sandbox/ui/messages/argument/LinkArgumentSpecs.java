@@ -1,5 +1,6 @@
 package es.sandbox.ui.messages.argument;
 
+import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
 import static es.sandbox.test.assertion.ArgumentAssertions.assertThatMethod;
 import static org.fest.assertions.api.Assertions.assertThat;
@@ -10,7 +11,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import es.sandbox.ui.messages.resolver.MessageResolver;
-import es.sandbox.ui.messages.resolver.StringFormatMessageResolverStrategy;
+import es.sandbox.ui.messages.resolver.StringFormatMessageResolverAdapter;
 
 
 @RunWith(Enclosed.class)
@@ -20,11 +21,11 @@ public class LinkArgumentSpecs {
 
       @Test
       public void it_should_fail_with_invalid_url() {
-         assertThatConstructor(LinkArgument.class, String.class)
+         assertThatConstructor(LinkArgument.class, arguments(String.class))
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatConstructor(LinkArgument.class, String.class)
+         assertThatConstructor(LinkArgument.class, arguments(String.class))
                .throwsIllegalArgumentException()
                .invokedWith("")
                .invokedWith(" ");
@@ -75,11 +76,11 @@ public class LinkArgumentSpecs {
 
       @Test
       public void it_should_fail_with_invalid_code() {
-         assertThatMethod(this.sut, "title", String.class, Object[].class)
+         assertThatMethod(this.sut, "title", arguments(String.class, Object[].class))
                .throwsNullPointerException()
                .invokedWithNulls();
 
-         assertThatMethod(this.sut, "title", String.class, Object[].class)
+         assertThatMethod(this.sut, "title", arguments(String.class, Object[].class))
                .throwsIllegalArgumentException()
                .invokedWith("", null)
                .invokedWith(" ", null);
@@ -148,7 +149,7 @@ public class LinkArgumentSpecs {
       @Before
       public void setup() {
 
-         this.messageResolver= new MessageResolver(new StringFormatMessageResolverStrategy());
+         this.messageResolver= new MessageResolver(new StringFormatMessageResolverAdapter());
          this.sut= new LinkArgument("/an/url");
       }
 

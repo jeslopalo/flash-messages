@@ -23,7 +23,7 @@
 	
 	<function>
 		<name>levels</name>
-		<function-class>es.sandbox.ui.messages.tags.MessagesTaglibSupport</function-class>
+		<function-class>es.sandbox.ui.messages.tags.FlashMessagesTaglibSupport</function-class>
 		<function-signature>
 			es.sandbox.ui.messages.Level[] levels(javax.servlet.http.HttpServletRequest)
 		</function-signature>
@@ -31,7 +31,7 @@
 		
 	<function>
 		<name>levelMessages</name>
-		<function-class>es.sandbox.ui.messages.tags.MessagesTaglibSupport</function-class>
+		<function-class>es.sandbox.ui.messages.tags.FlashMessagesTaglibSupport</function-class>
 		<function-signature>
 			java.util.Collection levelMessages(es.sandbox.ui.messages.Level, javax.servlet.http.HttpServletRequest)
 		</function-signature>
@@ -39,7 +39,7 @@
 	
 	<function>
 		<name>levelCssClass</name>
-		<function-class>es.sandbox.ui.messages.tags.MessagesTaglibSupport</function-class>
+		<function-class>es.sandbox.ui.messages.tags.FlashMessagesTaglibSupport</function-class>
 		<function-signature>
 			java.lang.String levelCssClass(es.sandbox.ui.messages.Level, javax.servlet.http.HttpServletRequest)
 		</function-signature>
