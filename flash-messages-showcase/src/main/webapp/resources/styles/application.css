@@ -1,13 +1,13 @@
 @CHARSET "UTF-8";
 
 body {
-	background-color: #C1DAD6;
+    background-color: #C1DAD6;
 }
 
 .flash-messages {
-	border: 1px solid;
+    border: 1px solid;
 }
 
 .flash-success {
-	border-color: blue;
+    border-color: blue;
 }

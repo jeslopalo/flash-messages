@@ -8,13 +8,13 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class StoreEqualitySpecs {
 
-	public static class EqualityContractSpec {
+    public static class EqualityContractSpec {
 
-		@Test
-		public void should_respect_equals_contract() {
-			EqualsVerifier.
-					forClass(Store.class)
-					.verify();
-		}
-	}
+        @Test
+        public void should_respect_equals_contract() {
+            EqualsVerifier.
+                forClass(Store.class)
+                .verify();
+        }
+    }
 }

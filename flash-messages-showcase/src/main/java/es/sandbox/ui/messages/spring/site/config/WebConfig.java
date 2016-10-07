@@ -1,9 +1,5 @@
 package es.sandbox.ui.messages.spring.site.config;
 
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -22,66 +18,70 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Configuration
 @EnableWebMvc
-@Import({ GlobalControllerExceptionHandler.class, FlashMessagesConfigurer.class })
-@ComponentScan(basePackages= "es.sandbox.ui.messages.spring.site.ui")
+@Import({GlobalControllerExceptionHandler.class, FlashMessagesConfigurer.class})
+@ComponentScan(basePackages = "es.sandbox.ui.messages.spring.site.ui")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-   @Inject
-   private Environment environment;
+    @Inject
+    private Environment environment;
 
 
-   /**
-    * MessageSource to support internationalization/localization.
-    * TODO: move messages and application text to property files.
-    */
-   @Bean
-   public MessageSource messageSource() {
-      final ReloadableResourceBundleMessageSource messageSource= new ReloadableResourceBundleMessageSource();
+    /**
+     * MessageSource to support internationalization/localization.
+     * TODO: move messages and application text to property files.
+     */
+    @Bean
+    public MessageSource messageSource() {
+        final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
 
-      messageSource.setCacheSeconds(this.environment.getProperty("app.config.i18n.cache.seconds", Integer.class, 30));
-      messageSource.setUseCodeAsDefaultMessage(true);
-      messageSource.setDefaultEncoding("UTF-8");
-      messageSource.setBasenames(new String[] { "WEB-INF/i18n/messages", "WEB-INF/i18n/application" });
-      return messageSource;
-   }
-
-
-   @Override
-   public void addInterceptors(InterceptorRegistry registry) {
-      registry.addInterceptor(new HandlerInterceptorAdapter() {
-
-         private final Logger logger= LoggerFactory.getLogger(getClass());
+        messageSource.setCacheSeconds(this.environment.getProperty("app.config.i18n.cache.seconds", Integer.class, 30));
+        messageSource.setUseCodeAsDefaultMessage(true);
+        messageSource.setDefaultEncoding("UTF-8");
+        messageSource.setBasenames(new String[]{"WEB-INF/i18n/messages", "WEB-INF/i18n/application"});
+        return messageSource;
+    }
 
 
-         @Override
-         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-            this.logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            return true;
-         }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new HandlerInterceptorAdapter() {
+
+            private final Logger logger = LoggerFactory.getLogger(getClass());
 
 
-         @Override
-         public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-            this.logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-         }
-      });
-   }
+            @Override
+            public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+                this.logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                return true;
+            }
 
 
-   @Override
-   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-      registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-   }
+            @Override
+            public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+                this.logger.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            }
+        });
+    }
 
-   @Bean
-   public ViewResolver viewResolver() {
 
-      final InternalResourceViewResolver viewResolver= new InternalResourceViewResolver();
-      viewResolver.setViewClass(JstlView.class);
-      viewResolver.setPrefix("/WEB-INF/views/");
-      viewResolver.setSuffix(".jsp");
-      return viewResolver;
-   }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+
+    @Bean
+    public ViewResolver viewResolver() {
+
+        final InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("/WEB-INF/views/");
+        viewResolver.setSuffix(".jsp");
+        return viewResolver;
+    }
 }
