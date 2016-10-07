@@ -1,8 +1,5 @@
 package es.sandbox.ui.messages.spring.config;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -12,47 +9,50 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+
 @RunWith(Enclosed.class)
 public class MessageSourceMessageResolverAdapterSpecs {
 
-   @RunWith(MockitoJUnitRunner.class)
-   public static class ConstructorSpecs {
+    @RunWith(MockitoJUnitRunner.class)
+    public static class ConstructorSpecs {
 
-      @Mock
-      private MessageSource messageSource;
-
-
-      @Test(expected= NullPointerException.class)
-      public void it_should_raise_an_exception_with_null_message_source() {
-         new MessageSourceMessageResolverAdapter(null);
-      }
-
-      @Test
-      public void it_should_be_constructed() {
-         assertThat(new MessageSourceMessageResolverAdapter(this.messageSource)).isNotNull();
-      }
-   }
-
-   @RunWith(MockitoJUnitRunner.class)
-   public static class MessageSourceDelegationSpecs {
-
-      @Mock
-      private MessageSource messageSource;
-
-      private MessageSourceMessageResolverAdapter sut;
+        @Mock
+        private MessageSource messageSource;
 
 
-      @Before
-      public void setup() {
-         this.sut= new MessageSourceMessageResolverAdapter(this.messageSource);
-      }
+        @Test(expected = NullPointerException.class)
+        public void it_should_raise_an_exception_with_null_message_source() {
+            new MessageSourceMessageResolverAdapter(null);
+        }
 
-      @Test
-      public void it_should_delegate_getmessage_to_message_source() {
+        @Test
+        public void it_should_be_constructed() {
+            assertThat(new MessageSourceMessageResolverAdapter(this.messageSource)).isNotNull();
+        }
+    }
 
-         this.sut.resolve("code", 1L);
+    @RunWith(MockitoJUnitRunner.class)
+    public static class MessageSourceDelegationSpecs {
 
-         verify(this.messageSource).getMessage("code", new Object[] { 1L }, LocaleContextHolder.getLocale());
-      }
-   }
+        @Mock
+        private MessageSource messageSource;
+
+        private MessageSourceMessageResolverAdapter sut;
+
+
+        @Before
+        public void setup() {
+            this.sut = new MessageSourceMessageResolverAdapter(this.messageSource);
+        }
+
+        @Test
+        public void it_should_delegate_getmessage_to_message_source() {
+
+            this.sut.resolve("code", 1L);
+
+            verify(this.messageSource).getMessage("code", new Object[]{1L}, LocaleContextHolder.getLocale());
+        }
+    }
 }

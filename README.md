@@ -44,7 +44,7 @@ Let's start!
         <dependency>
           <groupId>es.sandbox.ui.messages</groupId>
           <artifactId>flash-messages-bom</artifactId>
-          <version>0.1.4</version>
+          <version>1.0.0</version>
           <type>pom</type>
           <scope>import</scope>
         </dependency>
@@ -76,9 +76,9 @@ After importing the *BOM* in your `pom.xml` you can easily declare the modules.
 #### Download
 You can download the latest version directly from GitHub:
 
- - `flash-messages-core`        **(_[0.1.4](https://repo1.maven.org/maven2/es/sandbox/ui/messages/flash-messages-core/0.1.4/flash-messages-core-0.1.4.jar)_)**
- - `flash-messages-spring`      **(_[0.1.4](https://repo1.maven.org/maven2/es/sandbox/ui/messages/flash-messages-spring/0.1.4/flash-messages-spring-0.1.4.jar)_)**
- - `flash-messages-taglibs`     **(_[0.1.4](https://repo1.maven.org/maven2/es/sandbox/ui/messages/flash-messages-taglibs/0.1.4/flash-messages-taglibs-0.1.4.jar)_)**
+ - `flash-messages-core`        **(_[1.0.0](https://repo1.maven.org/maven2/es/sandbox/ui/messages/flash-messages-core/1.0.0/flash-messages-core-1.0.0.jar)_)**
+ - `flash-messages-spring`      **(_[1.0.0](https://repo1.maven.org/maven2/es/sandbox/ui/messages/flash-messages-spring/1.0.0/flash-messages-spring-1.0.0.jar)_)**
+ - `flash-messages-taglibs`     **(_[1.0.0](https://repo1.maven.org/maven2/es/sandbox/ui/messages/flash-messages-taglibs/1.0.0/flash-messages-taglibs-1.0.0.jar)_)**
 
 #### Building from sources
 You can build the latest version directly from source. Just run:

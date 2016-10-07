@@ -1,10 +1,11 @@
 package es.sandbox.ui.messages.spring.config.annotation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
+import es.sandbox.ui.messages.*;
+import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
+import es.sandbox.ui.messages.spring.config.FlashMessagesHandlerInterceptor;
+import es.sandbox.ui.messages.spring.config.FlashMessagesMethodArgumentResolver;
+import es.sandbox.ui.messages.spring.config.MessageSourceMessageResolverAdapter;
+import es.sandbox.ui.messages.spring.scope.flash.FlashScopeStoreAccessorFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -18,152 +19,145 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.handler.HandlerExceptionResolverComposite;
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 
-import es.sandbox.ui.messages.Context;
-import es.sandbox.ui.messages.ContextBuilder;
-import es.sandbox.ui.messages.CssClassesByLevel;
-import es.sandbox.ui.messages.Level;
-import es.sandbox.ui.messages.StoreAccessorFactory;
-import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
-import es.sandbox.ui.messages.spring.config.FlashMessagesHandlerInterceptor;
-import es.sandbox.ui.messages.spring.config.FlashMessagesMethodArgumentResolver;
-import es.sandbox.ui.messages.spring.config.MessageSourceMessageResolverAdapter;
-import es.sandbox.ui.messages.spring.scope.flash.FlashScopeStoreAccessorFactory;
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class FlashMessagesConfigurationSupport
-      extends WebMvcConfigurerAdapter
-      implements ApplicationContextAware {
+    extends WebMvcConfigurerAdapter
+    implements ApplicationContextAware {
 
-   private HandlerExceptionResolver handlerExceptionResolver;
-   private MessageSource messageSource;
-   private ApplicationContext applicationContext;
-
-
-   @Autowired
-   void setHandlerExceptionResolver(HandlerExceptionResolver handlerExceptionResolver) {
-      this.handlerExceptionResolver= handlerExceptionResolver;
-   }
-
-   @Autowired
-   void setMessageSource(MessageSource messageSource) {
-      this.messageSource= messageSource;
-   }
-
-   @Override
-   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-      this.applicationContext= applicationContext;
-   }
+    private HandlerExceptionResolver handlerExceptionResolver;
+    private MessageSource messageSource;
+    private ApplicationContext applicationContext;
 
 
-   /**
-	 * 
-	 */
-   @PostConstruct
-   private void configureMessagesExceptionArgumentResolvers() {
-      for (final HandlerExceptionResolver resolver : ((HandlerExceptionResolverComposite) this.handlerExceptionResolver).getExceptionResolvers()) {
-         if (resolver instanceof ExceptionHandlerExceptionResolver) {
-            configureCustomHandlerMethodArgumentResolver((ExceptionHandlerExceptionResolver) resolver);
-         }
-      }
-   }
+    @Autowired
+    void setHandlerExceptionResolver(HandlerExceptionResolver handlerExceptionResolver) {
+        this.handlerExceptionResolver = handlerExceptionResolver;
+    }
 
-   private void configureCustomHandlerMethodArgumentResolver(final ExceptionHandlerExceptionResolver exceptionHandlerExceptionResolver) {
-      final List<HandlerMethodArgumentResolver> resolvers= new ArrayList<HandlerMethodArgumentResolver>();
-      resolvers.addAll(exceptionHandlerExceptionResolver.getArgumentResolvers().getResolvers());
-      resolvers.add(flashMessagesMethodArgumentResolver());
+    @Autowired
+    void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
-      exceptionHandlerExceptionResolver.setArgumentResolvers(resolvers);
-      exceptionHandlerExceptionResolver.setApplicationContext(this.applicationContext);
-      exceptionHandlerExceptionResolver.afterPropertiesSet();
-   }
-
-   /*
-    * (non-Javadoc)
-    * @see
-    * org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addArgumentResolvers(java.util.List)
-    */
-   @Override
-   public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-      argumentResolvers.add(flashMessagesMethodArgumentResolver());
-   }
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.applicationContext = applicationContext;
+    }
 
 
-   private FlashMessagesMethodArgumentResolver flashMessagesMethodArgumentResolver() {
-      return new FlashMessagesMethodArgumentResolver(flashMessagesContext());
-   }
+    /**
+     *
+     */
+    @PostConstruct
+    private void configureMessagesExceptionArgumentResolvers() {
+        for (final HandlerExceptionResolver resolver : ((HandlerExceptionResolverComposite) this.handlerExceptionResolver).getExceptionResolvers()) {
+            if (resolver instanceof ExceptionHandlerExceptionResolver) {
+                configureCustomHandlerMethodArgumentResolver((ExceptionHandlerExceptionResolver) resolver);
+            }
+        }
+    }
+
+    private void configureCustomHandlerMethodArgumentResolver(final ExceptionHandlerExceptionResolver exceptionHandlerExceptionResolver) {
+        final List<HandlerMethodArgumentResolver> resolvers = new ArrayList<HandlerMethodArgumentResolver>();
+        resolvers.addAll(exceptionHandlerExceptionResolver.getArgumentResolvers().getResolvers());
+        resolvers.add(flashMessagesMethodArgumentResolver());
+
+        exceptionHandlerExceptionResolver.setArgumentResolvers(resolvers);
+        exceptionHandlerExceptionResolver.setApplicationContext(this.applicationContext);
+        exceptionHandlerExceptionResolver.afterPropertiesSet();
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addArgumentResolvers(java.util.List)
+     */
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(flashMessagesMethodArgumentResolver());
+    }
 
 
-   /*
-    * (non-Javadoc)
-    * @see
-    * org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addInterceptors(org.springframework.
-    * web.servlet.config.annotation.InterceptorRegistry)
-    */
-   @Override
-   public void addInterceptors(InterceptorRegistry registry) {
-      registry.addInterceptor(new FlashMessagesHandlerInterceptor(flashMessagesContext()));
-   }
+    private FlashMessagesMethodArgumentResolver flashMessagesMethodArgumentResolver() {
+        return new FlashMessagesMethodArgumentResolver(flashMessagesContext());
+    }
 
 
-   /**
-    * @return
-    */
-   @Bean
-   Context flashMessagesContext() {
-      return new ContextBuilder(configureFlashStoreAccessorFactory())
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addInterceptors(org.springframework.
+     * web.servlet.config.annotation.InterceptorRegistry)
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new FlashMessagesHandlerInterceptor(flashMessagesContext()));
+    }
+
+
+    /**
+     * @return
+     */
+    @Bean
+    Context flashMessagesContext() {
+        return new ContextBuilder(configureFlashStoreAccessorFactory())
             .withMessageResolverStrategy(configureMessageResolverStrategy())
             .withLevels(includedLevels())
             .withCssClassesByLevel(cssClassesByLevel())
             .build();
-   }
+    }
 
 
-   /**
-    * Override this method to add a custom {@link StoreAccessorFactory}
-    * 
-    * @return
-    */
-   protected StoreAccessorFactory configureFlashStoreAccessorFactory() {
-      return new FlashScopeStoreAccessorFactory();
-   }
+    /**
+     * Override this method to add a custom {@link StoreAccessorFactory}
+     *
+     * @return
+     */
+    protected StoreAccessorFactory configureFlashStoreAccessorFactory() {
+        return new FlashScopeStoreAccessorFactory();
+    }
 
-   /**
-    * Override this method to add a custom {@link MessageResolverStrategy}
-    * 
-    * @return
-    */
-   protected MessageResolverStrategy configureMessageResolverStrategy() {
-      return new MessageSourceMessageResolverAdapter(this.messageSource);
-   }
-
-
-   private Level[] includedLevels() {
-      return configureIncludedLevels();
-   }
-
-   /**
-    * Override this method to configure {@link Level} values
-    * that will be used.
-    * 
-    * @return
-    */
-   protected Level[] configureIncludedLevels() {
-      return Level.values();
-   }
+    /**
+     * Override this method to add a custom {@link MessageResolverStrategy}
+     *
+     * @return
+     */
+    protected MessageResolverStrategy configureMessageResolverStrategy() {
+        return new MessageSourceMessageResolverAdapter(this.messageSource);
+    }
 
 
-   private CssClassesByLevel cssClassesByLevel() {
-      final CssClassesByLevel cssClassesByLevel= new CssClassesByLevel();
-      configureCssClassesByLevel(cssClassesByLevel);
-      return cssClassesByLevel;
-   }
+    private Level[] includedLevels() {
+        return configureIncludedLevels();
+    }
 
-   /**
-    * Override this method to configure custom css classes in each {@link Level}
-    * 
-    * @param cssClassesByLevel
-    */
-   protected void configureCssClassesByLevel(CssClassesByLevel cssClassesByLevel) {
+    /**
+     * Override this method to configure {@link Level} values
+     * that will be used.
+     *
+     * @return
+     */
+    protected Level[] configureIncludedLevels() {
+        return Level.values();
+    }
 
-   }
+
+    private CssClassesByLevel cssClassesByLevel() {
+        final CssClassesByLevel cssClassesByLevel = new CssClassesByLevel();
+        configureCssClassesByLevel(cssClassesByLevel);
+        return cssClassesByLevel;
+    }
+
+    /**
+     * Override this method to configure custom css classes in each {@link Level}
+     *
+     * @param cssClassesByLevel
+     */
+    protected void configureCssClassesByLevel(CssClassesByLevel cssClassesByLevel) {
+
+    }
 }
