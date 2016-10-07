@@ -1,15 +1,12 @@
 package es.sandbox.ui.messages;
 
-import static org.fest.assertions.api.Assertions.assertThat;
 import nl.jqno.equalsverifier.EqualsVerifier;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import es.sandbox.ui.messages.CssClassesByLevel;
-import es.sandbox.ui.messages.Level;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 
 @RunWith(Enclosed.class)
@@ -124,7 +121,7 @@ public class CssClassesByLevelSpecs {
 
       @Test
       public void it_should_respect_the_equals_and_hashcode_contracts() {
-         EqualsVerifier.forClass(CssClassesByLevel.class).allFieldsShouldBeUsed().verify();
+         EqualsVerifier.forClass(CssClassesByLevel.class).verify();
       }
    }
 

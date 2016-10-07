@@ -1,14 +1,14 @@
 package es.sandbox.ui.messages;
 
-import static es.sandbox.ui.messages.MessageFixturer.fixturer;
-import static org.fest.assertions.api.Assertions.assertThat;
 import nl.jqno.equalsverifier.EqualsVerifier;
-
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+
+import static es.sandbox.ui.messages.MessageFixturer.fixturer;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 @RunWith(Enclosed.class)
 public class MessageEqualitySpecs {
@@ -24,7 +24,6 @@ public class MessageEqualitySpecs {
       public void should_respect_equals_and_hashcode_contract() {
          EqualsVerifier.
                forClass(Message.class)
-               .allFieldsShouldBeUsed()
                .verify();
       }
    }
