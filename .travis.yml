@@ -2,8 +2,8 @@ language: java
 
 jdk:
   - oraclejdk7
-  - oraclejdk8
   - openjdk7
+  - oraclejdk8
 
 after_success: ./src/main/scripts/build/cobertura.sh
 

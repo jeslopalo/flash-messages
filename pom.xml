@@ -43,38 +43,39 @@
                 <module>flash-messages-showcase</module>
             </modules>
         </profile>
+
+        <profile>
+            <id>coveralls</id>
+            <activation>
+                <property>
+                    <name>coveralls</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <!-- Cobertura -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>cobertura-maven-plugin</artifactId>
+                        <version>2.7</version>
+                        <configuration>
+                            <format>xml</format>
+                            <maxmem>256m</maxmem>
+                            <!-- aggregated reports for multi-module projects -->
+                            <aggregate>true</aggregate>
+                            <check/>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.eluder.coveralls</groupId>
+                        <artifactId>coveralls-maven-plugin</artifactId>
+                        <version>4.2.0</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
-
-    <build>
-        <plugins>
-            <!-- Cobertura -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <format>xml</format>
-                    <maxmem>256m</maxmem>
-                    <!-- aggregated reports for multi-module projects -->
-                    <aggregate>true</aggregate>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>2.2.0</version>
-                <configuration>
-                    <coberturaFile>flash-messages-parent/target/site/cobertura/coverage.xml</coberturaFile>
-                    <coverageFile>flash-messages-parent/target/site/cobertura/coverage.xml</coverageFile>
-                    <coverallsFile>flash-messages-parent/target/coveralls.json</coverallsFile>
-                    <serviceName>travis-ci</serviceName>
-                    <!-- If used as a standalone maven build or with any continuous
-                       integration server other than Travis CI -->
-                    <!-- <repoToken>yourcoverallsprojectrepositorytoken</repoToken> -->
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
