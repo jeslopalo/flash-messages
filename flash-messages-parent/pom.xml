@@ -238,35 +238,7 @@
                         <autoVersionSubmodules>true</autoVersionSubmodules>
                     </configuration>
                 </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-pmd-plugin</artifactId>
-                    <version>3.6</version>
-                    <configuration>
-                        <linkXref>true</linkXref>
-                        <sourceEncoding>UTF-8</sourceEncoding>
-                        <minimumTokens>100</minimumTokens>
-                        <targetJdk>${java.version}</targetJdk>
-                        <excludes>
-                            <!-- <exclude>**/generated/*Bean.java</exclude> -->
-                        </excludes>
-                        <excludeRoots>
-                            <excludeRoot>target/**</excludeRoot>
-                        </excludeRoots>
-
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>pmd</goal>
-                                    <goal>check</goal>
-                                </goals>
-                                <phase>package</phase>
-                            </execution>
-                        </executions>
-                    </configuration>
-                </plugin>
-
+                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
