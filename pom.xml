@@ -38,13 +38,6 @@
 
     <profiles>
         <profile>
-            <id>include-showcase</id>
-            <modules>
-                <module>flash-messages-showcase</module>
-            </modules>
-        </profile>
-
-        <profile>
             <id>coveralls</id>
             <activation>
                 <property>
