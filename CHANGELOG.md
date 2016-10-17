@@ -1,7 +1,14 @@
-### v0.2.1 (2016-10-17) - Fix bintray's distribution repository id
+### v0.2.2 (2016-10-17) - Switch off doclint with java8
+
+  * [352dd2e] Switch off java8's doclint (temporal)
+  * [e566744] Bump version to 0.2.2
+
+
+### vv0.2.1 (2016-10-17) - Fix bintray's distribution repository id
 
   * [d5e7714] Fix distributionManagement repository id
   * [cdb26e0] Bump version to 0.2.1
+  * [1edce90] Update CHANGELOG.md with 0.2.1 changes
 
 
 ### vv0.2.0 (2016-10-17) - Continuous integration & publishment configuration
