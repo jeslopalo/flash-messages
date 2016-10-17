@@ -5,19 +5,36 @@ jdk:
   - openjdk7
   - oraclejdk8
 
-after_success: ./src/main/scripts/build/cobertura.sh
-
 env:
   global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "kabyZRSGs4f+b9ByMdccPyeFdj3uDWaC9Q+xukeANUpCK1dRIJTsnZCVAuoi62fD5Vgrxn0OojaxNh3Xa8UnP1y/kgNHE69tsklFhcbnrgRLkvUmH9DEU4MPqG1jARUiyFPihoe1xj7yPG+hDGHHXHrOkur54PeLVXh8V6gmJx0="
+  # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+  #   via the "travis encrypt" command using the project repo's public key
+  - secure: "kabyZRSGs4f+b9ByMdccPyeFdj3uDWaC9Q+xukeANUpCK1dRIJTsnZCVAuoi62fD5Vgrxn0OojaxNh3Xa8UnP1y/kgNHE69tsklFhcbnrgRLkvUmH9DEU4MPqG1jARUiyFPihoe1xj7yPG+hDGHHXHrOkur54PeLVXh8V6gmJx0="
+  - BINTRAY_USERNAME="jeslopalo"
+
+after_success: ./src/main/scripts/build/cobertura.sh
+
+
+before_deploy: echo "$(date +%Y-%m-%d) - Deploying to bintray"
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: mvn deploy -P release -Dmaven.test.skip=true --batch-mode --settings .travis.settings.xml
+  on:
+    tags: true
+    jdk: oraclejdk8
+
+after_deploy: echo "$(date +%Y-%m-%d) - Artifact has been deployed into bintray!"
+
 
 addons:
+  code_climate:
+    repo_token: 106965e34ca71a66acd922be52dd355bda3538a089842e8dad95d2f75683daae
+
   coverity_scan:
     project:
       name: "jeslopalo/flash-messages"
-      description: "A simple way to send &amp; show flash messages"
     notification_email: jeslopalo@sandbox.es
     build_command_prepend: mvn clean
     build_command: mvn package

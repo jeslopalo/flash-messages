@@ -8,7 +8,7 @@ _An easy way to send &amp; show *flash messages*_
 |Coverage |[![Coverage Status](https://coveralls.io/repos/jeslopalo/flash-messages/badge.png?branch=master)](https://coveralls.io/r/jeslopalo/flash-messages?branch=master)|
 |Coverity Scan |[![Coverity Scan Build Status](https://scan.coverity.com/projects/2142/badge.svg?branch=master)](https://scan.coverity.com/projects/2142?branch=master)|
 |Project|[![Project Stats](https://www.ohloh.net/p/flash-messages/widgets/project_thin_badge.gif)](https://www.ohloh.net/p/flash-messages) |
-
+|Code climate|[![Code Climate](https://codeclimate.com/github/jeslopalo/flash-messages/badges/gpa.svg)](https://codeclimate.com/github/jeslopalo/flash-messages)<br/>[![Test Coverage](https://codeclimate.com/github/jeslopalo/flash-messages/badges/coverage.svg)](https://codeclimate.com/github/jeslopalo/flash-messages/coverage)<br/>[![Issue Count](https://codeclimate.com/github/jeslopalo/flash-messages/badges/issue_count.svg)](https://codeclimate.com/github/jeslopalo/flash-messages)|
 # Flash!
 When applying the [Post/Redirect/Get](http://kcy.me/15fxw) pattern in web application development, I run always into the same problem: __how to communicate the result to the user after the redirection__.
 
