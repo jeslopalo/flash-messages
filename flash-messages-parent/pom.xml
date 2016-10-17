@@ -4,7 +4,7 @@
 
     <groupId>es.sandbox.ui.messages</groupId>
     <artifactId>flash-messages-parent</artifactId>
-    <version>0.2.1</version>
+    <version>0.2.2</version>
     <packaging>pom</packaging>
 
     <name>Flash Messages POM</name>
@@ -289,6 +289,16 @@
         </profile>
 
         <profile>
+            <id>disable-java8-doclint</id>
+            <activation>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <additionalparam>-Xdoclint:none</additionalparam>
+            </properties>
+        </profile>
+
+        <profile>
             <id>release</id>
             <build>
                 <plugins>
@@ -316,6 +326,9 @@
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
+                                <configuration>
+                                    <quiet>true</quiet>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>
