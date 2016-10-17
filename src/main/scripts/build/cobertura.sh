@@ -3,5 +3,4 @@
 echo "Working directory: [`pwd`]"
 
 echo "Generating cobertura reports to be submited to coverall service"
-mvn test cobertura:cobertura coveralls:cobertura $1
-
+mvn cobertura:cobertura coveralls:report -P coveralls $1

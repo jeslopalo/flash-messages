@@ -1,10 +1,8 @@
 package es.sandbox.ui.messages.spring.config.annotation;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import es.sandbox.ui.messages.spring.config.FlashMessagesHandlerInterceptor;
+import es.sandbox.ui.messages.spring.config.FlashMessagesMethodArgumentResolver;
+import es.sandbox.ui.messages.spring.config.annotation.FlashMessagesConfigurationSupportSpecs.CustomFlashMessagesConfigurationSupport;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,78 +20,79 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.handler.HandlerExceptionResolverComposite;
 import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 
-import es.sandbox.ui.messages.spring.config.FlashMessagesHandlerInterceptor;
-import es.sandbox.ui.messages.spring.config.FlashMessagesMethodArgumentResolver;
-import es.sandbox.ui.messages.spring.config.annotation.FlashMessagesConfigurationSupportSpecs.CustomFlashMessagesConfigurationSupport;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.fest.assertions.api.Assertions.assertThat;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= CustomFlashMessagesConfigurationSupport.class)
+@ContextConfiguration(classes = CustomFlashMessagesConfigurationSupport.class)
 @WebAppConfiguration
 public class FlashMessagesConfigurationSupportSpecs
-      implements ApplicationContextAware {
+    implements ApplicationContextAware {
 
-   private ApplicationContext context;
-   private CustomFlashMessagesConfigurationSupport messagesConfiguration;
-
-
-   @Override
-   public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-      this.context= applicationContext;
-   }
-
-   @Before
-   public void setup() {
-      this.messagesConfiguration= this.context.getBean(CustomFlashMessagesConfigurationSupport.class);
-   }
-
-   @Test
-   public void it_should_add_message_handler_interceptor() {
-      final SpyInterceptorRegistry registry= new SpyInterceptorRegistry();
-
-      this.messagesConfiguration.addInterceptors(registry);
-
-      assertThat(registry.containsMessagesHandlerInterceptor()).isTrue();
-   }
-
-   @Test
-   public void it_should_add_messages_method_argument_resolver() {
-      final List<HandlerMethodArgumentResolver> resolvers= new ArrayList<HandlerMethodArgumentResolver>();
-
-      this.messagesConfiguration.addArgumentResolvers(resolvers);
-
-      assertThat(resolvers.get(0)).isInstanceOf(FlashMessagesMethodArgumentResolver.class);
-   }
-
-   @Test
-   public void it_should_add_exception_argument_resolver() {
-      final HandlerExceptionResolver handlerExceptionResolver= this.context.getBean(HandlerExceptionResolver.class);
-
-      assertThat(handlerExceptionResolver).isInstanceOf(HandlerExceptionResolverComposite.class);
-      for (final HandlerExceptionResolver resolver : ((HandlerExceptionResolverComposite) handlerExceptionResolver).getExceptionResolvers()) {
-         if (resolver instanceof ExceptionHandlerExceptionResolver) {
-            assertThat(((ExceptionHandlerExceptionResolver) resolver).getArgumentResolvers().getResolvers().get(0))
-                  .isInstanceOf(FlashMessagesMethodArgumentResolver.class);
-         }
-      }
-   }
+    private ApplicationContext context;
+    private CustomFlashMessagesConfigurationSupport messagesConfiguration;
 
 
-   @Configuration
-   @Import(FixtureFlashMessagesContextConfiguration.class)
-   static class CustomFlashMessagesConfigurationSupport
-         extends FlashMessagesConfigurationSupport {
-   }
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
+    }
 
-   static class SpyInterceptorRegistry extends InterceptorRegistry {
+    @Before
+    public void setup() {
+        this.messagesConfiguration = this.context.getBean(CustomFlashMessagesConfigurationSupport.class);
+    }
 
-      public boolean containsMessagesHandlerInterceptor() {
-         for (final Object interceptor : getInterceptors()) {
-            if (interceptor instanceof FlashMessagesHandlerInterceptor) {
-               return true;
+    @Test
+    public void it_should_add_message_handler_interceptor() {
+        final SpyInterceptorRegistry registry = new SpyInterceptorRegistry();
+
+        this.messagesConfiguration.addInterceptors(registry);
+
+        assertThat(registry.containsMessagesHandlerInterceptor()).isTrue();
+    }
+
+    @Test
+    public void it_should_add_messages_method_argument_resolver() {
+        final List<HandlerMethodArgumentResolver> resolvers = new ArrayList<HandlerMethodArgumentResolver>();
+
+        this.messagesConfiguration.addArgumentResolvers(resolvers);
+
+        assertThat(resolvers.get(0)).isInstanceOf(FlashMessagesMethodArgumentResolver.class);
+    }
+
+    @Test
+    public void it_should_add_exception_argument_resolver() {
+        final HandlerExceptionResolver handlerExceptionResolver = this.context.getBean(HandlerExceptionResolver.class);
+
+        assertThat(handlerExceptionResolver).isInstanceOf(HandlerExceptionResolverComposite.class);
+        for (final HandlerExceptionResolver resolver : ((HandlerExceptionResolverComposite) handlerExceptionResolver).getExceptionResolvers()) {
+            if (resolver instanceof ExceptionHandlerExceptionResolver) {
+                assertThat(((ExceptionHandlerExceptionResolver) resolver).getArgumentResolvers().getResolvers().get(0))
+                    .isInstanceOf(FlashMessagesMethodArgumentResolver.class);
             }
-         }
-         return false;
-      }
-   }
+        }
+    }
+
+
+    @Configuration
+    @Import(FixtureFlashMessagesContextConfiguration.class)
+    static class CustomFlashMessagesConfigurationSupport
+        extends FlashMessagesConfigurationSupport {
+    }
+
+    static class SpyInterceptorRegistry extends InterceptorRegistry {
+
+        public boolean containsMessagesHandlerInterceptor() {
+            for (final Object interceptor : getInterceptors()) {
+                if (interceptor instanceof FlashMessagesHandlerInterceptor) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }

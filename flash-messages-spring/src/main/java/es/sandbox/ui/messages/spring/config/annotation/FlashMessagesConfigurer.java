@@ -8,24 +8,24 @@ import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
 
 public interface FlashMessagesConfigurer {
 
-	/**
-	 * @return
-	 */
-	StoreAccessorFactory configureMessagesStoreAccessorFactory();
+    /**
+     * @return
+     */
+    StoreAccessorFactory configureMessagesStoreAccessorFactory();
 
-	/**
-	 * @param messageSource
-	 * @return
-	 */
-	MessageResolverStrategy configureMessageResolverStrategy();
+    /**
+     * @param messageSource
+     * @return
+     */
+    MessageResolverStrategy configureMessageResolverStrategy();
 
-	/**
-	 * @return
-	 */
-	Level[] configureIncludedLevels();
+    /**
+     * @return
+     */
+    Level[] configureIncludedLevels();
 
-	/**
-	 * @param cssClasses
-	 */
-	void configureCssClassesByLevel(CssClassesByLevel cssClasses);
+    /**
+     * @param cssClasses
+     */
+    void configureCssClassesByLevel(CssClassesByLevel cssClasses);
 }
