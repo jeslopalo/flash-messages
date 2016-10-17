@@ -48,8 +48,8 @@
 
     <distributionManagement>
         <repository>
-            <id>bintray</id>
-            <url>https://api.bintray.com/maven/jeslopalo/sandbox-maven-repository/flash-messages</url>
+            <id>sandbox-maven-repository</id>
+            <url>https://api.bintray.com/maven/jeslopalo/sandbox-maven-repository/flash-messages/;publish=1</url>
         </repository>
     </distributionManagement>
 
