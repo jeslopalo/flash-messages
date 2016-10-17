@@ -1,0 +1,21 @@
+engines:
+  checkstyle:
+    enabled: true
+    channel: "beta"
+  pmd:
+    enabled: true
+    channel: "beta"
+  fixme:
+    enabled: true
+  csslint:
+    enabled: true
+  markdownlint:
+    enabled: true
+  shellcheck:
+    enabled: true
+
+ratings:
+  paths:
+  - "**.java"
+  - "**.css"
+exclude_paths: []
