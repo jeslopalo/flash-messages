@@ -1,4 +1,10 @@
-### v0.2.0 (2016-10-17) - Continuous integration & publishment configuration
+### v0.2.1 (2016-10-17) - Fix bintray's distribution repository id
+
+  * [d5e7714] Fix distributionManagement repository id
+  * [cdb26e0] Bump version to 0.2.1
+
+
+### vv0.2.0 (2016-10-17) - Continuous integration & publishment configuration
 
   * [aba7be0] [maven-release-plugin] prepare for next development iteration
   * [6b20c92] Add intelliJ config files to .gitignore
@@ -18,6 +24,7 @@
   * [e87ec73] Modify version in README.md
   * [9f996ef] Bump version to 0.2.0
   * [431ead0] Add codeclimate configuration
+  * [b6c2e69] Update CHANGELOG.md with 0.2.0 changes
 
 
 ### vv0.1.4 (2014-11-13) - [maven-release-plugin] copy for tag v0.1.4
