@@ -1,7 +1,24 @@
-### v0.2.2 (2016-10-17) - Switch off doclint with java8
+### v0.2.3 (2016-10-29) - Fix some codeclimate issues
+
+  * [ad29b01] Fix cobertura.sh issues
+  * [5a5722f] Fix README.md issues
+  * [f222792] Fix some codeclimante issues
+  * [44371c7] Fix javadoc for Flash
+  * [ae838fb] Exclude rules in codeclimate
+  * [9186c04] Fix 'pwd' command invocation from cobertura.sh
+  * [77316e7] Try to disable complete checks and not single issues
+  * [320e8e9] Add an extra white line before heading
+  * [740f7f8] Exclude more checks for codeclimate analysis
+  * [b6064ba] Fix codeclimate issues
+  * [750f5d1] Disable a codeclimate check
+  * [15dae76] Bump version to 0.2.3
+
+
+### vv0.2.2 (2016-10-17) - Switch off doclint with java8
 
   * [352dd2e] Switch off java8's doclint (temporal)
   * [e566744] Bump version to 0.2.2
+  * [be5954c] Update CHANGELOG.md with 0.2.2 changes
 
 
 ### vv0.2.1 (2016-10-17) - Fix bintray's distribution repository id

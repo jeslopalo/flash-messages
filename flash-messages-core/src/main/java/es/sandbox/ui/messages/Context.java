@@ -31,7 +31,8 @@ public class Context {
      * @param strategy
      * @throws NullPointerException
      */
-    Context(StoreAccessorFactory factory, MessageResolverStrategy strategy) throws NullPointerException {
+    Context(StoreAccessorFactory factory, MessageResolverStrategy strategy)
+        throws NullPointerException {
 
         if (factory == null) {
             throw new NullPointerException("StoreAccessorFactory can't not be null");
@@ -132,10 +133,11 @@ public class Context {
 
     @Override
     public String toString() {
-        return String.format("Context [factory=%s, messageResolver=%s, levels=%s, cssClassesByLevel=%s]",
-            this.factory.getClass().getSimpleName(),
-            this.messageResolver,
-            this.levels,
-            this.cssClassesByLevel);
+        return
+            String.format("Context [factory=%s, messageResolver=%s, levels=%s, cssClassesByLevel=%s]",
+                this.factory.getClass().getSimpleName(),
+                this.messageResolver,
+                this.levels,
+                this.cssClassesByLevel);
     }
 }

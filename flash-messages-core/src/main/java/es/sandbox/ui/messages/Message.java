@@ -148,6 +148,7 @@ public final class Message
      */
     @Override
     public String toString() {
-        return String.format("[(%1$tF %1$tT) %2$s: %3$s]", this.timestamp.toDate(), this.level, this.text);
+        return String.format("[(%1$tF %1$tT) %2$s: %3$s]",
+            this.timestamp.toDate(), this.level, this.text);
     }
 }

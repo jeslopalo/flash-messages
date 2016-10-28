@@ -1,16 +1,34 @@
 engines:
+
   checkstyle:
     enabled: true
     channel: "beta"
+    checks:
+      com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck:
+        enabled: false
+
   pmd:
     enabled: true
     channel: "beta"
+
   fixme:
     enabled: true
+
   csslint:
     enabled: true
+
   markdownlint:
     enabled: true
+    checks:
+      MD026:
+        enabled: false
+      MD014:
+        enabled: false
+      MD013:
+        enabled: false
+    exclude_fingerprints:
+      - ada55f17fa4a11ae8c12260832bb30ee
+
   shellcheck:
     enabled: true
 
@@ -18,4 +36,5 @@ ratings:
   paths:
   - "**.java"
   - "**.css"
+  - "**.md"
 exclude_paths: []
