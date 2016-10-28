@@ -4,20 +4,17 @@ import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
 
 
 /**
- * <p>
  * Allow controllers to add flash messages in the view.
- * <p>
  * Some examples:
- * <p>
- * <p>
  * <pre>
  * flash.success(&quot;i18n.message.code&quot;);
- * flash.error(&quot;i18n.message.code&quot;, 1L, new Date());
- * flash.warning(&quot;i18n.message.code&quot;, Arguments.text(&quot;i18n.argument.code&quot;));
- * flash.info(&quot;i18n.message.code&quot;, Arguments.link(&quot;/path/to/somewhere&quot;).title(&quot;i18n.argument.code&quot;));
+ * flash.error(&quot;i18n.message.code&quot;,
+ *              1L, new Date());
+ * flash.warning(&quot;i18n.message.code&quot;,
+ *              Arguments.text(&quot;i18n.argument.code&quot;));
+ * flash.info(&quot;i18n.message.code&quot;,
+ *              Arguments.link(&quot;/path/to/somewhere&quot;).title(&quot;i18n.argument.code&quot;));
  * </pre>
- * <p>
- * <br/>
  *
  * @author jeslopalo
  * @since v0.1

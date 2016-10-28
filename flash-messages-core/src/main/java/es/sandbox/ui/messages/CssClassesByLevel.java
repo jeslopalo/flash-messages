@@ -29,7 +29,10 @@ public final class CssClassesByLevel {
     }
 
     private static String cssClass(Level level) {
-        return String.format("%s %s-%s", DEFAULT_MAIN_CSS_CLASS, DEFAULT_PREFIX_CSS_CLASSES, level.name().toLowerCase());
+        return String.format("%s %s-%s",
+            DEFAULT_MAIN_CSS_CLASS,
+            DEFAULT_PREFIX_CSS_CLASSES,
+            level.name().toLowerCase());
     }
 
     /**
