@@ -1,10 +1,18 @@
 engines:
+
   checkstyle:
     enabled: true
     channel: "beta"
+    exclude_fingerprints:
+    - f7ba0eb8eee1518009558955c1dd0632
+    - 636e94c798476482e7426bd75e7b9e4d
+    - a8e93a554854cc01509a47dcadee2c3a
+    - 38816835b617e710ef53dec9ccc5dfd7
+
   pmd:
     enabled: true
     channel: "beta"
+
   fixme:
     enabled: true
   csslint:
