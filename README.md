@@ -1,4 +1,3 @@
-
 # flash-messages
 
 _An easy way to send &amp; show *flash messages*_
@@ -12,7 +11,7 @@ _An easy way to send &amp; show *flash messages*_
 |Coverity Scan |[![Coverity Scan Build Status](https://scan.coverity.com/projects/2142/badge.svg?branch=master)](https://scan.coverity.com/projects/2142?branch=master)|
 |Code climate|[![Code Climate](https://codeclimate.com/github/jeslopalo/flash-messages/badges/gpa.svg)](https://codeclimate.com/github/jeslopalo/flash-messages)<br/>[![Test Coverage](https://codeclimate.com/github/jeslopalo/flash-messages/badges/coverage.svg)](https://codeclimate.com/github/jeslopalo/flash-messages/coverage)<br/>[![Issue Count](https://codeclimate.com/github/jeslopalo/flash-messages/badges/issue_count.svg)](https://codeclimate.com/github/jeslopalo/flash-messages)|
 
-# Flash!
+## Flash!
 
 When applying the [Post/Redirect/Get](http://kcy.me/15fxw) pattern in web application development, I run always into the same problem: __how to communicate the result to the user after the redirection__.
 
@@ -20,7 +19,7 @@ While it is a known problem and it has been resolved in other platforms (like Ru
 
 *flash-messages* is an easy way to communicate flash messages after a redirection in Java web applications.
 
-Today, you can use *flash-messages* in applications which use **spring-mvc** as web framework and **Jstl** to render views. 
+Today, you can use *flash-messages* in applications which use **spring-mvc** as web framework and **Jstl** to render views.
 
 In future releases, it will be possible to use it in **JavaEE** applications and possibly with another view technologies like **Thymeleaf** or **Freemarker**.
 
@@ -29,12 +28,11 @@ Let's start!
 ## Features
 
 - Seamless integration with ```@RequestMapping``` and ```@ExceptionHandler``` methods in the **spring-mvc** framework ```@Controller```'s
-- Different levels of messages (ie. __SUCCESS__, __INFO__, __WARNING__, __ERROR__) 
+- Different levels of messages (ie. __SUCCESS__, __INFO__, __WARNING__, __ERROR__)
 - Resolution of __i18n__ messages with arguments
-- Resolution of __i18n__ arguments (ie Text, Link) 
+- Resolution of __i18n__ arguments (ie Text, Link)
 - Easy integration with the **Twitter Bootstrap** alerts
 
- 
 ## Getting started
 
 ### Get it into your project
@@ -112,16 +110,16 @@ In order to obtain the default configuration, just add ```@EnableFlashMessages``
 
 ```java
 import es.sandbox.ui.messages.spring.config.annotation.EnableFlashMessages;
-   
+
 @Configuration
 @EnableFlashMessages
 @EnableWebMvc
 public class WebMvcConfigurer {
     ...
     @Bean
-    public MessageSource messageSource() {      
+    public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource= new ReloadableResourceBundleMessageSource();
-        messageSource.setBasenames("WEB-INF/i18n/messages");        
+        messageSource.setBasenames("WEB-INF/i18n/messages");
         return messageSource;
     }
     ...
@@ -143,7 +141,7 @@ import es.sandbox.ui.messages.spring.config.annotation.FlashMessagesConfigurerAd
 public class CustomFlashMessagesConfigurer extends FlashMessagesConfigurerAdapter {
 
     /**
-     * Sets the styles of flash-messages to be compatible 
+     * Sets the styles of flash-messages to be compatible
      * with twitter bootstrap alerts
      */
      @Override
@@ -162,16 +160,16 @@ In order to write messages, just declare an argument of type ```Flash``` in the 
 ```java
 @RequestMapping(value="/target", method= RequestMethod.POST)
 String post(Flash flash, @ModelAttribute FormBackingBean form, BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {        
+    if (bindingResult.hasErrors()) {
         return "form";
     }
-    
+
     Result result= this.service.doSomething(form.getValue());
     if (result.isSuccessful()) {
         flash.success("messages.success-after-post", result.getValue());
         return "redirect:/successful-target-after-post";
     }
-    
+
     flash.error("messages.error-in-service", form.getValue());
     return "redirect:/error-target-after-post";
 }

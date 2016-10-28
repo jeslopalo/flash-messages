@@ -22,6 +22,10 @@ engines:
     checks:
       MD014:
         enabled: false
+      MD013:
+        enabled: false
+    exclude_fingerprints:
+      - ada55f17fa4a11ae8c12260832bb30ee
 
   shellcheck:
     enabled: true
@@ -30,4 +34,5 @@ ratings:
   paths:
   - "**.java"
   - "**.css"
+  - "**.md"
 exclude_paths: []
