@@ -4,18 +4,25 @@ engines:
     enabled: true
     channel: "beta"
     checks:
-      MD014:
+      com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck:
         enabled: false
+
   pmd:
     enabled: true
     channel: "beta"
 
   fixme:
     enabled: true
+
   csslint:
     enabled: true
+
   markdownlint:
     enabled: true
+    checks:
+      MD014:
+        enabled: false
+
   shellcheck:
     enabled: true
 
