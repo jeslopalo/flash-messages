@@ -33,6 +33,7 @@ Let's start!
 - Resolution of __i18n__ messages with arguments
 - Resolution of __i18n__ arguments (ie Text, Link) 
 - Easy integration with the **Twitter Bootstrap** alerts
+
  
 ## Getting started
 
