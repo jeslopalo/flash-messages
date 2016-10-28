@@ -20,6 +20,8 @@ engines:
   markdownlint:
     enabled: true
     checks:
+      MD026:
+        enabled: false
       MD014:
         enabled: false
       MD013:
