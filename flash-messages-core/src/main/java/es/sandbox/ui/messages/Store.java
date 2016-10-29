@@ -1,6 +1,3 @@
-/**
- *
- */
 package es.sandbox.ui.messages;
 
 import java.io.Serializable;
