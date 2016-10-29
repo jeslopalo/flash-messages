@@ -1,10 +1,11 @@
-/**
- *
- */
 package es.sandbox.ui.messages;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.List;
 
 
 /**

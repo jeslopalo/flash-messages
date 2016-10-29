@@ -1,3 +1,12 @@
+### v0.2.4 (2016-10-29) - Fix some codeclimate issues
+
+  * [faded8e] Remove usage of wildcards in imports
+  * [f31f4bc] Fix codeclimate issues
+  * [0d7958a] Deactivate some codeclimate checks
+  * [249b200] Remove documentation duplication between README.md and sandbox.es
+  * [32fc0d9] Bump version to 0.2.4
+
+
 ### v0.2.3 (2016-10-29) - Fix some codeclimate issues
 
   * [ad29b01] Fix cobertura.sh issues
@@ -12,6 +21,7 @@
   * [b6064ba] Fix codeclimate issues
   * [750f5d1] Disable a codeclimate check
   * [15dae76] Bump version to 0.2.3
+  * [368f9da] Update CHANGELOG.md with 0.2.3 changes
 
 
 ### vv0.2.2 (2016-10-17) - Switch off doclint with java8

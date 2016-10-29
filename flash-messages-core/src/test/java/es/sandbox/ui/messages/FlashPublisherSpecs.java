@@ -7,7 +7,9 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import static es.sandbox.test.assertion.ArgumentAssertions.*;
+import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
+import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
+import static es.sandbox.test.assertion.ArgumentAssertions.assertThatMethod;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 

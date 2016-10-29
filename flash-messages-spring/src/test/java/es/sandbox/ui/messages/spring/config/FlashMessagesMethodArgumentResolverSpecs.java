@@ -1,7 +1,11 @@
 package es.sandbox.ui.messages.spring.config;
 
 import es.sandbox.spring.fixture.MockedSpringHttpServletRequest;
-import es.sandbox.ui.messages.*;
+import es.sandbox.ui.messages.Context;
+import es.sandbox.ui.messages.ContextBuilder;
+import es.sandbox.ui.messages.Flash;
+import es.sandbox.ui.messages.Store;
+import es.sandbox.ui.messages.StoreNotFoundException;
 import es.sandbox.ui.messages.spring.scope.flash.FlashScopeStoreAccessorFactory;
 import org.junit.Before;
 import org.junit.Test;

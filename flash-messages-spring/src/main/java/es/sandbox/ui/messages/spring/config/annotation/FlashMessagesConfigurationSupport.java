@@ -1,6 +1,10 @@
 package es.sandbox.ui.messages.spring.config.annotation;
 
-import es.sandbox.ui.messages.*;
+import es.sandbox.ui.messages.Context;
+import es.sandbox.ui.messages.ContextBuilder;
+import es.sandbox.ui.messages.CssClassesByLevel;
+import es.sandbox.ui.messages.Level;
+import es.sandbox.ui.messages.StoreAccessorFactory;
 import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
 import es.sandbox.ui.messages.spring.config.FlashMessagesHandlerInterceptor;
 import es.sandbox.ui.messages.spring.config.FlashMessagesMethodArgumentResolver;
