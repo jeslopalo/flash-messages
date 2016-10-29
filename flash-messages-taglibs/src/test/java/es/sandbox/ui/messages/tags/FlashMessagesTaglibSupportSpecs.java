@@ -1,7 +1,13 @@
 package es.sandbox.ui.messages.tags;
 
 import es.sandbox.test.utils.ReflectionInvoker;
-import es.sandbox.ui.messages.*;
+import es.sandbox.ui.messages.Context;
+import es.sandbox.ui.messages.ContextBuilder;
+import es.sandbox.ui.messages.CssClassesByLevel;
+import es.sandbox.ui.messages.Level;
+import es.sandbox.ui.messages.Store;
+import es.sandbox.ui.messages.StoreAccessor;
+import es.sandbox.ui.messages.StoreAccessorFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -12,7 +18,9 @@ import java.lang.reflect.InvocationTargetException;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.verify;
 
 @RunWith(Enclosed.class)
 public class FlashMessagesTaglibSupportSpecs {

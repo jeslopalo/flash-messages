@@ -14,7 +14,9 @@ import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 @RunWith(Enclosed.class)
 public class ContextSpecs {
