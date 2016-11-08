@@ -57,7 +57,7 @@ public class FlashMessagesMethodArgumentResolver
                                    NativeWebRequest webRequest,
                                    WebDataBinderFactory binderFactory) {
 
-        LOGGER.trace("Accesing to the messages publisher from the request");
+        LOGGER.trace("Accesing to the messages publisher from the request: {}", webRequest);
         return this.context.publisher(nativeRequest(webRequest));
     }
 
