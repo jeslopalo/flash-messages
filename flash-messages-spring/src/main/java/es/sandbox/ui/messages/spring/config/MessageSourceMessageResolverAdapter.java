@@ -28,6 +28,6 @@ public class MessageSourceMessageResolverAdapter
      */
     @Override
     public String resolve(String code, Object... arguments) {
-        return this.messageSourceAccessor.getMessage(code, arguments);
+        return this.messageSourceAccessor.getMessage(code, arguments, code);
     }
 }
