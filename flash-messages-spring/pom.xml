@@ -20,7 +20,8 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
-                <version>3.2.6.RELEASE</version>
+                <!-- It's only a minimum -->
+                <version>4.2.3.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -69,7 +70,7 @@
         <dependency>
             <!-- Servlet -->
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
         <dependency>

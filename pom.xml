@@ -34,5 +34,6 @@
         <module>flash-messages-taglibs</module>
         <module>flash-messages-spring</module>
         <module>flash-messages-bom</module>
+        <module>flash-messages-spring-boot-starter-taglibs</module>
     </modules>
 </project>
