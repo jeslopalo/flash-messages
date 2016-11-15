@@ -39,7 +39,7 @@ public class ResolvableFixtureSpecs {
         @Test
         public void it_should_be_created_with_null_arguments() {
             assertThat(ResolvableFixture.resolvable(EXAMPLE_CODE, (Object) null)).isNotNull();
-            assertThat(ResolvableFixture.resolvable(EXAMPLE_CODE, (Object) null, (Object) null)).isNotNull();
+            assertThat(ResolvableFixture.resolvable(EXAMPLE_CODE, null, null)).isNotNull();
         }
 
         @Test
