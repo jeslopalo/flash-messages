@@ -1,7 +1,15 @@
+### v1.0.2 (2016-11-17) - Fix the starter module to declare distribution management config
+
+  * [b6f92ac] Add distribution management configuration in pom
+  * [7d5c707] Add a useless class to force to generate javadoc jar
+  * [4d0b3e5] Bump version to 1.0.2
+
+
 ### v1.0.1 (2016-11-16) - Fix javax.servlet-api version
 
   * [2168ec9] Fix javax.servlet:javax.servlet version to exclude version 4.0
   * [f5323d3] Bump version to 1.0.1
+  * [90e935e] Update CHANGELOG.md with 1.0.1 changes
 
 
 ### v1.0.0 (2016-11-16) - New spring-boot starter module for flash-messages
