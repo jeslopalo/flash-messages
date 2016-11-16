@@ -1,3 +1,9 @@
+### v1.0.1 (2016-11-16) - Fix javax.servlet-api version
+
+  * [2168ec9] Fix javax.servlet:javax.servlet version to exclude version 4.0
+  * [f5323d3] Bump version to 1.0.1
+
+
 ### v1.0.0 (2016-11-16) - New spring-boot starter module for flash-messages
 
   * [b43ec37] Improve ContextBuilder log message
@@ -8,6 +14,7 @@
   * [aff19f8] Refactor autoconfiguration springboot classes
   * [33a4794] Add minor changes
   * [3e392b3] Bump version to 1.0.0
+  * [9bf3b5a] Update CHANGELOG.md with 1.0.0 changes
 
 
 ### v0.2.4 (2016-10-29) - Fix some codeclimate issues
