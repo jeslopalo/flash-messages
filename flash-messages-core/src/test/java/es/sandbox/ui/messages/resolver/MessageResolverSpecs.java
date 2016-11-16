@@ -37,7 +37,7 @@ public class MessageResolverSpecs {
 
         @Test(expected = NullPointerException.class)
         public void it_should_raise_an_exception_with_null_code() {
-            this.sut.resolve((String) null);
+            this.sut.resolve(null);
         }
 
         @Test(expected = IllegalArgumentException.class)

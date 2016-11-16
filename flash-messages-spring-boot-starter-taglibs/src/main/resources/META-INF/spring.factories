@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+es.sandbox.ui.messages.spring.autoconfigure.FlashMessagesAutoConfiguration

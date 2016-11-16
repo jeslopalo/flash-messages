@@ -15,12 +15,17 @@
     <name>Flash Messages for SpringMVC</name>
     <description>Flash messages integration for spring mvc framework</description>
 
+    <properties>
+        <spring-boot.version>1.3.0.RELEASE</spring-boot.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
-                <version>3.2.6.RELEASE</version>
+                <!-- It's only a minimum -->
+                <version>4.2.3.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -33,6 +38,21 @@
             <groupId>es.sandbox.ui.messages</groupId>
             <artifactId>flash-messages-core</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <!-- springboot dependencies to compile -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot.version}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <!-- http://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor -->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>${spring-boot.version}</version>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -69,7 +89,7 @@
         <dependency>
             <!-- Servlet -->
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
         <dependency>

@@ -1,7 +1,6 @@
-# flash-messages-spring
+# flash-messages-spring-boot-starter-taglibs
 
-
-*flash-messages* integration for spring mvc
+*flash-messages* spring-boot starter project.
 
 ## Requirements
 
