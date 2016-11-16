@@ -15,7 +15,7 @@
     <groupId>es.sandbox.ui.messages</groupId>
     <artifactId>flash-messages-spring-boot-starter-taglibs</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>Flash Messages spring boot starter</name>
     <description>Flash messages starter module for spring boot</description>
