@@ -10,6 +10,8 @@ import es.sandbox.ui.messages.spring.config.FlashMessagesHandlerInterceptor;
 import es.sandbox.ui.messages.spring.config.FlashMessagesMethodArgumentResolver;
 import es.sandbox.ui.messages.spring.config.MessageSourceMessageResolverAdapter;
 import es.sandbox.ui.messages.spring.scope.flash.FlashScopeStoreAccessorFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -32,32 +34,32 @@ public class FlashMessagesConfigurationSupport
     extends WebMvcConfigurerAdapter
     implements ApplicationContextAware {
 
+    private static final Logger LOG = LoggerFactory.getLogger(FlashMessagesConfigurationSupport.class);
+
     private HandlerExceptionResolver handlerExceptionResolver;
     private MessageSource messageSource;
     private ApplicationContext applicationContext;
 
+    private Context context;
 
-    @Autowired
-    void setHandlerExceptionResolver(HandlerExceptionResolver handlerExceptionResolver) {
-        this.handlerExceptionResolver = handlerExceptionResolver;
-    }
-
-    @Autowired
+    @Autowired(required = true)
     void setMessageSource(MessageSource messageSource) {
         this.messageSource = messageSource;
     }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        LOG.info("Using application context: {}", applicationContext);
         this.applicationContext = applicationContext;
     }
 
-
     /**
-     *
+     * adds a FlashMessagesMethodArgumentResolver to handlerExceptionResolver's argument resolvers
      */
     @PostConstruct
     private void configureMessagesExceptionArgumentResolvers() {
+        this.handlerExceptionResolver = this.applicationContext.getBean("handlerExceptionResolver", HandlerExceptionResolver.class);
+
         for (final HandlerExceptionResolver resolver : ((HandlerExceptionResolverComposite) this.handlerExceptionResolver).getExceptionResolvers()) {
             if (resolver instanceof ExceptionHandlerExceptionResolver) {
                 configureCustomHandlerMethodArgumentResolver((ExceptionHandlerExceptionResolver) resolver);
@@ -108,11 +110,14 @@ public class FlashMessagesConfigurationSupport
      */
     @Bean
     Context flashMessagesContext() {
-        return new ContextBuilder(configureFlashStoreAccessorFactory())
-            .withMessageResolverStrategy(configureMessageResolverStrategy())
-            .withLevels(includedLevels())
-            .withCssClassesByLevel(cssClassesByLevel())
-            .build();
+        if (this.context == null) {
+            this.context = new ContextBuilder(configureFlashStoreAccessorFactory())
+                .withMessageResolverStrategy(configureMessageResolverStrategy())
+                .withLevels(includedLevels())
+                .withCssClassesByLevel(cssClassesByLevel())
+                .build();
+        }
+        return this.context;
     }
 
 

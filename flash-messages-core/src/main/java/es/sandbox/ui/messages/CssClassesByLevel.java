@@ -12,9 +12,8 @@ public final class CssClassesByLevel {
 
     private final EnumMap<Level, String> cssClasses;
 
-
     /**
-     *
+     * CssClassesByLevel allows to configure what css class should be applied to every level
      */
     public CssClassesByLevel() {
         this.cssClasses = defaultLevelCssClasses();
@@ -58,6 +57,13 @@ public final class CssClassesByLevel {
      */
     public void put(Level level, String cssClass) {
         this.cssClasses.put(level, trimToEmpty(cssClass));
+    }
+
+    /**
+     * @param cssClassesByLevel
+     */
+    public void copyAll(CssClassesByLevel cssClassesByLevel) {
+        this.cssClasses.putAll(cssClassesByLevel.cssClasses);
     }
 
     /**

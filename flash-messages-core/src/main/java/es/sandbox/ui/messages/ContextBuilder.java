@@ -75,7 +75,7 @@ public class ContextBuilder {
         context.setCssClassesByLevel(this.cssClassesByLevel);
 
         LOGGER.info("The messages context has been built successfuly!");
-        LOGGER.debug("{}", context);
+        LOGGER.debug("Using flash-messages context: {}", context);
         return context;
     }
 }

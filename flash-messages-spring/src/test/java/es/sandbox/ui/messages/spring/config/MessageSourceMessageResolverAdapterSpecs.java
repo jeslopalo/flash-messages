@@ -52,7 +52,7 @@ public class MessageSourceMessageResolverAdapterSpecs {
 
             this.sut.resolve("code", 1L);
 
-            verify(this.messageSource).getMessage("code", new Object[]{1L}, LocaleContextHolder.getLocale());
+            verify(this.messageSource).getMessage("code", new Object[]{1L}, "code", LocaleContextHolder.getLocale());
         }
     }
 }
