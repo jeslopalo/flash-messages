@@ -1,3 +1,15 @@
+### v1.0.0 (2016-11-16) - New spring-boot starter module for flash-messages
+
+  * [b43ec37] Improve ContextBuilder log message
+  * [c35f586] Add copyAll() method to CssClassesByLevel
+  * [33ca05c] Trace the webrequest in FlashMessagesMethodArgumentResolver
+  * [10f5796] Add code as default message if code isn't found
+  * [9a899e2] Add 'flash-messages-spring-boot-starter-taglibs' module
+  * [aff19f8] Refactor autoconfiguration springboot classes
+  * [33a4794] Add minor changes
+  * [3e392b3] Bump version to 1.0.0
+
+
 ### v0.2.4 (2016-10-29) - Fix some codeclimate issues
 
   * [faded8e] Remove usage of wildcards in imports
@@ -5,6 +17,7 @@
   * [0d7958a] Deactivate some codeclimate checks
   * [249b200] Remove documentation duplication between README.md and sandbox.es
   * [32fc0d9] Bump version to 0.2.4
+  * [82ef459] Update CHANGELOG.md with 0.2.4 changes
 
 
 ### v0.2.3 (2016-10-29) - Fix some codeclimate issues
