@@ -4,7 +4,7 @@
 
     <groupId>es.sandbox.ui.messages</groupId>
     <artifactId>flash-messages-parent</artifactId>
-    <version>0.2.4</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
 
     <name>Flash Messages POM</name>
