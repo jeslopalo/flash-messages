@@ -13,7 +13,7 @@
     <packaging>jar</packaging>
 
     <name>Flash Messages Taglibs</name>
-    <description>A set of Taglibs to print messages in views</description>
+    <description>A set of Taglibs to print flash messages in views</description>
 
     <dependencies>
         <dependency>
