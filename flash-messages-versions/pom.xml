@@ -166,6 +166,12 @@
 
             <!-- Testing -->
             <dependency>
+                <groupId>es.sandbox.test</groupId>
+                <artifactId>sandbox-test-support</artifactId>
+                <version>[0,1)</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>4.12</version>
@@ -189,6 +195,7 @@
                 <version>2.1.6</version>
                 <scope>test</scope>
             </dependency>
+
         </dependencies>
 
     </dependencyManagement>
