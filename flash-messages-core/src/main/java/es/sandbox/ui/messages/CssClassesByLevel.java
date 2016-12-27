@@ -61,6 +61,7 @@ public final class CssClassesByLevel {
 
     /**
      * @param cssClassesByLevel
+     * @throws NullPointerException with null cssClassesByLevel
      */
     public void copyAll(CssClassesByLevel cssClassesByLevel) {
         this.cssClasses.putAll(cssClassesByLevel.cssClasses);
