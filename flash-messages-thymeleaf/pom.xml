@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>es.sandbox.ui.messages</groupId>
+        <artifactId>flash-messages-parent</artifactId>
+        <version>1.0.2</version>
+        <relativePath>../flash-messages-parent/pom.xml</relativePath>
+    </parent>
+
+    <artifactId>flash-messages-thymeleaf</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Flash messages integration for thymeleaf</name>
+    <description>Flash messages integration for thymeleaf</description>
+
+    <dependencies>
+        <dependency>
+            <!-- Flash messages core -->
+            <groupId>es.sandbox.ui.messages</groupId>
+            <artifactId>flash-messages-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <!-- Servlet api -->
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+    </dependencies>
+</project>

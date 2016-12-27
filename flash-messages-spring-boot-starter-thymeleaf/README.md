@@ -1,7 +1,7 @@
-flash-messages-spring
-=====================
+flash-messages-spring-boot-starter-thymeleaf
+============================================
 
-*flash-messages* integration for spring mvc
+Flash-messages' Spring-boot starter module
 
 ## Requirements
 

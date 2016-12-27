@@ -20,11 +20,6 @@
         <dependencies>
             <dependency>
                 <groupId>es.sandbox.ui.messages</groupId>
-                <artifactId>flash-messages-parent</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>es.sandbox.ui.messages</groupId>
                 <artifactId>flash-messages-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -40,7 +35,19 @@
             </dependency>
             <dependency>
                 <groupId>es.sandbox.ui.messages</groupId>
+                <artifactId>flash-messages-thymeleaf</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Flash messages spring-boot staters -->
+            <dependency>
+                <groupId>es.sandbox.ui.messages</groupId>
                 <artifactId>flash-messages-spring-boot-starter-taglibs</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>es.sandbox.ui.messages</groupId>
+                <artifactId>flash-messages-spring-boot-starter-thymeleaf</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

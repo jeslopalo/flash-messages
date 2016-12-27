@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+es.sandbox.ui.messages.spring.autoconfigure.FlashMessagesAutoConfiguration,\
+es.sandbox.ui.messages.spring.autoconfigure.FlashMessagesThymeleafDialectLoader
