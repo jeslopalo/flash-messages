@@ -8,10 +8,10 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Constructor;
 
 import static es.sandbox.spring.fixture.MockedSpringHttpServletRequest.detachedHttpServletRequest;
-import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
-import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
+import static es.sandbox.test.asserts.parameter.ParameterAssertions.assertThat;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 
@@ -31,17 +31,21 @@ public class FlashScopeStoreAccessorCreationSpecs {
         }
 
         @Test
-        public void it_should_fail_with_invalid_args() {
-            assertThatConstructor(FlashScopeStoreAccessor.class, arguments(HttpServletRequest.class, String.class))
-                .throwsNullPointerException()
-                .invokedWithNulls()
-                .invokedWith(null, "key")
-                .invokedWith(detachedHttpServletRequest(), null);
+        public void it_should_fail_with_invalid_args() throws NoSuchMethodException {
 
-            assertThatConstructor(FlashScopeStoreAccessor.class, arguments(HttpServletRequest.class, String.class))
-                .throwsIllegalArgumentException()
-                .invokedWith(detachedHttpServletRequest(), "")
-                .invokedWith(detachedHttpServletRequest(), " ");
+            final Constructor<FlashScopeStoreAccessor> constructor = FlashScopeStoreAccessor.class.getDeclaredConstructor(HttpServletRequest.class, String.class);
+            constructor.setAccessible(true);
+
+            assertThat(constructor)
+                .willThrowNullPointerException()
+                .whenInvokedWithNulls()
+                .whenInvokedWith(null, "key")
+                .whenInvokedWith(detachedHttpServletRequest(), null);
+
+            assertThat(constructor)
+                .willThrowIllegalArgumentException()
+                .whenInvokedWith(detachedHttpServletRequest(), "")
+                .whenInvokedWith(detachedHttpServletRequest(), " ");
         }
 
         @Test

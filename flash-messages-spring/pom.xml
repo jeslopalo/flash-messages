@@ -12,7 +12,6 @@
     <artifactId>flash-messages-spring</artifactId>
     <packaging>jar</packaging>
 
-    <name>Flash Messages for SpringMVC</name>
     <description>Flash messages integration for spring mvc framework</description>
 
     <dependencies>

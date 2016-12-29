@@ -9,11 +9,11 @@ import java.util.List;
 
 /**
  * <code>
- *  flash-messages.levels=ERROR,INFO
- *  flash-messages.error.cssClass="alert alert-error"
- *  flash-messages.warning.cssClass="alert alert-warning"
- *  flash-messages.info.cssClass="alert alert-info"
- *  flash-messages.success.cssClass="alert alert-success"
+ * flash-messages.levels=ERROR,INFO
+ * flash-messages.error.cssClass="alert alert-error"
+ * flash-messages.warning.cssClass="alert alert-warning"
+ * flash-messages.info.cssClass="alert alert-info"
+ * flash-messages.success.cssClass="alert alert-success"
  * </code>
  * Created by jeslopalo on 3/11/16.
  */
