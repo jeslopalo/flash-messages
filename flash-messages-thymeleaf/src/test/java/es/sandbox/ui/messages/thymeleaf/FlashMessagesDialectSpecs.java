@@ -19,6 +19,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(Enclosed.class)
 public class FlashMessagesDialectSpecs {
 
+    public static final String DIALECT_PREFIX = "flash";
+
     public static final class CreationSpecs {
 
         @Test
@@ -54,14 +56,14 @@ public class FlashMessagesDialectSpecs {
 
         @Test
         public void it_should_get_two_processors() {
-            final Set<IProcessor> processors = this.sut.getProcessors("messages");
+            final Set<IProcessor> processors = this.sut.getProcessors(DIALECT_PREFIX);
 
             assertThat(processors).hasSize(2);
         }
 
         @Test
         public void it_should_get_a_standarxmlnstagprocessor() {
-            final Set<IProcessor> processors = this.sut.getProcessors("messages");
+            final Set<IProcessor> processors = this.sut.getProcessors(DIALECT_PREFIX);
 
             final long count = processors
                 .stream()
@@ -73,7 +75,7 @@ public class FlashMessagesDialectSpecs {
 
         @Test
         public void it_should_get_a_flashmessageselementtagprocessor() {
-            final Set<IProcessor> processors = this.sut.getProcessors("messages");
+            final Set<IProcessor> processors = this.sut.getProcessors(DIALECT_PREFIX);
 
             final long count = processors
                 .stream()

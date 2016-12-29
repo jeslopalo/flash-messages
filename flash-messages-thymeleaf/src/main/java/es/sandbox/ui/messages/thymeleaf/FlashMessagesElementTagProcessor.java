@@ -80,17 +80,12 @@ public class FlashMessagesElementTagProcessor extends AbstractElementTagProcesso
      */
     @Override
     protected void doProcess(ITemplateContext context, IProcessableElementTag tag, IElementTagStructureHandler structureHandler) {
+        checkPreconditions(context, tag, structureHandler);
 
-        if (!(context instanceof WebEngineContext)) {
-            throw new IllegalArgumentException(String.format("Context is not a WebEngineContext instance [%s]", context.getClass()));
-        }
         final WebEngineContext webEngineContext = (WebEngineContext) context;
-
         final IModelFactory modelFactory = context.getModelFactory();
         final IModel model = modelFactory.createModel();
-
         final HttpServletRequest request = webEngineContext.getRequest();
-
         final Context flashMessagesContext = context(request);
 
         for (Level level : flashMessagesContext.levels()) {
@@ -104,6 +99,17 @@ public class FlashMessagesElementTagProcessor extends AbstractElementTagProcesso
          * Instruct the engine to replace this entire element with the specified model.
          */
         structureHandler.replaceWith(model, false);
+    }
+
+    private void checkPreconditions(ITemplateContext context, IProcessableElementTag tag, IElementTagStructureHandler structureHandler) {
+        Objects.requireNonNull(context, "Template context may not be null");
+        Objects.requireNonNull(tag, "Processable element tag may not be null");
+        Objects.requireNonNull(structureHandler, "Element tag structure handler may not be null");
+
+        if (!(context instanceof WebEngineContext)) {
+            throw new IllegalArgumentException(String.format("Context is not a WebEngineContext instance [%s]", context));
+        }
+
     }
 
     private IModel levelMessages(Level level, Collection<Message> messages, HttpServletRequest request, IModelFactory modelFactory) {
