@@ -7,6 +7,7 @@ import org.thymeleaf.standard.processor.StandardXmlNsTagProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -22,10 +23,19 @@ public class FlashMessagesDialect extends AbstractProcessorDialect {
     }
 
     public Set<IProcessor> getProcessors(final String dialectPrefix) {
+        checkDialectPrefix(dialectPrefix);
+
         final Set<IProcessor> processors = new HashSet<IProcessor>();
         processors.add(new FlashMessagesElementTagProcessor(dialectPrefix));
         // This will remove the xmlns:score attributes we might add for IDE validation
         processors.add(new StandardXmlNsTagProcessor(TemplateMode.HTML, dialectPrefix));
         return processors;
+    }
+
+    private void checkDialectPrefix(String dialectPrefix) {
+        Objects.requireNonNull(dialectPrefix, "Dialect prefix may not be null");
+        if (dialectPrefix.isEmpty() || dialectPrefix.trim().isEmpty()) {
+            throw new IllegalArgumentException("Dialect prefix may not be empty");
+        }
     }
 }
