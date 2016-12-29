@@ -15,7 +15,6 @@
     <artifactId>flash-messages-thymeleaf</artifactId>
     <packaging>jar</packaging>
 
-    <name>Flash messages integration for thymeleaf</name>
     <description>Flash messages integration for thymeleaf</description>
 
     <dependencies>

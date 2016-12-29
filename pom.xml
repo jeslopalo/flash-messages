@@ -12,7 +12,7 @@
     <artifactId>flash-messages</artifactId>
     <packaging>pom</packaging>
 
-    <name>Flash Messages multimodule super POM</name>
+    <name>${project.artifactId}</name>
     <description>A simple way to send &amp; show flash messages</description>
     <url>https://github.com/jeslopalo/flash-messages</url>
     <inceptionYear>2013</inceptionYear>
@@ -29,8 +29,8 @@
     </properties>
 
     <modules>
-        <module>flash-messages-parent</module>
         <module>flash-messages-versions</module>
+        <module>flash-messages-parent</module>
         <module>flash-messages-core</module>
 
         <module>flash-messages-taglibs</module>

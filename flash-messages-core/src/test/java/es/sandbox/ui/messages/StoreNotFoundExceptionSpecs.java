@@ -20,7 +20,7 @@ public class StoreNotFoundExceptionSpecs {
         }
     }
 
-    public static class MessageSpecs {
+    public static class ExceptionMessageSpecs {
 
         @Test
         public void it_should_has_message() {

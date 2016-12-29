@@ -96,6 +96,28 @@ public class CssClassesByLevelSpecs {
         }
     }
 
+    public static class CopyingAllSpecs {
+
+        @Test
+        public void it_should_be_copied() {
+            final CssClassesByLevel source = new CssClassesByLevel();
+            source.put(Level.SUCCESS, null);
+            source.put(Level.ERROR, "alert alert-danger");
+
+            final CssClassesByLevel copy = new CssClassesByLevel();
+            copy.copyAll(source);
+
+            assertThat(source).isEqualTo(copy);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void it_should_raise_an_exception_with_null() {
+            final CssClassesByLevel source = new CssClassesByLevel();
+
+            source.copyAll(null);
+        }
+    }
+
     public static class GettingLevelSpecs {
 
         private CssClassesByLevel sut;

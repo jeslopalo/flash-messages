@@ -12,7 +12,6 @@
     <artifactId>flash-messages-core</artifactId>
     <packaging>jar</packaging>
 
-    <name>Flash Messages Core</name>
     <description>A simple way to send &amp; show flash messages</description>
 
     <dependencies>
@@ -34,16 +33,18 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <!-- Testing -->
         <dependency>
-            <!-- Equals Verifier -->
             <groupId>nl.jqno.equalsverifier</groupId>
             <artifactId>equalsverifier</artifactId>
         </dependency>
-
         <dependency>
-            <!-- Mockito -->
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>es.sandbox.test</groupId>
+            <artifactId>sandbox-test-support</artifactId>
         </dependency>
     </dependencies>
 </project>
