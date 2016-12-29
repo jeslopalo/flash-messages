@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.trimToEmpty;
 
@@ -42,8 +43,41 @@ public class FlashMessagesElementTagProcessor extends AbstractElementTagProcesso
      */
     public FlashMessagesElementTagProcessor(final String dialectPrefix) {
         super(TemplateMode.HTML, dialectPrefix, THYMELEAF_TAG_NAME, true, null, false, PRECEDENCE);
+
+        checkDialectPrefix(dialectPrefix);
     }
 
+    private static void checkDialectPrefix(String dialectPrefix) {
+        Objects.requireNonNull(dialectPrefix, "Dialect prefix may not be null");
+        if (dialectPrefix.isEmpty() || dialectPrefix.trim().isEmpty()) {
+            throw new IllegalArgumentException("Dialect prefix may not be empty");
+        }
+    }
+
+    /**
+     * <pre>
+     *  <div data-level="${level}" class="alert alert-${level}">
+     *  <c:choose>
+     *      <c:when test="${fn:length(messages) gt 1}">
+     *          <ul>
+     *          <c:forEach var="message" items="${messages}">
+     *              <li data-timestamp="${message.timestamp}"><c:out value="${message.text}" escapeXml="false"/></li>
+     *          </c:forEach>
+     *          </ul>
+     *      </c:when>
+     *      <c:otherwise>
+     *      <c:forEach var="message" items="${messages}">
+     *          <span data-timestamp="${message.timestamp}"><c:out value="${message.text}" escapeXml="false"/></span>
+     *      </c:forEach>
+     *      </c:otherwise>
+     *  </c:choose>
+     *  </div>
+     * </pre>
+     *
+     * @param context
+     * @param tag
+     * @param structureHandler
+     */
     @Override
     protected void doProcess(ITemplateContext context, IProcessableElementTag tag, IElementTagStructureHandler structureHandler) {
 
@@ -71,23 +105,6 @@ public class FlashMessagesElementTagProcessor extends AbstractElementTagProcesso
          */
         structureHandler.replaceWith(model, false);
     }
-
-//      <div data-level="${level}" class="alert alert-${level}">
-//          <c:choose>
-//              <c:when test="${fn:length(messages) gt 1}">
-//              <ul>
-//                  <c:forEach var="message" items="${messages}">
-//                      <li data-timestamp="${message.timestamp}"><c:out value="${message.text}" escapeXml="false"/></li>
-//                  </c:forEach>
-//              </ul>
-//              </c:when>
-//              <c:otherwise>
-//                  <c:forEach var="message" items="${messages}">
-//                      <span data-timestamp="${message.timestamp}"><c:out value="${message.text}" escapeXml="false"/></span>
-//                  </c:forEach>
-//              </c:otherwise>
-//          </c:choose>
-//      </div>
 
     private IModel levelMessages(Level level, Collection<Message> messages, HttpServletRequest request, IModelFactory modelFactory) {
         final IModel model = modelFactory.createModel();
