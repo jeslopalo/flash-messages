@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import java.lang.reflect.Constructor;
 
 import static es.sandbox.test.asserts.parameter.ParameterAssertions.assertThat;
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @RunWith(Enclosed.class)

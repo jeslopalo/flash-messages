@@ -1,7 +1,7 @@
 package es.sandbox.ui.messages;
 
 import es.sandbox.test.jodatime.JodaTimeFreezer;
-import org.fest.assertions.api.ListAssert;
+import org.assertj.core.api.ListAssert;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -14,8 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static es.sandbox.ui.messages.MessageFixturer.fixturer;
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 @RunWith(Enclosed.class)
 public class StoreAdditionSpecs {

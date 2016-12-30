@@ -11,8 +11,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 import static es.sandbox.test.asserts.parameter.ParameterAssertions.assertThat;
-import static org.fest.assertions.api.Assertions.assertThat;
-
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Enclosed.class)
 public class ArgumentsSpecs {

@@ -11,8 +11,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 import static es.sandbox.test.asserts.parameter.ParameterAssertions.assertThat;
-import static org.fest.assertions.api.Assertions.assertThat;
-
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Enclosed.class)
 public class FlashPublisherSpecs {
