@@ -16,19 +16,16 @@
 
     <dependencies>
         <dependency>
-            <!-- Apache commons lang -->
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
         <dependency>
-            <!-- JodaTime API -->
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
         </dependency>
 
         <dependency>
-            <!-- Servlet -->
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
