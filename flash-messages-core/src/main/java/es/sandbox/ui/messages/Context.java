@@ -2,7 +2,6 @@ package es.sandbox.ui.messages;
 
 import es.sandbox.ui.messages.resolver.MessageResolver;
 import es.sandbox.ui.messages.resolver.MessageResolverStrategy;
-import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,11 +59,13 @@ public class Context {
     }
 
     private List<Level> sanitize(Level... levels) {
-        final List<Level> levelsWithoutNulls =
-            new ArrayList<Level>(Arrays.asList(ObjectUtils.defaultIfNull(levels, new Level[0])));
-
+        final List<Level> levelsWithoutNulls = emptyIfNull(levels);
         levelsWithoutNulls.remove(null);
         return levelsWithoutNulls;
+    }
+
+    private List<Level> emptyIfNull(Level... levels) {
+        return new ArrayList<>(Arrays.asList(levels == null ? new Level[0] : levels));
     }
 
     /**

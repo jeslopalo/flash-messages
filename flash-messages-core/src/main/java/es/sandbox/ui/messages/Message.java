@@ -1,6 +1,5 @@
 package es.sandbox.ui.messages;
 
-import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
@@ -60,7 +59,7 @@ public final class Message
             throw new NullPointerException("Text can't be null");
         }
 
-        if (StringUtils.isBlank(text)) {
+        if (text.trim().isEmpty()) {
             throw new IllegalArgumentException("Text can't be blank");
         }
     }

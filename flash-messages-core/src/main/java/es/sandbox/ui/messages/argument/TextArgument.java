@@ -2,8 +2,6 @@ package es.sandbox.ui.messages.argument;
 
 import es.sandbox.ui.messages.resolver.MessageResolver;
 import es.sandbox.ui.messages.resolver.Resolvable;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 
@@ -30,7 +28,7 @@ class TextArgument implements Text, Resolvable {
             throw new NullPointerException("Text code can't be null");
         }
 
-        if (StringUtils.isBlank(code)) {
+        if (code.trim().isEmpty()) {
             throw new IllegalArgumentException("Text code can't be empty");
         }
     }
@@ -60,7 +58,7 @@ class TextArgument implements Text, Resolvable {
      */
     @Override
     public String toString() {
-        if (ArrayUtils.isEmpty(this.arguments)) {
+        if (this.arguments == null || this.arguments.length == 0) {
             return String.format("text{%s}", this.code);
         }
         return String.format("text{%s, %s}", this.code, Arrays.toString(this.arguments));

@@ -2,7 +2,6 @@ package es.sandbox.ui.messages.argument;
 
 import es.sandbox.ui.messages.resolver.MessageResolver;
 import es.sandbox.ui.messages.resolver.Resolvable;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ class LinkArgument implements Link, Resolvable {
             throw new NullPointerException("Link url can't be null");
         }
 
-        if (StringUtils.isBlank(url)) {
+        if (url.trim().isEmpty()) {
             throw new IllegalArgumentException("Link url can't be empty");
         }
     }
@@ -53,8 +52,16 @@ class LinkArgument implements Link, Resolvable {
 
     @Override
     public LinkArgument cssClass(String cssClass) {
-        this.cssClass = StringUtils.trimToNull(cssClass);
+        this.cssClass = trimToNull(cssClass);
         return this;
+    }
+
+    private static final String trimToNull(final String theString) {
+        if (theString == null) {
+            return null;
+        }
+        final String trimmed = theString.trim();
+        return trimmed.isEmpty() ? null : trimmed;
     }
 
     @Override
@@ -71,16 +78,20 @@ class LinkArgument implements Link, Resolvable {
     private Object[] arguments(MessageResolver messageResolver) {
         final List<Object> arguments = new ArrayList<Object>();
 
-        final String title = this.text == null ? null : ((Resolvable) this.text).resolve(messageResolver);
+        final String title = resolveTitle(messageResolver);
 
         arguments.add(this.url);
-        arguments.add(StringUtils.defaultString(title, this.url));
-        if (StringUtils.isNotBlank(this.cssClass)) {
-            arguments.add(StringUtils.defaultString(this.cssClass));
+        arguments.add(title == null ? this.url : title);
+        if (this.cssClass != null) {
+            arguments.add(this.cssClass);
         }
-        arguments.add(StringUtils.defaultString(title, this.url));
+        arguments.add(title == null ? this.url : title);
 
         return arguments.toArray(new Object[0]);
+    }
+
+    private String resolveTitle(MessageResolver messageResolver) {
+        return trimToNull(this.text == null ? null : ((Resolvable) this.text).resolve(messageResolver));
     }
 
     @Override

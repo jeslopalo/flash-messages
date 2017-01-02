@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static org.apache.commons.lang3.StringUtils.trimToEmpty;
-
 /**
  * Created by jeslopalo on 19/12/16.
  */
@@ -164,6 +162,7 @@ public class FlashMessagesElementTagProcessor extends AbstractElementTagProcesso
             LOG.warn("MessageContext can't be accessed!");
             return "";
         }
-        return trimToEmpty(context.getLevelCssClass(level));
+        final String levelCssClass = context.getLevelCssClass(level);
+        return levelCssClass == null ? "" : levelCssClass.trim();
     }
 }

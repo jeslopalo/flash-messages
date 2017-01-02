@@ -1,7 +1,5 @@
 package es.sandbox.ui.messages.resolver;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +36,7 @@ public class MessageResolver {
             throw new NullPointerException("Code can't be null");
         }
 
-        if (StringUtils.isBlank(code)) {
+        if (code.trim().isEmpty()) {
             throw new IllegalArgumentException("Code can't be blank");
         }
     }
