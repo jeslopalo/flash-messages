@@ -7,12 +7,11 @@ import org.junit.runner.RunWith;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
-import static es.sandbox.test.assertion.ArgumentAssertions.assertThatStaticMethod;
-import static org.fest.assertions.api.Assertions.assertThat;
-
+import static es.sandbox.test.asserts.parameter.ParameterAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Enclosed.class)
 public class ArgumentsSpecs {
@@ -39,15 +38,20 @@ public class ArgumentsSpecs {
     public static class TextCreationSpecs {
 
         @Test
-        public void it_should_fail_with_not_valid_code() {
-            assertThatStaticMethod(Arguments.class, "text", arguments(String.class, Object[].class))
-                .throwsNullPointerException()
-                .invokedWithNulls();
+        public void it_should_fail_with_not_valid_code() throws NoSuchMethodException {
+            final Method text = Arguments.class.getDeclaredMethod("text", String.class, Object[].class);
+            text.setAccessible(true);
 
-            assertThatStaticMethod(Arguments.class, "text", arguments(String.class, Object[].class))
-                .throwsIllegalArgumentException()
-                .invokedWith("")
-                .invokedWith(" ");
+            assertThat(text)
+                .beingStatic()
+                .willThrowNullPointerException()
+                .whenInvokedWithNulls();
+
+            assertThat(text)
+                .beingStatic()
+                .willThrowIllegalArgumentException()
+                .whenInvokedWith("", (Object[]) null)
+                .whenInvokedWith(" ", (Object[]) null);
         }
 
         @Test
@@ -69,15 +73,21 @@ public class ArgumentsSpecs {
     public static class LinkCreationSpecs {
 
         @Test
-        public void it_should_fail_with_not_valid_argument() {
-            assertThatStaticMethod(Arguments.class, "link", arguments(String.class))
-                .throwsIllegalArgumentException()
-                .invokedWith("")
-                .invokedWith(" ");
+        public void it_should_fail_with_not_valid_argument() throws NoSuchMethodException {
 
-            assertThatStaticMethod(Arguments.class, "link", arguments(String.class))
-                .throwsNullPointerException()
-                .invokedWithNulls();
+            final Method link = Arguments.class.getDeclaredMethod("link", String.class);
+            link.setAccessible(true);
+
+            assertThat(link)
+                .beingStatic()
+                .willThrowNullPointerException()
+                .whenInvokedWithNulls();
+
+            assertThat(link)
+                .beingStatic()
+                .willThrowIllegalArgumentException()
+                .whenInvokedWith("")
+                .whenInvokedWith(" ");
         }
 
         @Test

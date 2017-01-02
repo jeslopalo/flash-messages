@@ -2,8 +2,6 @@ package es.sandbox.ui.messages;
 
 import java.util.EnumMap;
 
-import static org.apache.commons.lang3.StringUtils.trimToEmpty;
-
 
 public final class CssClassesByLevel {
 
@@ -56,11 +54,12 @@ public final class CssClassesByLevel {
      * @param cssClass
      */
     public void put(Level level, String cssClass) {
-        this.cssClasses.put(level, trimToEmpty(cssClass));
+        this.cssClasses.put(level, cssClass == null ? "" : cssClass.trim());
     }
 
     /**
      * @param cssClassesByLevel
+     * @throws NullPointerException with null cssClassesByLevel
      */
     public void copyAll(CssClassesByLevel cssClassesByLevel) {
         this.cssClasses.putAll(cssClassesByLevel.cssClasses);

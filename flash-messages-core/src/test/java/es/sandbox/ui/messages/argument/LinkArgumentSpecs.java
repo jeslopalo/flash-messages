@@ -7,11 +7,11 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
-import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
-import static es.sandbox.test.assertion.ArgumentAssertions.assertThatMethod;
-import static org.fest.assertions.api.Assertions.assertThat;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
+import static es.sandbox.test.asserts.parameter.ParameterAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Enclosed.class)
 public class LinkArgumentSpecs {
@@ -19,15 +19,18 @@ public class LinkArgumentSpecs {
     public static class UrlSpecs {
 
         @Test
-        public void it_should_fail_with_invalid_url() {
-            assertThatConstructor(LinkArgument.class, arguments(String.class))
-                .throwsNullPointerException()
-                .invokedWithNulls();
+        public void it_should_fail_with_invalid_url() throws NoSuchMethodException {
+            final Constructor<LinkArgument> constructor = LinkArgument.class.getDeclaredConstructor(String.class);
+            constructor.setAccessible(true);
 
-            assertThatConstructor(LinkArgument.class, arguments(String.class))
-                .throwsIllegalArgumentException()
-                .invokedWith("")
-                .invokedWith(" ");
+            assertThat(constructor)
+                .willThrowNullPointerException()
+                .whenInvokedWithNulls();
+
+            assertThat(constructor)
+                .willThrowIllegalArgumentException()
+                .whenInvokedWith("")
+                .whenInvokedWith(" ");
         }
 
         @Test
@@ -74,15 +77,20 @@ public class LinkArgumentSpecs {
         }
 
         @Test
-        public void it_should_fail_with_invalid_code() {
-            assertThatMethod(this.sut, "title", arguments(String.class, Object[].class))
-                .throwsNullPointerException()
-                .invokedWithNulls();
+        public void it_should_fail_with_invalid_code() throws NoSuchMethodException {
+            final Method title = LinkArgument.class.getDeclaredMethod("title", String.class, Object[].class);
+            title.setAccessible(true);
 
-            assertThatMethod(this.sut, "title", arguments(String.class, Object[].class))
-                .throwsIllegalArgumentException()
-                .invokedWith("", null)
-                .invokedWith(" ", null);
+            assertThat(title)
+                .in(this.sut)
+                .willThrowNullPointerException()
+                .whenInvokedWithNulls();
+
+            assertThat(title)
+                .in(this.sut)
+                .willThrowIllegalArgumentException()
+                .whenInvokedWith("", null)
+                .whenInvokedWith(" ", null);
         }
 
         @Test

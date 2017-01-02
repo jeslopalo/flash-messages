@@ -5,14 +5,14 @@
     <parent>
         <groupId>es.sandbox.ui.messages</groupId>
         <artifactId>flash-messages-parent</artifactId>
-        <version>1.0.2</version>
+        <version>1.1.0</version>
         <relativePath>./flash-messages-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>flash-messages</artifactId>
     <packaging>pom</packaging>
 
-    <name>Flash Messages multimodule super POM</name>
+    <name>${project.artifactId}</name>
     <description>A simple way to send &amp; show flash messages</description>
     <url>https://github.com/jeslopalo/flash-messages</url>
     <inceptionYear>2013</inceptionYear>
@@ -31,9 +31,14 @@
     <modules>
         <module>flash-messages-parent</module>
         <module>flash-messages-core</module>
+
         <module>flash-messages-taglibs</module>
+        <module>flash-messages-thymeleaf</module>
+
         <module>flash-messages-spring</module>
-        <module>flash-messages-bom</module>
         <module>flash-messages-spring-boot-starter-taglibs</module>
+        <module>flash-messages-spring-boot-starter-thymeleaf</module>
+
+        <module>flash-messages-bom</module>
     </modules>
 </project>

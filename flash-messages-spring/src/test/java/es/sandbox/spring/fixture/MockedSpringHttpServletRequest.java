@@ -10,9 +10,8 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
-
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 public final class MockedSpringHttpServletRequest
     extends MockHttpServletRequest {
@@ -67,11 +66,11 @@ public final class MockedSpringHttpServletRequest
 
     public final <T> void assertThatOutputFlashScopeContains(final String key, final T value) {
         final FlashMap flash = RequestContextUtils.getOutputFlashMap(this);
-        assertThat(flash).contains(entry(key, value));
+        assertThat((HashMap) flash).contains(entry(key, value));
     }
 
     public final <T> void assertThatOutputFlashScopeDoesNotContain(final String key) {
         final FlashMap flash = RequestContextUtils.getOutputFlashMap(this);
-        assertThat(flash).doesNotContainKey(key);
+        assertThat((HashMap) flash).doesNotContainKey(key);
     }
 }

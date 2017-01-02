@@ -7,11 +7,11 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
-import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
-import static es.sandbox.test.assertion.ArgumentAssertions.assertThatMethod;
-import static org.fest.assertions.api.Assertions.assertThat;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
+import static es.sandbox.test.asserts.parameter.ParameterAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Enclosed.class)
 public class FlashPublisherSpecs {
@@ -29,12 +29,15 @@ public class FlashPublisherSpecs {
         }
 
         @Test
-        public void it_should_fail_with_invalid_arguments() {
-            assertThatConstructor(FlashPublisher.class, arguments(MessageResolver.class, Store.class))
-                .throwsNullPointerException()
-                .invokedWithNulls()
-                .invokedWith(null, this.store)
-                .invokedWith(this.messageResolver, null);
+        public void it_should_fail_with_invalid_arguments() throws NoSuchMethodException {
+            final Constructor<FlashPublisher> constructor = FlashPublisher.class.getDeclaredConstructor(MessageResolver.class, Store.class);
+            constructor.setAccessible(true);
+
+            assertThat(constructor)
+                .willThrowNullPointerException()
+                .whenInvokedWithNulls()
+                .whenInvokedWith(null, this.store)
+                .whenInvokedWith(this.messageResolver, null);
         }
 
         @Test
@@ -58,21 +61,26 @@ public class FlashPublisherSpecs {
         }
 
         @Test
-        public void it_should_fail_with_invalid_code() {
+        public void it_should_fail_with_invalid_code() throws NoSuchMethodException {
             for (final Level level : Level.values()) {
                 itShouldFailWithInvalidCode(level);
             }
         }
 
-        private void itShouldFailWithInvalidCode(Level level) {
-            assertThatMethod(this.sut, methodName(level), arguments(String.class, Object[].class))
-                .throwsNullPointerException()
-                .invokedWithNulls();
+        private void itShouldFailWithInvalidCode(Level level) throws NoSuchMethodException {
+            final Method method = FlashPublisher.class.getDeclaredMethod(methodName(level), String.class, Object[].class);
+            method.setAccessible(true);
 
-            assertThatMethod(this.sut, methodName(level), arguments(String.class, Object[].class))
-                .throwsIllegalArgumentException()
-                .invokedWith("")
-                .invokedWith(" ");
+            assertThat(method)
+                .in(this.sut)
+                .willThrowNullPointerException()
+                .whenInvokedWithNulls();
+
+            assertThat(method)
+                .in(this.sut)
+                .willThrowIllegalArgumentException()
+                .whenInvokedWith("", (Object[]) null)
+                .whenInvokedWith(" ", (Object[]) null);
         }
 
         private String methodName(Level level) {

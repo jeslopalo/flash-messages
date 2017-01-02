@@ -2,7 +2,7 @@ package es.sandbox.ui.messages;
 
 import org.junit.Test;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class StoreNotFoundExceptionSpecs {
@@ -20,7 +20,7 @@ public class StoreNotFoundExceptionSpecs {
         }
     }
 
-    public static class MessageSpecs {
+    public static class ExceptionMessageSpecs {
 
         @Test
         public void it_should_has_message() {

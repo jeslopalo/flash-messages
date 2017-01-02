@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.io.Serializable;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Enclosed.class)
 public class StoreCreationSpecs {

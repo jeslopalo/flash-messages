@@ -6,9 +6,10 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
-import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
-import static org.fest.assertions.api.Assertions.assertThat;
+import java.lang.reflect.Constructor;
+
+import static es.sandbox.test.asserts.parameter.ParameterAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @RunWith(Enclosed.class)
@@ -17,15 +18,18 @@ public class TextArgumentSpecs {
     public static class CodeSpecs {
 
         @Test
-        public void it_should_fail_with_invalid_code() {
-            assertThatConstructor(TextArgument.class, arguments(String.class, Object[].class))
-                .throwsNullPointerException()
-                .invokedWithNulls();
+        public void it_should_fail_with_invalid_code() throws NoSuchMethodException {
+            final Constructor<TextArgument> constructor = TextArgument.class.getDeclaredConstructor(String.class, Object[].class);
+            constructor.setAccessible(true);
 
-            assertThatConstructor(TextArgument.class, arguments(String.class, Object[].class))
-                .throwsIllegalArgumentException()
-                .invokedWith("", null)
-                .invokedWith(" ", null);
+            assertThat(constructor)
+                .willThrowNullPointerException()
+                .whenInvokedWithNulls();
+
+            assertThat(constructor)
+                .willThrowIllegalArgumentException()
+                .whenInvokedWith("", (Object[]) null)
+                .whenInvokedWith(" ", (Object[]) null);
         }
 
         @Test

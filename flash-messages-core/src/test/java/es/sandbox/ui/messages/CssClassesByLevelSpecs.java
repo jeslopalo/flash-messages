@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @RunWith(Enclosed.class)
@@ -93,6 +93,28 @@ public class CssClassesByLevelSpecs {
             for (final Level level : Level.values()) {
                 assertThat(sut.get(level)).isNull();
             }
+        }
+    }
+
+    public static class CopyingAllSpecs {
+
+        @Test
+        public void it_should_be_copied() {
+            final CssClassesByLevel source = new CssClassesByLevel();
+            source.put(Level.SUCCESS, null);
+            source.put(Level.ERROR, "alert alert-danger");
+
+            final CssClassesByLevel copy = new CssClassesByLevel();
+            copy.copyAll(source);
+
+            assertThat(source).isEqualTo(copy);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void it_should_raise_an_exception_with_null() {
+            final CssClassesByLevel source = new CssClassesByLevel();
+
+            source.copyAll(null);
         }
     }
 

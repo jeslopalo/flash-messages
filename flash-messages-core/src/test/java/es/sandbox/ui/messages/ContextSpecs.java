@@ -8,10 +8,10 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Constructor;
 
-import static es.sandbox.test.assertion.ArgumentAssertions.arguments;
-import static es.sandbox.test.assertion.ArgumentAssertions.assertThatConstructor;
-import static org.fest.assertions.api.Assertions.assertThat;
+import static es.sandbox.test.asserts.parameter.ParameterAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -32,11 +32,15 @@ public class ContextSpecs {
         }
 
         @Test
-        public void it_should_fail_with_invalid_arguments() {
-            assertThatConstructor(Context.class, arguments(StoreAccessorFactory.class, MessageResolverStrategy.class))
-                .throwsNullPointerException()
-                .invokedWith(null, new StringFormatMessageResolverAdapter())
-                .invokedWith(this.mockMessagesStoreAccessorFactory, null);
+        public void it_should_fail_with_invalid_arguments() throws NoSuchMethodException {
+
+            final Constructor<Context> constructor = Context.class.getDeclaredConstructor(StoreAccessorFactory.class, MessageResolverStrategy.class);
+            constructor.setAccessible(true);
+
+            assertThat(constructor)
+                .willThrowNullPointerException()
+                .whenInvokedWith(null, new StringFormatMessageResolverAdapter())
+                .whenInvokedWith(this.mockMessagesStoreAccessorFactory, null);
         }
 
         @Test

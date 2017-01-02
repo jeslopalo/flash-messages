@@ -5,45 +5,38 @@
     <parent>
         <groupId>es.sandbox.ui.messages</groupId>
         <artifactId>flash-messages-parent</artifactId>
-        <version>1.0.2</version>
+        <version>1.1.0</version>
         <relativePath>../flash-messages-parent/pom.xml</relativePath>
     </parent>
 
     <artifactId>flash-messages-core</artifactId>
     <packaging>jar</packaging>
 
-    <name>Flash Messages Core</name>
     <description>A simple way to send &amp; show flash messages</description>
 
     <dependencies>
         <dependency>
-            <!-- Apache commons lang -->
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-        </dependency>
-
-        <dependency>
-            <!-- JodaTime API -->
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
         </dependency>
 
         <dependency>
-            <!-- Servlet -->
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <!-- Testing -->
         <dependency>
-            <!-- Equals Verifier -->
             <groupId>nl.jqno.equalsverifier</groupId>
             <artifactId>equalsverifier</artifactId>
         </dependency>
-
         <dependency>
-            <!-- Mockito -->
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>es.sandbox.test</groupId>
+            <artifactId>sandbox-test-support</artifactId>
         </dependency>
     </dependencies>
 </project>
