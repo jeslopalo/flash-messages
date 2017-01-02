@@ -1,8 +1,27 @@
+### v1.1.0 (2017-01-02) - Add thymeleaf view engine support
+
+  * [881d333] Modify flash-messages-taglibs description
+  * [1460cfa] Add Thymeleaf dialect and starter module
+  * [69febee] Rename to ExceptionMessageSpecs
+  * [dbc3e33] Clean several poms
+  * [484f24d] Increase code coverage for CssClassByLevel and NoSourceCode
+  * [3be19ca] Modify poms hierarchy
+  * [84633c1] Test FlashMessagesDialect
+  * [8b765d8] Reduce jvm compatibility to >= jdk8
+  * [8999813] Add test to FlashMessagesElementTagProcessor
+  * [bf9cbb0] Add tests to FlashMessagesElementTagProcessor
+  * [6f9128c] Change fest-assert with assertj
+  * [9da7f97] Merge flash-messages-parent & flash-messages-versions modules
+  * [9b22b7e] Remove commons-lang3 dependency
+  * [9bd219b] Bump version to 1.1.0
+
+
 ### v1.0.2 (2016-11-17) - Fix the starter module to declare distribution management config
 
   * [b6f92ac] Add distribution management configuration in pom
   * [7d5c707] Add a useless class to force to generate javadoc jar
   * [4d0b3e5] Bump version to 1.0.2
+  * [f6c9fb2] Update CHANGELOG.md with 1.0.2 changes
 
 
 ### v1.0.1 (2016-11-16) - Fix javax.servlet-api version
